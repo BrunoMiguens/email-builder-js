@@ -210,8 +210,8 @@ Quick start (Vite + MUI)
 
 1. Fork this repository.
 2. Open up directory in terminal.
-3. Go to the editor-sample package: `cd examples/vite-emailbuilder-mui`
-4. Install packages: `npm install`
+3. Install dependencies and build workspace packages: `npm install && npm run build --workspaces`
+4. Go to the example directory: `cd examples/vite-emailbuilder-mui`
 5. Run the server: `npx vite`
 6. Open in browser: http://localhost:5173/email-builder-js/
 
