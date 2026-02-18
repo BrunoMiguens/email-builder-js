@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { MonitorOutlined, PhoneIphoneOutlined } from '@mui/icons-material';
 import { Box, Stack, SxProps, ToggleButton, ToggleButtonGroup, Tooltip } from '@mui/material';
 import { Reader } from '@usewaypoint/email-builder';
 
+import resolveCustomBlocks from '../../documents/blocks/CustomBlock/resolveCustomBlocks';
+import { useCustomBlocksStore } from '../../documents/blocks/helpers/EditorChildrenIds/AddBlockMenu/useCustomBlocks';
 import EditorBlock from '../../documents/editor/EditorBlock';
 import {
   setSelectedScreenSize,
@@ -23,8 +25,10 @@ import ShareButton from './ShareButton';
 
 export default function TemplatePanel() {
   const document = useDocument();
+  const customBlocks = useCustomBlocksStore((s) => s.customBlocks);
   const selectedMainTab = useSelectedMainTab();
   const selectedScreenSize = useSelectedScreenSize();
+  const resolvedDocument = useMemo(() => resolveCustomBlocks(document, customBlocks), [document, customBlocks]);
 
   let mainBoxSx: SxProps = {
     height: '100%',
@@ -62,7 +66,7 @@ export default function TemplatePanel() {
       case 'preview':
         return (
           <Box sx={mainBoxSx}>
-            <Reader document={document} rootBlockId="root" />
+            <Reader document={resolvedDocument as never} rootBlockId="root" />
           </Box>
         );
       case 'html':
