@@ -9,6 +9,7 @@ import AvatarSidebarPanel from './input-panels/AvatarSidebarPanel';
 import ButtonSidebarPanel from './input-panels/ButtonSidebarPanel';
 import ColumnsContainerSidebarPanel from './input-panels/ColumnsContainerSidebarPanel';
 import ContainerSidebarPanel from './input-panels/ContainerSidebarPanel';
+import CustomBlockSidebarPanel from './input-panels/CustomBlockSidebarPanel';
 import DividerSidebarPanel from './input-panels/DividerSidebarPanel';
 import EmailLayoutSidebarPanel from './input-panels/EmailLayoutSidebarPanel';
 import HeadingSidebarPanel from './input-panels/HeadingSidebarPanel';
@@ -64,6 +65,10 @@ export default function ConfigurationPanel() {
       return <SpacerSidebarPanel key={selectedBlockId} data={data} setData={(data) => setBlock({ type, data })} />;
     case 'Text':
       return <TextSidebarPanel key={selectedBlockId} data={data} setData={(data) => setBlock({ type, data })} />;
+    case 'CustomBlock':
+      return (
+        <CustomBlockSidebarPanel key={selectedBlockId} data={data} setData={(data) => setBlock({ type, data })} />
+      );
     default:
       return <pre>{JSON.stringify(block, null, '  ')}</pre>;
   }
