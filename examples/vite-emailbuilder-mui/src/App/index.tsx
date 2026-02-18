@@ -3,6 +3,7 @@ import React from 'react';
 import { Stack, useTheme } from '@mui/material';
 
 import { useInspectorDrawerOpen, useSamplesDrawerOpen } from '../documents/editor/EditorContext';
+import { FileSystemProvider } from './TemplatePanel/FileSystem/FileSystemContext';
 
 import InspectorDrawer, { INSPECTOR_DRAWER_WIDTH } from './InspectorDrawer';
 import SamplesDrawer, { SAMPLES_DRAWER_WIDTH } from './SamplesDrawer';
@@ -24,7 +25,7 @@ export default function App() {
   const marginRightTransition = useDrawerTransition('margin-right', inspectorDrawerOpen);
 
   return (
-    <>
+    <FileSystemProvider>
       <InspectorDrawer />
       <SamplesDrawer />
 
@@ -37,6 +38,6 @@ export default function App() {
       >
         <TemplatePanel />
       </Stack>
-    </>
+    </FileSystemProvider>
   );
 }

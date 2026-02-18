@@ -94,7 +94,7 @@ export default function TemplatePanel() {
           <Stack direction="row" spacing={2}>
             <MainTabsGroup />
           </Stack>
-          <Stack direction="row" spacing={2}>
+          <Stack direction="row" spacing={2} alignItems="center">
             <DownloadJson />
             <ImportJson />
             <ToggleButtonGroup value={selectedScreenSize} exclusive size="small" onChange={handleScreenSizeChange}>
