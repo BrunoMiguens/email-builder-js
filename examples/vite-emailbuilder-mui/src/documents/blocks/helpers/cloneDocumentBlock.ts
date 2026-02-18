@@ -27,6 +27,7 @@ function cloneBlock(document: TEditorConfiguration, blockId: string): TEditorBlo
     case 'Image':
     case 'Spacer':
     case 'Text':
+    case 'CustomBlock':
       return clone;
     case 'Container':
       if (clone.data?.props?.childrenIds) {

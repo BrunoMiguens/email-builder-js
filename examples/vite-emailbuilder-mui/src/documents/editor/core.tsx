@@ -19,6 +19,8 @@ import ColumnsContainerEditor from '../blocks/ColumnsContainer/ColumnsContainerE
 import ColumnsContainerPropsSchema from '../blocks/ColumnsContainer/ColumnsContainerPropsSchema';
 import ContainerEditor from '../blocks/Container/ContainerEditor';
 import ContainerPropsSchema from '../blocks/Container/ContainerPropsSchema';
+import CustomBlockEditor from '../blocks/CustomBlock/CustomBlockEditor';
+import CustomBlockPropsSchema from '../blocks/CustomBlock/CustomBlockPropsSchema';
 import EmailLayoutEditor from '../blocks/EmailLayout/EmailLayoutEditor';
 import EmailLayoutPropsSchema from '../blocks/EmailLayout/EmailLayoutPropsSchema';
 import EditorBlockWrapper from '../blocks/helpers/block-wrappers/EditorBlockWrapper';
@@ -114,6 +116,14 @@ const EDITOR_DICTIONARY = buildBlockConfigurationDictionary({
     Component: (props) => (
       <EditorBlockWrapper>
         <Divider {...props} />
+      </EditorBlockWrapper>
+    ),
+  },
+  CustomBlock: {
+    schema: CustomBlockPropsSchema,
+    Component: (props) => (
+      <EditorBlockWrapper>
+        <CustomBlockEditor {...props} />
       </EditorBlockWrapper>
     ),
   },
