@@ -31,6 +31,7 @@ const FONT_FAMILY_SCHEMA = z
     'MODERN_SERIF',
     'BOOK_SERIF',
     'MONOSPACE',
+    'INTER',
   ])
   .nullable()
   .optional();
@@ -55,6 +56,8 @@ function getFontFamily(fontFamily: z.infer<typeof FONT_FAMILY_SCHEMA>) {
       return '"Iowan Old Style", "Palatino Linotype", "URW Palladio L", P052, serif';
     case 'MONOSPACE':
       return '"Nimbus Mono PS", "Courier New", "Cutive Mono", monospace';
+    case 'INTER':
+      return '"Inter", -apple-system, BlinkMacSystemFont, Arial, sans-serif';
   }
   return undefined;
 }
@@ -74,6 +77,8 @@ export const HeadingPropsSchema = z.object({
       fontFamily: FONT_FAMILY_SCHEMA,
       fontWeight: z.enum(['bold', 'normal']).optional().nullable(),
       textAlign: z.enum(['left', 'center', 'right']).optional().nullable(),
+      letterSpacing: z.number().optional().nullable(),
+      lineHeight: z.number().optional().nullable(),
       padding: PADDING_SCHEMA,
     })
     .optional()
@@ -98,6 +103,8 @@ export function Heading({ props, style }: HeadingProps) {
     margin: 0,
     fontFamily: getFontFamily(style?.fontFamily),
     fontSize: getFontSize(level),
+    letterSpacing: style?.letterSpacing != null ? `${style.letterSpacing}px` : undefined,
+    lineHeight: style?.lineHeight != null ? `${style.lineHeight}px` : undefined,
     padding: getPadding(style?.padding),
   };
   switch (level) {

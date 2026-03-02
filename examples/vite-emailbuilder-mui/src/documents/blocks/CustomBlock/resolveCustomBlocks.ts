@@ -1,9 +1,13 @@
 import { TEditorBlock, TEditorConfiguration } from '../../editor/core';
-import { CustomBlockEntry } from '../helpers/EditorChildrenIds/AddBlockMenu/useCustomBlocks';
+import { CustomBlockEntry, TableItem } from '../helpers/EditorChildrenIds/AddBlockMenu/useCustomBlocks';
 
 /**
  * Resolves all CustomBlock references in a document by replacing them with
  * the actual block content. Used before passing to Reader or renderToStaticMarkup.
+ *
+ * If the custom block defines __slots__ and the CustomBlock instance provides
+ * slotValues, all `{{slotName}}` placeholders in the resolved blocks are
+ * replaced with the corresponding values.
  */
 export default function resolveCustomBlocks(
   document: TEditorConfiguration,
@@ -16,6 +20,7 @@ export default function resolveCustomBlocks(
     if (block.type === 'CustomBlock') {
       hasCustomBlocks = true;
       const blockName = block.data?.props?.blockName;
+      const slotValues: Record<string, unknown> = (block.data?.props as Record<string, unknown>)?.slotValues as Record<string, unknown> ?? {};
       const entry = customBlocks.find((b) => b.name === blockName);
       if (!entry) {
         // Replace unresolvable CustomBlock with an empty Container so the Reader doesn't crash
@@ -43,6 +48,28 @@ export default function resolveCustomBlocks(
         continue;
       }
 
+      // Build the effective values map: slot defaults merged with instance overrides
+      const effectiveValues: Record<string, unknown> = {};
+      if (entry.slots) {
+        for (const [key, def] of Object.entries(entry.slots)) {
+          effectiveValues[key] = def.defaultValue;
+        }
+      }
+      for (const [key, val] of Object.entries(slotValues)) {
+        if (val !== undefined && val !== null) {
+          effectiveValues[key] = val;
+        }
+      }
+
+      // Convert table-type slot values from array to HTML string
+      if (entry.slots) {
+        for (const [key, def] of Object.entries(entry.slots)) {
+          if (def.type === 'table' && Array.isArray(effectiveValues[key])) {
+            effectiveValues[key] = generateTableHtml(effectiveValues[key] as TableItem[]);
+          }
+        }
+      }
+
       const idPrefix = `cb-${id}-`;
 
       // Build old→new ID mapping
@@ -63,12 +90,19 @@ export default function resolveCustomBlocks(
       };
 
       // Copy all child blocks with namespaced IDs, remapping internal references
+      const hasSlots = Object.keys(effectiveValues).length > 0;
       for (const [oldId, childBlock] of Object.entries(config)) {
         if (oldId === 'root') continue;
         const newId = idMap.get(oldId)!;
         const cloned: TEditorBlock = structuredClone(childBlock);
 
         remapChildrenIds(cloned, idMap);
+
+        // Substitute slot placeholders in all string values
+        if (hasSlots) {
+          substituteSlotValues(cloned, effectiveValues);
+        }
+
         resolved[newId] = cloned;
       }
     }
@@ -92,4 +126,81 @@ function remapChildrenIds(block: TEditorBlock, idMap: Map<string, string>): void
       }
     }
   }
+}
+
+/**
+ * Recursively walks a block's data and replaces all `{{key}}` patterns
+ * in string values with the corresponding slot value.
+ *
+ * When a string value is exactly `{{key}}` (a single placeholder with no
+ * surrounding text), the raw slot value is used — preserving its original
+ * type (e.g. number for width/height fields). When the placeholder is
+ * embedded in a larger string, it's converted to a string via String().
+ */
+function substituteSlotValues(obj: unknown, values: Record<string, unknown>): void {
+  if (obj === null || obj === undefined) return;
+  if (Array.isArray(obj)) {
+    for (let i = 0; i < obj.length; i++) {
+      if (typeof obj[i] === 'string') {
+        obj[i] = resolveSlotValue(obj[i], values);
+      } else if (typeof obj[i] === 'object') {
+        substituteSlotValues(obj[i], values);
+      }
+    }
+    return;
+  }
+  if (typeof obj === 'object') {
+    const record = obj as Record<string, unknown>;
+    for (const key of Object.keys(record)) {
+      const val = record[key];
+      if (typeof val === 'string') {
+        record[key] = resolveSlotValue(val, values);
+      } else if (typeof val === 'object' && val !== null) {
+        substituteSlotValues(val, values);
+      }
+    }
+  }
+}
+
+function resolveSlotValue(str: string, values: Record<string, unknown>): unknown {
+  // If the entire string is a single placeholder, return the raw value (type-preserving)
+  const singleMatch = str.match(/^\{\{(\w+)\}\}$/);
+  if (singleMatch && singleMatch[1] in values) {
+    return values[singleMatch[1]];
+  }
+  // Otherwise, do string interpolation
+  return replaceSlotPlaceholders(str, values);
+}
+
+function replaceSlotPlaceholders(str: string, values: Record<string, unknown>): string {
+  return str.replace(/\{\{(\w+)\}\}/g, (match, key: string) => {
+    if (key in values) {
+      return String(values[key]);
+    }
+    return match;
+  });
+}
+
+/**
+ * Converts an array of {label, value} items into an HTML receipt-style table.
+ * Used to resolve `table` type slot values into HTML before substitution.
+ */
+export function generateTableHtml(items: TableItem[]): string {
+  if (items.length === 0) return '';
+
+  const labelStyle =
+    'color:#808080;font-size:16px;line-height:22px;letter-spacing:-0.18px;padding:0;vertical-align:middle;';
+  const valueStyle =
+    'color:#111111;font-size:16px;line-height:22px;letter-spacing:-0.18px;padding:0;text-align:right;vertical-align:middle;white-space:nowrap;';
+  const spacerRow =
+    '<tr><td height="16" style="height:16px;line-height:16px;font-size:16px;" colspan="2"></td></tr>';
+
+  const rows = items
+    .map((item, i) => {
+      const row = `<tr><td style="${labelStyle}">${item.label}</td><td style="${valueStyle}">${item.value}</td></tr>`;
+      return i < items.length - 1 ? row + spacerRow : row;
+    })
+    .join('');
+
+  return `<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;">${rows}</table>`;
 }

@@ -46,6 +46,11 @@ export const FONT_FAMILIES = [
     label: 'Monospace',
     value: '"Nimbus Mono PS", "Courier New", "Cutive Mono", monospace',
   },
+  {
+    key: 'INTER',
+    label: 'Inter',
+    value: '"Inter", -apple-system, BlinkMacSystemFont, Arial, sans-serif',
+  },
 ];
 
 export const FONT_FAMILY_NAMES = [
@@ -58,4 +63,5 @@ export const FONT_FAMILY_NAMES = [
   'MODERN_SERIF',
   'BOOK_SERIF',
   'MONOSPACE',
+  'INTER',
 ] as const;

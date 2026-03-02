@@ -14,6 +14,7 @@ const FONT_FAMILY_SCHEMA = z
     'MODERN_SERIF',
     'BOOK_SERIF',
     'MONOSPACE',
+    'INTER',
   ])
   .nullable()
   .optional();
@@ -38,6 +39,8 @@ function getFontFamily(fontFamily: z.infer<typeof FONT_FAMILY_SCHEMA>) {
       return '"Iowan Old Style", "Palatino Linotype", "URW Palladio L", P052, serif';
     case 'MONOSPACE':
       return '"Nimbus Mono PS", "Courier New", "Cutive Mono", monospace';
+    case 'INTER':
+      return '"Inter", -apple-system, BlinkMacSystemFont, Arial, sans-serif';
   }
   return undefined;
 }
@@ -70,6 +73,9 @@ export const TextPropsSchema = z.object({
       fontFamily: FONT_FAMILY_SCHEMA,
       fontWeight: z.enum(['bold', 'normal']).optional().nullable(),
       textAlign: z.enum(['left', 'center', 'right']).optional().nullable(),
+      linkColor: COLOR_SCHEMA,
+      letterSpacing: z.number().optional().nullable(),
+      lineHeight: z.number().optional().nullable(),
       padding: PADDING_SCHEMA,
     })
     .optional()
@@ -97,12 +103,14 @@ export function Text({ style, props }: TextProps) {
     fontFamily: getFontFamily(style?.fontFamily),
     fontWeight: style?.fontWeight ?? undefined,
     textAlign: style?.textAlign ?? undefined,
+    letterSpacing: style?.letterSpacing != null ? `${style.letterSpacing}px` : undefined,
+    lineHeight: style?.lineHeight != null ? `${style.lineHeight}px` : undefined,
     padding: getPadding(style?.padding),
   };
 
   const text = props?.text ?? TextPropsDefaults.text;
   if (props?.markdown) {
-    return <EmailMarkdown style={wStyle} markdown={text} />;
+    return <EmailMarkdown style={wStyle} markdown={text} linkColor={style?.linkColor ?? undefined} />;
   }
   return <div style={wStyle}>{text}</div>;
 }

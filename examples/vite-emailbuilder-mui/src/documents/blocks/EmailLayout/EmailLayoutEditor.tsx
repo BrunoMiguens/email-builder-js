@@ -27,6 +27,8 @@ function getFontFamily(fontFamily: EmailLayoutProps['fontFamily']) {
       return '"Iowan Old Style", "Palatino Linotype", "URW Palladio L", P052, serif';
     case 'MONOSPACE':
       return '"Nimbus Mono PS", "Courier New", "Cutive Mono", monospace';
+    case 'INTER':
+      return '"Inter", -apple-system, BlinkMacSystemFont, Arial, sans-serif';
   }
 }
 
@@ -59,7 +61,7 @@ export default function EmailLayoutEditor(props: EmailLayoutProps) {
         width="100%"
         style={{
           margin: '0 auto',
-          maxWidth: '600px',
+          maxWidth: `${props.maxWidth ?? 600}px`,
           backgroundColor: props.canvasColor ?? '#FFFFFF',
           borderRadius: props.borderRadius ?? undefined,
           border: (() => {

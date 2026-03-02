@@ -76,32 +76,37 @@ function sanitizer(html: string): string {
   });
 }
 
-class CustomRenderer extends Renderer {
-  table(header: string, body: string) {
+function createCustomRenderer(linkColor?: string) {
+  const renderer = new Renderer();
+
+  renderer.table = (header: string, body: string) => {
     return `<table width="100%">
 <thead>
 ${header}</thead>
 <tbody>
 ${body}</tbody>
 </table>`;
-  }
+  };
 
-  link(href: string, title: string | null, text: string) {
-    if (!title) {
-      return `<a href="${href}" target="_blank">${text}</a>`;
+  renderer.link = (href: string, title: string | null, text: string) => {
+    const titleAttr = title ? ` title="${title}"` : '';
+    if (linkColor) {
+      return `<a href="${href}"${titleAttr} target="_blank" style="color: ${linkColor}; text-decoration: underline;"><span style="color: ${linkColor};">${text}</span></a>`;
     }
-    return `<a href="${href}" title="${title}" target="_blank">${text}</a>`;
-  }
+    return `<a href="${href}"${titleAttr} target="_blank">${text}</a>`;
+  };
+
+  return renderer;
 }
 
-function renderMarkdownString(str: string): string {
+function renderMarkdownString(str: string, linkColor?: string): string {
   const html = marked.parse(str, {
     async: false,
     breaks: true,
     gfm: true,
     pedantic: false,
     silent: false,
-    renderer: new CustomRenderer(),
+    renderer: createCustomRenderer(linkColor),
   });
   if (typeof html !== 'string') {
     throw new Error('marked.parse did not return a string');
@@ -112,8 +117,9 @@ function renderMarkdownString(str: string): string {
 type Props = {
   style: CSSProperties;
   markdown: string;
+  linkColor?: string;
 };
-export default function EmailMarkdown({ markdown, ...props }: Props) {
-  const data = useMemo(() => renderMarkdownString(markdown), [markdown]);
+export default function EmailMarkdown({ markdown, linkColor, ...props }: Props) {
+  const data = useMemo(() => renderMarkdownString(markdown, linkColor), [markdown, linkColor]);
   return <div {...props} dangerouslySetInnerHTML={{ __html: data }} />;
 }

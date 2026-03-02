@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { RoundedCornerOutlined } from '@mui/icons-material';
+import { FormatLineSpacingOutlined, RoundedCornerOutlined, SpaceBarOutlined } from '@mui/icons-material';
 
 import { TStyle } from '../../../../../../documents/blocks/helpers/TStyle';
 import { NullableColorInput } from '../inputs/ColorInput';
@@ -44,12 +44,40 @@ export default function SingleStylePropertyPanel({ name, value, onChange }: Styl
       );
     case 'color':
       return <NullableColorInput label="Text color" defaultValue={defaultValue} onChange={handleChange} />;
+    case 'linkColor':
+      return <NullableColorInput label="Link color" defaultValue={defaultValue} onChange={handleChange} />;
     case 'fontFamily':
       return <NullableFontFamily label="Font family" defaultValue={defaultValue} onChange={handleChange} />;
     case 'fontSize':
       return <FontSizeInput label="Font size" defaultValue={defaultValue} onChange={handleChange} />;
     case 'fontWeight':
       return <FontWeightInput label="Font weight" defaultValue={defaultValue} onChange={handleChange} />;
+    case 'letterSpacing':
+      return (
+        <SliderInput
+          iconLabel={<SpaceBarOutlined />}
+          units="px"
+          step={0.1}
+          min={-2}
+          max={8}
+          label="Letter spacing"
+          defaultValue={defaultValue ?? 0}
+          onChange={handleChange}
+        />
+      );
+    case 'lineHeight':
+      return (
+        <SliderInput
+          iconLabel={<FormatLineSpacingOutlined />}
+          units="px"
+          step={1}
+          min={10}
+          max={60}
+          label="Line height"
+          defaultValue={defaultValue ?? 20}
+          onChange={handleChange}
+        />
+      );
     case 'textAlign':
       return <TextAlignInput label="Alignment" defaultValue={defaultValue} onChange={handleChange} />;
     case 'padding':

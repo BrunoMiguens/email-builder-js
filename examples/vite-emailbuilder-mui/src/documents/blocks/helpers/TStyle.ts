@@ -8,6 +8,9 @@ export type TStyle = {
   fontFamily?: any;
   fontSize?: any;
   fontWeight?: any;
+  letterSpacing?: any;
+  lineHeight?: any;
+  linkColor?: any;
   padding?: any;
   textAlign?: any;
 };

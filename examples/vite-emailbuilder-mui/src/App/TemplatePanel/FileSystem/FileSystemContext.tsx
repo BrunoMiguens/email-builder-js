@@ -80,19 +80,61 @@ async function verifyPermission(handle: DirHandle): Promise<boolean> {
   return state === 'granted';
 }
 
-export async function listJsonFiles(dir: DirHandle): Promise<string[]> {
+export async function listJsonFiles(dir: DirHandle, prefix = '', skipFolders: string[] = []): Promise<string[]> {
   const names: string[] = [];
   const iter = dir.values();
   let result = await iter.next();
   while (!result.done) {
     const entry = result.value;
     if (entry.kind === 'file' && entry.name.endsWith('.json')) {
-      names.push(entry.name);
+      names.push(prefix + entry.name);
+    } else if (entry.kind === 'directory' && !skipFolders.includes(entry.name)) {
+      const subDir = await dir.getDirectoryHandle(entry.name);
+      const subFiles = await listJsonFiles(subDir, `${prefix}${entry.name}/`, skipFolders);
+      names.push(...subFiles);
     }
     result = await iter.next();
   }
   names.sort();
   return names;
+}
+
+async function getFileHandleByPath(dir: DirHandle, path: string): Promise<FileHandle> {
+  const parts = path.split('/');
+  let currentDir: DirHandle = dir;
+  for (let i = 0; i < parts.length - 1; i++) {
+    currentDir = await currentDir.getDirectoryHandle(parts[i]);
+  }
+  return currentDir.getFileHandle(parts[parts.length - 1]);
+}
+
+/**
+ * Parse a block JSON string, extracting __slots__ metadata and returning
+ * the clean config (without __slots__) plus the slots definition.
+ */
+function parseBlockJson(text: string): { config: Record<string, unknown>; slots: CustomBlockEntry['slots'] } | null {
+  try {
+    const parsed = JSON.parse(text) as Record<string, unknown>;
+    if (!parsed || typeof parsed !== 'object' || !parsed.root) return null;
+    const slots = (parsed.__slots__ ?? {}) as CustomBlockEntry['slots'];
+    const config = { ...parsed };
+    delete config.__slots__;
+    return { config, slots };
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Build the save payload for a block file. If the block had __slots__,
+ * they are re-injected at the top of the JSON.
+ */
+function buildBlockSavePayload(doc: unknown, slots: Record<string, unknown> | null): string {
+  if (slots && Object.keys(slots).length > 0) {
+    const obj = doc as Record<string, unknown>;
+    return JSON.stringify({ __slots__: slots, ...obj }, null, 2);
+  }
+  return JSON.stringify(doc, null, 2);
 }
 
 async function loadAllBlockFiles(dir: DirHandle): Promise<CustomBlockEntry[]> {
@@ -103,9 +145,9 @@ async function loadAllBlockFiles(dir: DirHandle): Promise<CustomBlockEntry[]> {
       const fileHandle = await dir.getFileHandle(name);
       const file = await fileHandle.getFile();
       const text = await file.text();
-      const parsed = JSON.parse(text) as TEditorConfiguration;
-      if (parsed && typeof parsed === 'object' && parsed.root) {
-        entries.push({ name, config: parsed });
+      const result = parseBlockJson(text);
+      if (result) {
+        entries.push({ name, config: structuredClone(result.config) as TEditorConfiguration, slots: result.slots });
       }
     } catch {
       // skip invalid files
@@ -171,6 +213,7 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
   const activeBlockFileHandleRef = useRef<FileHandle | null>(null);
   const lastLoadedBlockDocRef = useRef<unknown>(null);
   const blockSaveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const activeBlockSlotsRef = useRef<Record<string, unknown> | null>(null);
 
   // Preserve template state when switching to block editing
   const savedTemplateDocRef = useRef<TEditorConfiguration | null>(null);
@@ -178,9 +221,12 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
   const savedTemplateFileNameRef = useRef<string>('');
   const savedTemplateSaveStatusRef = useRef<SaveStatus | null>(null);
 
-  // Use a ref for editingMode inside effects to avoid stale closures
+  // Ref for editingMode used by the auto-save effect. IMPORTANT: do NOT sync
+  // this from React state on every render — zustand updates (resetDocument) can
+  // trigger a re-render before the React useState commit, which would overwrite
+  // the ref with the OLD mode. Instead, set the ref explicitly in every
+  // mode-switching function BEFORE calling resetDocument.
   const editingModeRef = useRef<EditingMode>('template');
-  editingModeRef.current = editingMode;
 
   // --- Flush pending saves before mode switches ---
   // When switching modes, the auto-save effect cleanup cancels the pending timer.
@@ -196,7 +242,7 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
 
     try {
       const writable = await fileHandle.createWritable();
-      await writable.write(JSON.stringify(document, null, 2));
+      await writable.write(buildBlockSavePayload(document, activeBlockSlotsRef.current));
       await writable.close();
       lastLoadedBlockDocRef.current = document;
 
@@ -204,7 +250,7 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
       const store = useCustomBlocksStore.getState();
       const blockName = activeBlockFileName;
       const updated = store.customBlocks.map((cb) =>
-        cb.name === blockName ? { ...cb, config: document as TEditorConfiguration } : cb
+        cb.name === blockName ? { ...cb, config: structuredClone(document) as TEditorConfiguration } : cb
       );
       store.setCustomBlocks(updated);
       setBlockSaveStatus('saved');
@@ -260,7 +306,7 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
           return;
         }
         dirHandleRef.current = handle;
-        const jsonFiles = await listJsonFiles(handle);
+        const jsonFiles = await listJsonFiles(handle, '', ['blocks']);
         setFolderName(handle.name);
         setFiles(jsonFiles);
 
@@ -288,10 +334,18 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
     }
 
     timerRef.current = setTimeout(async () => {
+      // Safety: if the mode changed since this timer was created, skip the save.
+      // The new effect run (with the correct mode) will handle it.
+      const currentIsBlockMode = editingModeRef.current === 'block';
+      if (currentIsBlockMode !== isBlockMode) return;
+
       setStatus('saving');
       try {
         const writable = await fileHandle.createWritable();
-        await writable.write(JSON.stringify(document, null, 2));
+        const payload = isBlockMode
+          ? buildBlockSavePayload(document, activeBlockSlotsRef.current)
+          : JSON.stringify(document, null, 2);
+        await writable.write(payload);
         await writable.close();
 
         if (isBlockMode) {
@@ -301,7 +355,7 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
           const store = useCustomBlocksStore.getState();
           const blockName = activeBlockFileName;
           const updated = store.customBlocks.map((cb) =>
-            cb.name === blockName ? { ...cb, config: document as TEditorConfiguration } : cb
+            cb.name === blockName ? { ...cb, config: structuredClone(document) as TEditorConfiguration } : cb
           );
           store.setCustomBlocks(updated);
         } else {
@@ -337,7 +391,7 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
       dirHandleRef.current = handle;
       await saveHandle(handle);
 
-      const jsonFiles = await listJsonFiles(handle);
+      const jsonFiles = await listJsonFiles(handle, '', ['blocks']);
       setFolderName(handle.name);
       setFiles(jsonFiles);
       setActiveFileName('');
@@ -346,10 +400,12 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
       setSaveStatus(null);
 
       // Reset block editing state
+      editingModeRef.current = 'template';
       setEditingMode('template');
       setActiveBlockFileName('');
       activeBlockFileHandleRef.current = null;
       lastLoadedBlockDocRef.current = null;
+      activeBlockSlotsRef.current = null;
       setBlockSaveStatus(null);
 
       // Initialize blocks subfolder
@@ -361,7 +417,7 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
 
   const refreshFiles = async () => {
     if (!dirHandleRef.current) return;
-    const jsonFiles = await listJsonFiles(dirHandleRef.current);
+    const jsonFiles = await listJsonFiles(dirHandleRef.current, '', ['blocks']);
     setFiles(jsonFiles);
   };
 
@@ -370,7 +426,7 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
     try {
       await flushPendingBlockSave();
       await flushPendingTemplateSave();
-      const fileHandle = await dirHandleRef.current.getFileHandle(name);
+      const fileHandle = await getFileHandleByPath(dirHandleRef.current, name);
       const file = await fileHandle.getFile();
       const text = await file.text();
       const { data, error } = validateJsonStringValue(text);
@@ -382,6 +438,19 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
       lastLoadedDocRef.current = data;
       setActiveFileName(name);
       setSaveStatus('saved');
+
+      // Clear block editing state to prevent stale handles
+      activeBlockFileHandleRef.current = null;
+      lastLoadedBlockDocRef.current = null;
+      activeBlockSlotsRef.current = null;
+      setActiveBlockFileName('');
+      setBlockSaveStatus(null);
+      savedTemplateDocRef.current = null;
+      savedTemplateFileHandleRef.current = null;
+      savedTemplateFileNameRef.current = '';
+      savedTemplateSaveStatusRef.current = null;
+
+      editingModeRef.current = 'template'; // Set ref before resetDocument to prevent stale auto-save
       setEditingMode('template');
       resetDocument(data);
     } catch (e) {
@@ -391,6 +460,8 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
 
   const createFile = async () => {
     if (!dirHandleRef.current) return;
+    await flushPendingBlockSave();
+    await flushPendingTemplateSave();
     const raw = window.prompt('New file name:', 'untitled.json');
     if (!raw) return;
     const fileName = raw.endsWith('.json') ? raw : `${raw}.json`;
@@ -404,6 +475,19 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
       lastLoadedDocRef.current = EMPTY_EMAIL_MESSAGE;
       setActiveFileName(fileName);
       setSaveStatus('saved');
+
+      // Clear block editing state to prevent stale handles
+      activeBlockFileHandleRef.current = null;
+      lastLoadedBlockDocRef.current = null;
+      activeBlockSlotsRef.current = null;
+      setActiveBlockFileName('');
+      setBlockSaveStatus(null);
+      savedTemplateDocRef.current = null;
+      savedTemplateFileHandleRef.current = null;
+      savedTemplateFileNameRef.current = '';
+      savedTemplateSaveStatusRef.current = null;
+
+      editingModeRef.current = 'template'; // Set ref before resetDocument to prevent stale auto-save
       setEditingMode('template');
       setFiles((prev) => [...prev, fileName].sort());
       resetDocument(EMPTY_EMAIL_MESSAGE);
@@ -432,9 +516,19 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
       const fileHandle = await blocksDirHandleRef.current.getFileHandle(name);
       const file = await fileHandle.getFile();
       const text = await file.text();
-      const { data, error } = validateJsonStringValue(text);
-      if (error || !data) {
-        alert(`Could not load block "${name}": ${error}`);
+      // Parse block JSON, stripping __slots__ metadata.
+      // We skip strict Zod schema validation for blocks because blocks with
+      // __slots__ may contain {{placeholder}} strings in number/enum fields
+      // that would fail the schema (e.g. "{{iconWidth}}" in a z.number() field).
+      // The placeholders are substituted at resolve time, not at load time.
+      const parsed = parseBlockJson(text);
+      if (!parsed) {
+        alert(`Could not load block "${name}": Invalid JSON`);
+        return;
+      }
+      const data = parsed.config as TEditorConfiguration;
+      if (!data.root) {
+        alert(`Could not load block "${name}": Missing "root" node`);
         return;
       }
 
@@ -448,6 +542,7 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
 
       activeBlockFileHandleRef.current = fileHandle;
       lastLoadedBlockDocRef.current = data;
+      activeBlockSlotsRef.current = Object.keys(parsed.slots).length > 0 ? parsed.slots as Record<string, unknown> : null;
       setActiveBlockFileName(name);
       setBlockSaveStatus('saved');
       editingModeRef.current = 'block'; // Set ref before resetDocument to prevent stale auto-save
@@ -490,7 +585,7 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
 
       // Also add to the custom blocks store
       const store = useCustomBlocksStore.getState();
-      store.setCustomBlocks([...store.customBlocks, { name: fileName, config: EMPTY_BLOCK }]);
+      store.setCustomBlocks([...store.customBlocks, { name: fileName, config: structuredClone(EMPTY_BLOCK), slots: {} }]);
     } catch (e) {
       console.error('Failed to create block', e);
     }
@@ -503,6 +598,7 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
     setActiveBlockFileName('');
     activeBlockFileHandleRef.current = null;
     lastLoadedBlockDocRef.current = null;
+    activeBlockSlotsRef.current = null;
     setBlockSaveStatus(null);
 
     // Restore saved template state

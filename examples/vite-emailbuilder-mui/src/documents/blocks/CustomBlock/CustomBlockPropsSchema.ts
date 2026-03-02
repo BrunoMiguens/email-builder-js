@@ -4,6 +4,7 @@ const CustomBlockPropsSchema = z.object({
   props: z
     .object({
       blockName: z.string(),
+      slotValues: z.record(z.string(), z.unknown()).optional(),
     })
     .optional()
     .nullable(),

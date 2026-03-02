@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { AddOutlined, ArrowBackOutlined, FolderOpenOutlined, RefreshOutlined, WidgetsOutlined } from '@mui/icons-material';
+import { AddOutlined, ArrowBackOutlined, ChevronRight, FolderOpenOutlined, FolderOutlined, RefreshOutlined, WidgetsOutlined } from '@mui/icons-material';
 import { Box, Button, CircularProgress, Divider, Drawer, IconButton, Link, Stack, Tooltip, Typography } from '@mui/material';
 
 import { useSamplesDrawerOpen } from '../../documents/editor/EditorContext';
@@ -10,6 +10,28 @@ import SidebarButton from './SidebarButton';
 import logo from './waypoint.svg';
 
 export const SAMPLES_DRAWER_WIDTH = 240;
+
+type TreeNode = {
+  files: string[]; // full relative paths (e.g. 'onboarding/rejected.json')
+  folders: Record<string, TreeNode>;
+};
+
+function buildTree(paths: string[]): TreeNode {
+  const root: TreeNode = { files: [], folders: {} };
+  for (const path of paths) {
+    const parts = path.split('/');
+    let node = root;
+    for (let i = 0; i < parts.length - 1; i++) {
+      const folder = parts[i];
+      if (!node.folders[folder]) {
+        node.folders[folder] = { files: [], folders: {} };
+      }
+      node = node.folders[folder];
+    }
+    node.files.push(path);
+  }
+  return root;
+}
 
 export default function SamplesDrawer() {
   const samplesDrawerOpen = useSamplesDrawerOpen();
@@ -32,64 +54,115 @@ export default function SamplesDrawer() {
     switchToTemplateMode,
   } = useFileSystem();
 
-  const renderFileList = () => (
-    <Stack spacing={1}>
-      <Stack direction="row" alignItems="center" justifyContent="space-between" px={0.75}>
-        <Tooltip title={`Folder: ${folderName} — click to change`}>
-          <Typography
-            variant="caption"
-            color="text.secondary"
-            sx={{ cursor: 'pointer', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: 120 }}
-            onClick={openFolder}
+  const [collapsedFolders, setCollapsedFolders] = useState<Set<string>>(new Set());
+
+  const toggleFolder = (folderPath: string) => {
+    setCollapsedFolders((prev) => {
+      const next = new Set(prev);
+      if (next.has(folderPath)) {
+        next.delete(folderPath);
+      } else {
+        next.add(folderPath);
+      }
+      return next;
+    });
+  };
+
+  const renderNode = (node: TreeNode, depth: number, pathPrefix: string): React.ReactNode => (
+    <>
+      {node.files.map((path) => {
+        const label = path.split('/').pop()!.replace(/\.json$/, '');
+        const isActive = path === activeFileName && editingMode === 'template';
+        return (
+          <Button
+            key={path}
+            size="small"
+            onClick={() => selectFile(path)}
+            sx={{ pl: 0.75 + depth * 1.5, fontWeight: isActive ? 'bold' : 'normal', width: '100%', justifyContent: 'flex-start' }}
           >
-            {folderName}
-          </Typography>
-        </Tooltip>
-        <Stack direction="row" alignItems="center" spacing={0.5}>
-          {saveStatus === 'saving' && <CircularProgress size={10} />}
-          {saveStatus === 'saved' && (
-            <Typography variant="caption" color="text.secondary">
-              Saved
+            {label}
+          </Button>
+        );
+      })}
+      {Object.entries(node.folders)
+        .sort(([a], [b]) => a.localeCompare(b))
+        .map(([folder, subtree]) => {
+          const fullPath = pathPrefix ? `${pathPrefix}/${folder}` : folder;
+          const isCollapsed = collapsedFolders.has(fullPath);
+          return (
+            <React.Fragment key={fullPath}>
+              <Button
+                size="small"
+                onClick={() => toggleFolder(fullPath)}
+                startIcon={
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.25 }}>
+                    <ChevronRight sx={{ fontSize: 14, transform: isCollapsed ? 'rotate(0deg)' : 'rotate(90deg)', transition: 'transform 0.15s' }} />
+                    <FolderOutlined sx={{ fontSize: 14 }} />
+                  </Box>
+                }
+                sx={{ pl: 0.75 + depth * 1.5, width: '100%', justifyContent: 'flex-start', color: 'text.secondary' }}
+              >
+                {folder}
+              </Button>
+              {!isCollapsed && renderNode(subtree, depth + 1, fullPath)}
+            </React.Fragment>
+          );
+        })}
+    </>
+  );
+
+  const renderFileList = () => {
+    const tree = buildTree(files);
+    return (
+      <Stack spacing={1}>
+        <Stack direction="row" alignItems="center" justifyContent="space-between" px={0.75}>
+          <Tooltip title={`Folder: ${folderName} — click to change`}>
+            <Typography
+              variant="caption"
+              color="text.secondary"
+              sx={{ cursor: 'pointer', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: 120 }}
+              onClick={openFolder}
+            >
+              {folderName}
             </Typography>
-          )}
-          {saveStatus === 'unsaved' && (
-            <Typography variant="caption" color="warning.main">
-              Unsaved
+          </Tooltip>
+          <Stack direction="row" alignItems="center" spacing={0.5}>
+            {saveStatus === 'saving' && <CircularProgress size={10} />}
+            {saveStatus === 'saved' && (
+              <Typography variant="caption" color="text.secondary">
+                Saved
+              </Typography>
+            )}
+            {saveStatus === 'unsaved' && (
+              <Typography variant="caption" color="warning.main">
+                Unsaved
+              </Typography>
+            )}
+            <Tooltip title="New file">
+              <IconButton size="small" onClick={createFile}>
+                <AddOutlined sx={{ fontSize: 16 }} />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Refresh">
+              <IconButton size="small" onClick={refreshFiles}>
+                <RefreshOutlined sx={{ fontSize: 16 }} />
+              </IconButton>
+            </Tooltip>
+          </Stack>
+        </Stack>
+
+        <Stack sx={{ '& .MuiButtonBase-root': { width: '100%', justifyContent: 'flex-start' } }}>
+          {files.length === 0 ? (
+            <Typography variant="body2" color="text.secondary" px={0.75}>
+              No JSON files in folder.
             </Typography>
+          ) : (
+            renderNode(tree, 0, '')
           )}
-          <Tooltip title="New file">
-            <IconButton size="small" onClick={createFile}>
-              <AddOutlined sx={{ fontSize: 16 }} />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Refresh">
-            <IconButton size="small" onClick={refreshFiles}>
-              <RefreshOutlined sx={{ fontSize: 16 }} />
-            </IconButton>
-          </Tooltip>
         </Stack>
       </Stack>
-
-      <Stack alignItems="flex-start" sx={{ '& .MuiButtonBase-root': { width: '100%', justifyContent: 'flex-start' } }}>
-        {files.length === 0 ? (
-          <Typography variant="body2" color="text.secondary" px={0.75}>
-            No JSON files in folder.
-          </Typography>
-        ) : (
-          files.map((f) => (
-            <Button
-              key={f}
-              size="small"
-              onClick={() => selectFile(f)}
-              sx={{ fontWeight: f === activeFileName && editingMode === 'template' ? 'bold' : 'normal' }}
-            >
-              {f.replace(/\.json$/, '')}
-            </Button>
-          ))
-        )}
-      </Stack>
-    </Stack>
-  );
+    );
+  };
 
   const renderBlockList = () => (
     <Stack spacing={1}>
@@ -203,29 +276,6 @@ export default function SamplesDrawer() {
               View on GitHub
             </Button>
           </Stack>
-        </Stack>
-        <Stack spacing={2} px={0.75} py={3}>
-          <Link href="https://usewaypoint.com?utm_source=emailbuilderjs" target="_blank" sx={{ lineHeight: 1 }}>
-            <Box component="img" src={logo} width={32} />
-          </Link>
-          <Box>
-            <Typography variant="overline" gutterBottom>
-              Looking to send emails?
-            </Typography>
-            <Typography variant="body2" color="text.secondary" paragraph>
-              Waypoint is an end-to-end email API with a &apos;pro&apos; version of this template builder with dynamic
-              variables, loops, conditionals, drag and drop, layouts, and more.
-            </Typography>
-          </Box>
-          <Button
-            variant="contained"
-            color="primary"
-            sx={{ justifyContent: 'center' }}
-            href="https://usewaypoint.com?utm_source=emailbuilderjs"
-            target="_blank"
-          >
-            Learn more
-          </Button>
         </Stack>
       </Stack>
     </Drawer>

@@ -12,6 +12,7 @@ const FONT_FAMILY_SCHEMA = z
     'MODERN_SERIF',
     'BOOK_SERIF',
     'MONOSPACE',
+    'INTER',
   ])
   .nullable()
   .optional();
@@ -36,6 +37,8 @@ function getFontFamily(fontFamily: z.infer<typeof FONT_FAMILY_SCHEMA>) {
       return '"Iowan Old Style", "Palatino Linotype", "URW Palladio L", P052, serif';
     case 'MONOSPACE':
       return '"Nimbus Mono PS", "Courier New", "Cutive Mono", monospace';
+    case 'INTER':
+      return '"Inter", -apple-system, BlinkMacSystemFont, Arial, sans-serif';
   }
   return undefined;
 }

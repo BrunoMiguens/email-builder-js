@@ -17,6 +17,7 @@ const FONT_FAMILY_SCHEMA = z
     'MODERN_SERIF',
     'BOOK_SERIF',
     'MONOSPACE',
+    'INTER',
   ])
   .nullable()
   .optional();
@@ -28,6 +29,7 @@ const EmailLayoutPropsSchema = z.object({
   canvasColor: COLOR_SCHEMA,
   textColor: COLOR_SCHEMA,
   fontFamily: FONT_FAMILY_SCHEMA,
+  maxWidth: z.number().optional().nullable(),
   childrenIds: z.array(z.string()).optional().nullable(),
 });
 

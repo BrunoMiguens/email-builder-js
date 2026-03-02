@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ZodError } from 'zod';
 
-import { RoundedCornerOutlined } from '@mui/icons-material';
+import { RoundedCornerOutlined, WidthNormalOutlined } from '@mui/icons-material';
 
 import EmailLayoutPropsSchema, {
   EmailLayoutProps,
@@ -56,6 +56,16 @@ export default function EmailLayoutSidebarFields({ data, setData }: EmailLayoutS
         label="Canvas border radius"
         defaultValue={data.borderRadius ?? 0}
         onChange={(borderRadius) => updateData({ ...data, borderRadius })}
+      />
+      <SliderInput
+        iconLabel={<WidthNormalOutlined />}
+        units="px"
+        step={10}
+        min={240}
+        max={800}
+        label="Canvas max width"
+        defaultValue={data.maxWidth ?? 600}
+        onChange={(maxWidth) => updateData({ ...data, maxWidth })}
       />
       <NullableFontFamily
         label="Font family"
