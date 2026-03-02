@@ -1,7 +1,15 @@
 {
-  "name": "@usewaypoint/email-builder",
-  "version": "0.0.9",
+  "name": "@brunomiguens/email-builder",
+  "version": "0.1.0",
   "description": "React component to render email messages",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BrunoMiguens/email-builder-js.git",
+    "directory": "packages/email-builder"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",

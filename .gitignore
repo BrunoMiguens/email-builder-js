@@ -11,3 +11,9 @@ yarn-debug.log*
 yarn-error.log*
 
 dist
+
+# compiled jest config (source is jest.config.ts)
+jest.config.js
+jest.config.js.map
+jest.config.d.ts
+jest.config.d.ts.map

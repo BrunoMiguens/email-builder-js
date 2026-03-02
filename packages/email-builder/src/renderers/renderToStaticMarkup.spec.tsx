@@ -21,6 +21,6 @@ describe('renderToStaticMarkup', () => {
       },
       { rootBlockId: 'root' }
     );
-    expect(result).toEqual('<!DOCTYPE html><html><body><div></div></body></html>');
+    expect(result).toEqual('<!DOCTYPE html><html><head></head><body><div></div></body></html>');
   });
 });

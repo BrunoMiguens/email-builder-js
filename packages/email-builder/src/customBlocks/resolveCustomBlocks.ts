@@ -1,5 +1,9 @@
-import { TEditorBlock, TEditorConfiguration } from '../../editor/core';
-import { CustomBlockEntry, TableItem } from '../helpers/EditorChildrenIds/AddBlockMenu/useCustomBlocks';
+import { TReaderDocument } from '../Reader/core';
+
+import { CustomBlockEntry, TableItem } from './types';
+
+type AnyBlock = { type: string; data?: Record<string, unknown> };
+type AnyDocument = Record<string, AnyBlock>;
 
 /**
  * Resolves all CustomBlock references in a document by replacing them with
@@ -10,17 +14,20 @@ import { CustomBlockEntry, TableItem } from '../helpers/EditorChildrenIds/AddBlo
  * replaced with the corresponding values.
  */
 export default function resolveCustomBlocks(
-  document: TEditorConfiguration,
+  document: AnyDocument,
   customBlocks: CustomBlockEntry[]
-): TEditorConfiguration {
-  const resolved: TEditorConfiguration = { ...document };
+): TReaderDocument {
+  if (customBlocks.length === 0) return document as TReaderDocument;
+
+  const resolved: AnyDocument = { ...document };
   let hasCustomBlocks = false;
 
   for (const [id, block] of Object.entries(resolved)) {
     if (block.type === 'CustomBlock') {
       hasCustomBlocks = true;
-      const blockName = block.data?.props?.blockName;
-      const slotValues: Record<string, unknown> = (block.data?.props as Record<string, unknown>)?.slotValues as Record<string, unknown> ?? {};
+      const props = block.data?.props as Record<string, unknown> | undefined;
+      const blockName = props?.blockName as string | undefined;
+      const slotValues: Record<string, unknown> = (props?.slotValues as Record<string, unknown>) ?? {};
       const entry = customBlocks.find((b) => b.name === blockName);
       if (!entry) {
         resolved[id] = {
@@ -34,8 +41,9 @@ export default function resolveCustomBlocks(
       }
 
       const config = entry.config;
-      const root = config.root;
-      const childrenIds: string[] = (root?.data as Record<string, unknown>)?.childrenIds as string[] ?? [];
+      const root = config.root as Record<string, unknown> | undefined;
+      const rootData = root?.data as Record<string, unknown> | undefined;
+      const childrenIds: string[] = (rootData?.childrenIds as string[]) ?? [];
       if (childrenIds.length === 0) {
         resolved[id] = {
           type: 'Container',
@@ -74,7 +82,7 @@ export default function resolveCustomBlocks(
       // Build old→new ID mapping
       const idMap = new Map<string, string>();
       for (const oldId of Object.keys(config)) {
-        if (oldId === 'root') continue;
+        if (oldId === 'root' || oldId === '__slots__') continue;
         idMap.set(oldId, `${idPrefix}${oldId}`);
       }
 
@@ -91,13 +99,12 @@ export default function resolveCustomBlocks(
       // Copy all child blocks with namespaced IDs, remapping internal references
       const hasSlots = Object.keys(effectiveValues).length > 0;
       for (const [oldId, childBlock] of Object.entries(config)) {
-        if (oldId === 'root') continue;
+        if (oldId === 'root' || oldId === '__slots__') continue;
         const newId = idMap.get(oldId)!;
-        const cloned: TEditorBlock = structuredClone(childBlock);
+        const cloned = structuredClone(childBlock) as AnyBlock;
 
         remapChildrenIds(cloned, idMap);
 
-        // Substitute slot placeholders in all string values
         if (hasSlots) {
           substituteSlotValues(cloned, effectiveValues);
         }
@@ -107,19 +114,19 @@ export default function resolveCustomBlocks(
     }
   }
 
-  // If no custom blocks were found, return original to avoid unnecessary object creation
-  if (!hasCustomBlocks) return document;
-  return resolved;
+  if (!hasCustomBlocks) return document as TReaderDocument;
+  return resolved as TReaderDocument;
 }
 
-function remapChildrenIds(block: TEditorBlock, idMap: Map<string, string>): void {
-  if (block.type === 'Container' && block.data?.props?.childrenIds) {
-    block.data.props.childrenIds = block.data.props.childrenIds.map(
+function remapChildrenIds(block: AnyBlock, idMap: Map<string, string>): void {
+  const props = block.data?.props as Record<string, unknown> | undefined;
+  if (block.type === 'Container' && props?.childrenIds) {
+    (props as { childrenIds: string[] }).childrenIds = (props.childrenIds as string[]).map(
       (id: string) => idMap.get(id) ?? id
     );
   }
-  if (block.type === 'ColumnsContainer' && block.data?.props?.columns) {
-    for (const col of block.data.props.columns) {
+  if (block.type === 'ColumnsContainer' && props?.columns) {
+    for (const col of props.columns as Array<{ childrenIds?: string[] }>) {
       if (col.childrenIds) {
         col.childrenIds = col.childrenIds.map((id: string) => idMap.get(id) ?? id);
       }
@@ -130,6 +137,11 @@ function remapChildrenIds(block: TEditorBlock, idMap: Map<string, string>): void
 /**
  * Recursively walks a block's data and replaces all `{{key}}` patterns
  * in string values with the corresponding slot value.
+ *
+ * When a string value is exactly `{{key}}` (a single placeholder with no
+ * surrounding text), the raw slot value is used — preserving its original
+ * type (e.g. number for width/height fields). When the placeholder is
+ * embedded in a larger string, it's converted to a string via String().
  */
 function substituteSlotValues(obj: unknown, values: Record<string, unknown>): void {
   if (obj === null || obj === undefined) return;
@@ -175,6 +187,7 @@ function replaceSlotPlaceholders(str: string, values: Record<string, unknown>): 
 
 /**
  * Converts an array of {label, value} items into an HTML receipt-style table.
+ * Used to resolve `table` type slot values into HTML before substitution.
  */
 export function generateTableHtml(items: TableItem[]): string {
   if (items.length === 0) return '';
@@ -183,8 +196,7 @@ export function generateTableHtml(items: TableItem[]): string {
     'color:#808080;font-size:16px;line-height:22px;letter-spacing:-0.18px;padding:0;vertical-align:middle;';
   const valueStyle =
     'color:#111111;font-size:16px;line-height:22px;letter-spacing:-0.18px;padding:0;text-align:right;vertical-align:middle;white-space:nowrap;';
-  const spacerRow =
-    '<tr><td height="16" style="height:16px;line-height:16px;font-size:16px;" colspan="2"></td></tr>';
+  const spacerRow = '<tr><td height="16" style="height:16px;line-height:16px;font-size:16px;" colspan="2"></td></tr>';
 
   const rows = items
     .map((item, i) => {
