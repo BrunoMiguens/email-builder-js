@@ -273,6 +273,9 @@ export default function SamplesDrawer() {
               Learn more
             </Button>
             <Button size="small" href="https://github.com/usewaypoint/email-builder-js" target="_blank">
+              Fork Origin 
+            </Button>
+            <Button size="small" href="https://github.com/BrunoMiguens/email-builder-js" target="_blank">
               View on GitHub
             </Button>
           </Stack>

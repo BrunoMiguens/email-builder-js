@@ -137,6 +137,28 @@ function buildBlockSavePayload(doc: unknown, slots: Record<string, unknown> | nu
   return JSON.stringify(doc, null, 2);
 }
 
+/**
+ * Filter a list of JSON file paths, keeping only those that parse as valid JSON
+ * with a "root" property (i.e. valid email builder configs or blocks).
+ */
+async function filterParsableFiles(dir: DirHandle, paths: string[]): Promise<string[]> {
+  const parsable: string[] = [];
+  for (const path of paths) {
+    try {
+      const fileHandle = await getFileHandleByPath(dir, path);
+      const file = await fileHandle.getFile();
+      const text = await file.text();
+      const parsed = JSON.parse(text);
+      if (parsed && typeof parsed === 'object' && parsed.root) {
+        parsable.push(path);
+      }
+    } catch {
+      // skip unparsable files
+    }
+  }
+  return parsable;
+}
+
 async function loadAllBlockFiles(dir: DirHandle): Promise<CustomBlockEntry[]> {
   const files = await listJsonFiles(dir);
   const entries: CustomBlockEntry[] = [];
@@ -283,7 +305,8 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
     try {
       const blocksDir = await parentDir.getDirectoryHandle('blocks', { create: true });
       blocksDirHandleRef.current = blocksDir;
-      const jsonFiles = await listJsonFiles(blocksDir);
+      const allJsonFiles = await listJsonFiles(blocksDir);
+      const jsonFiles = await filterParsableFiles(blocksDir, allJsonFiles);
       setBlockFiles(jsonFiles);
 
       // Load all block contents into the store
@@ -306,7 +329,8 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
           return;
         }
         dirHandleRef.current = handle;
-        const jsonFiles = await listJsonFiles(handle, '', ['blocks']);
+        const allJsonFiles = await listJsonFiles(handle, '', ['blocks']);
+        const jsonFiles = await filterParsableFiles(handle, allJsonFiles);
         setFolderName(handle.name);
         setFiles(jsonFiles);
 
@@ -391,7 +415,8 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
       dirHandleRef.current = handle;
       await saveHandle(handle);
 
-      const jsonFiles = await listJsonFiles(handle, '', ['blocks']);
+      const allJsonFiles = await listJsonFiles(handle, '', ['blocks']);
+      const jsonFiles = await filterParsableFiles(handle, allJsonFiles);
       setFolderName(handle.name);
       setFiles(jsonFiles);
       setActiveFileName('');
@@ -417,7 +442,8 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
 
   const refreshFiles = async () => {
     if (!dirHandleRef.current) return;
-    const jsonFiles = await listJsonFiles(dirHandleRef.current, '', ['blocks']);
+    const allJsonFiles = await listJsonFiles(dirHandleRef.current, '', ['blocks']);
+    const jsonFiles = await filterParsableFiles(dirHandleRef.current, allJsonFiles);
     setFiles(jsonFiles);
   };
 
@@ -500,7 +526,8 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
 
   const refreshBlockFiles = async () => {
     if (!blocksDirHandleRef.current) return;
-    const jsonFiles = await listJsonFiles(blocksDirHandleRef.current);
+    const allJsonFiles = await listJsonFiles(blocksDirHandleRef.current);
+    const jsonFiles = await filterParsableFiles(blocksDirHandleRef.current, allJsonFiles);
     setBlockFiles(jsonFiles);
 
     // Reload all block contents into the store
