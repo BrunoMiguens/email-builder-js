@@ -88,6 +88,10 @@ ${body}</tbody>
 </table>`;
   };
 
+  renderer.paragraph = (text: string) => {
+    return `<p style="margin:0;">${text}</p>`;
+  };
+
   renderer.link = (href: string, title: string | null, text: string) => {
     const titleAttr = title ? ` title="${title}"` : '';
     if (linkColor) {
