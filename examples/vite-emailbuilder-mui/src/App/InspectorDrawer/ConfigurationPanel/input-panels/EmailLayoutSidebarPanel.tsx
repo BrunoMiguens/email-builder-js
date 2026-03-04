@@ -89,6 +89,17 @@ export default function EmailLayoutSidebarFields({ data, setData }: EmailLayoutS
         onChange={(paddingVertical) => updateData({ ...data, paddingVertical })}
       />
       <SliderInput
+        iconLabel={<MonitorOutlined />}
+        units="px"
+        step={4}
+        marks
+        min={0}
+        max={128}
+        label="Desktop horizontal padding"
+        defaultValue={data.paddingHorizontal ?? 0}
+        onChange={(paddingHorizontal) => updateData({ ...data, paddingHorizontal })}
+      />
+      <SliderInput
         iconLabel={<PhoneIphoneOutlined />}
         units="px"
         step={4}
@@ -98,6 +109,17 @@ export default function EmailLayoutSidebarFields({ data, setData }: EmailLayoutS
         label="Mobile vertical padding"
         defaultValue={data.mobilePaddingVertical ?? 0}
         onChange={(mobilePaddingVertical) => updateData({ ...data, mobilePaddingVertical })}
+      />
+      <SliderInput
+        iconLabel={<PhoneIphoneOutlined />}
+        units="px"
+        step={4}
+        marks
+        min={0}
+        max={128}
+        label="Mobile horizontal padding"
+        defaultValue={data.mobilePaddingHorizontal ?? 0}
+        onChange={(mobilePaddingHorizontal) => updateData({ ...data, mobilePaddingHorizontal })}
       />
     </BaseSidebarPanel>
   );

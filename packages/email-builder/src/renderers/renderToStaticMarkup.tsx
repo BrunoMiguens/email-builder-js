@@ -15,10 +15,13 @@ function buildResponsiveStyles(document: TReaderDocument, rootBlockId: string): 
   }
   const data = rootBlock.data as Record<string, unknown>;
   const mobilePaddingVertical = data?.mobilePaddingVertical;
-  if (mobilePaddingVertical == null) {
+  const mobilePaddingHorizontal = data?.mobilePaddingHorizontal;
+  if (mobilePaddingVertical == null && mobilePaddingHorizontal == null) {
     return null;
   }
-  return `@media only screen and (max-width: 600px) { .email-layout-root { padding: ${mobilePaddingVertical}px 0 !important; } }`;
+  const pv = mobilePaddingVertical ?? data?.paddingVertical ?? 0;
+  const ph = mobilePaddingHorizontal ?? data?.paddingHorizontal ?? 0;
+  return `@media only screen and (max-width: 600px) { .email-layout-root { padding: ${pv}px ${ph}px !important; } }`;
 }
 
 export default function renderToStaticMarkup(document: TReaderDocument, { rootBlockId, fontUrl }: TOptions) {

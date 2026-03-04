@@ -43,6 +43,11 @@ export default function EmailLayoutEditor(props: EmailLayoutProps) {
       ? (props.mobilePaddingVertical ?? props.paddingVertical ?? 0)
       : (props.paddingVertical ?? 0);
 
+  const paddingHorizontal =
+    selectedScreenSize === 'mobile'
+      ? (props.mobilePaddingHorizontal ?? props.paddingHorizontal ?? 0)
+      : (props.paddingHorizontal ?? 0);
+
   return (
     <div
       onClick={() => {
@@ -57,15 +62,18 @@ export default function EmailLayoutEditor(props: EmailLayoutProps) {
         letterSpacing: '0.15008px',
         lineHeight: '1.5',
         margin: '0',
-        padding: `${paddingVertical}px 0`,
-        width: '100%',
+        paddingTop: paddingVertical,
+        paddingBottom: paddingVertical,
+        paddingLeft: paddingHorizontal,
+        paddingRight: paddingHorizontal,
         minHeight: '100%',
       }}
     >
       <table
         align="center"
-        width="100%"
         style={{
+          width: '100%',
+          tableLayout: 'fixed',
           margin: '0 auto',
           maxWidth: `${props.maxWidth ?? 600}px`,
           backgroundColor: props.canvasColor ?? '#FFFFFF',

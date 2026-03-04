@@ -31,7 +31,9 @@ export const EmailLayoutPropsSchema = z.object({
   fontFamily: FONT_FAMILY_SCHEMA,
   maxWidth: z.number().optional().nullable(),
   paddingVertical: z.number().optional().nullable(),
+  paddingHorizontal: z.number().optional().nullable(),
   mobilePaddingVertical: z.number().optional().nullable(),
+  mobilePaddingHorizontal: z.number().optional().nullable(),
   childrenIds: z.array(z.string()).optional().nullable(),
 });
 

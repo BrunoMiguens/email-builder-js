@@ -51,15 +51,18 @@ export default function EmailLayoutReader(props: EmailLayoutProps) {
         letterSpacing: '0.15008px',
         lineHeight: '1.5',
         margin: '0',
-        padding: `${props.paddingVertical ?? 0}px 0`,
+        padding: `${props.paddingVertical ?? 0}px ${props.paddingHorizontal ?? 0}px`,
         minHeight: '100%',
         width: '100%',
+        boxSizing: 'border-box' as const,
       }}
     >
       <table
         align="center"
         width="100%"
         style={{
+          width: '100%',
+          tableLayout: 'fixed',
           margin: '0 auto',
           maxWidth: `${props.maxWidth ?? 600}px`,
           backgroundColor: props.canvasColor ?? '#FFFFFF',

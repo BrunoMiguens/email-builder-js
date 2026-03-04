@@ -28,7 +28,28 @@ export default function TemplatePanel() {
   const customBlocks = useCustomBlocksStore((s) => s.customBlocks);
   const selectedMainTab = useSelectedMainTab();
   const selectedScreenSize = useSelectedScreenSize();
-  const resolvedDocument = useMemo(() => resolveCustomBlocks(document, customBlocks), [document, customBlocks]);
+  const resolvedDocument = useMemo(() => {
+    const doc = resolveCustomBlocks(document, customBlocks);
+    if (selectedScreenSize !== 'mobile') {
+      return doc;
+    }
+    const rootBlock = doc['root'];
+    if (!rootBlock || rootBlock.type !== 'EmailLayout') {
+      return doc;
+    }
+    const data = rootBlock.data as Record<string, unknown>;
+    return {
+      ...doc,
+      root: {
+        ...rootBlock,
+        data: {
+          ...data,
+          paddingVertical: data.mobilePaddingVertical ?? data.paddingVertical,
+          paddingHorizontal: data.mobilePaddingHorizontal ?? data.paddingHorizontal,
+        },
+      },
+    };
+  }, [document, customBlocks, selectedScreenSize]);
 
   let mainBoxSx: SxProps = {
     height: '100%',
