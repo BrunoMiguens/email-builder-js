@@ -41,14 +41,18 @@ class ReaderErrorBoundary extends Component<
  * interpolation is used.
  */
 function substituteSlots(obj: unknown, values: Record<string, unknown>): unknown {
-  if (obj === null || obj === undefined) return obj;
+  if (obj === null || obj === undefined) {
+    return obj;
+  }
   if (typeof obj === 'string') {
     const singleMatch = obj.match(/^\{\{(\w+)\}\}$/);
     if (singleMatch && singleMatch[1] in values) {
       return values[singleMatch[1]];
     }
     return obj.replace(/\{\{(\w+)\}\}/g, (match, key: string) => {
-      if (key in values) return String(values[key]);
+      if (key in values) {
+        return String(values[key]);
+      }
       return match;
     });
   }
@@ -73,16 +77,24 @@ export default function CustomBlockEditor({ props }: CustomBlockProps) {
   const entry = useMemo(() => customBlocks.find((b) => b.name === blockName), [customBlocks, blockName]);
 
   const virtualDoc = useMemo(() => {
-    if (!entry) return null;
+    if (!entry) {
+      return null;
+    }
     const config = entry.config;
     const root = config.root;
-    if (!root?.data) return null;
-    const childrenIds: string[] = (root.data as Record<string, unknown>)?.childrenIds as string[] ?? [];
-    if (childrenIds.length === 0) return null;
+    if (!root?.data) {
+      return null;
+    }
+    const childrenIds: string[] = ((root.data as Record<string, unknown>)?.childrenIds as string[]) ?? [];
+    if (childrenIds.length === 0) {
+      return null;
+    }
 
     // Verify all referenced children exist
     for (const id of childrenIds) {
-      if (!config[id]) return null;
+      if (!config[id]) {
+        return null;
+      }
     }
 
     // Build effective slot values: defaults merged with instance overrides
@@ -113,7 +125,9 @@ export default function CustomBlockEditor({ props }: CustomBlockProps) {
     // Build a virtual document with a Container as root instead of EmailLayout
     const doc: Record<string, unknown> = {};
     for (const [id, block] of Object.entries(config)) {
-      if (id === 'root') continue;
+      if (id === 'root') {
+        continue;
+      }
       doc[id] = hasSlots ? substituteSlots(block, effectiveValues) : block;
     }
     doc['__custom_block_root'] = {

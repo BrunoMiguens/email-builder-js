@@ -9,7 +9,9 @@ exports[`block-text renders with default values 1`] = `
 exports[`block-text renders with safe markdown 1`] = `
 <DocumentFragment>
   <div>
-    <p>
+    <p
+      style="margin:0;"
+    >
       This 
       <span>
         text
@@ -24,8 +26,6 @@ exports[`block-text renders with safe markdown 1`] = `
       </em>
       .
     </p>
-    
-
     <ul>
       
 
@@ -47,7 +47,9 @@ exports[`block-text renders with safe markdown 1`] = `
     </ul>
     
 
-    <p>
+    <p
+      style="margin:0;"
+    >
       Powered by 
       <a
         href="https://usewaypoint.com"
@@ -56,8 +58,6 @@ exports[`block-text renders with safe markdown 1`] = `
         Waypoint
       </a>
     </p>
-    
-
   </div>
 </DocumentFragment>
 `;
@@ -81,7 +81,9 @@ exports[`block-text sanitizes HTML 1`] = `
     
 
 
-    <p>
+    <p
+      style="margin:0;"
+    >
       <a
         target="_blank"
       >
@@ -112,9 +114,9 @@ exports[`block-text sanitizes HTML 1`] = `
         URL
       </a>
     </p>
-    
-
-    <p>
+    <p
+      style="margin:0;"
+    >
       <a
         target="_blank"
       >
@@ -155,8 +157,6 @@ exports[`block-text sanitizes HTML 1`] = `
         src="%22onerror=%22alert('ImageOnError')"
       />
     </p>
-    
-
     <div>
       
 

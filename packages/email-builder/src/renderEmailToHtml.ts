@@ -1,5 +1,5 @@
-import { CustomBlockEntry } from './customBlocks/types';
 import resolveCustomBlocks from './customBlocks/resolveCustomBlocks';
+import { CustomBlockEntry } from './customBlocks/types';
 import { TReaderDocument } from './Reader/core';
 import renderToStaticMarkup from './renderers/renderToStaticMarkup';
 

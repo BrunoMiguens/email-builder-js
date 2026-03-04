@@ -1,7 +1,18 @@
 import React, { useMemo } from 'react';
 
 import { AddOutlined, DeleteOutline, EditOutlined } from '@mui/icons-material';
-import { Box, Button, FormControl, IconButton, InputLabel, MenuItem, Select, Stack, TextField, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  FormControl,
+  IconButton,
+  InputLabel,
+  MenuItem,
+  Select,
+  Stack,
+  TextField,
+  Typography,
+} from '@mui/material';
 
 import { CustomBlockProps } from '../../../../documents/blocks/CustomBlock/CustomBlockPropsSchema';
 import {
@@ -54,12 +65,7 @@ export default function CustomBlockSidebarPanel({ data, setData }: CustomBlockSi
       </FormControl>
 
       {blockName && (
-        <Button
-          variant="outlined"
-          size="small"
-          startIcon={<EditOutlined />}
-          onClick={() => selectBlock(blockName)}
-        >
+        <Button variant="outlined" size="small" startIcon={<EditOutlined />} onClick={() => selectBlock(blockName)}>
           Edit block
         </Button>
       )}
@@ -96,13 +102,7 @@ function SlotFieldInput({ slotKey, definition, value, onChange }: SlotFieldInput
 
   switch (definition.type) {
     case 'text':
-      return (
-        <TextInput
-          label={definition.label}
-          defaultValue={String(effectiveValue)}
-          onChange={(v) => onChange(v)}
-        />
-      );
+      return <TextInput label={definition.label} defaultValue={String(effectiveValue)} onChange={(v) => onChange(v)} />;
     case 'html':
       return (
         <TextInput

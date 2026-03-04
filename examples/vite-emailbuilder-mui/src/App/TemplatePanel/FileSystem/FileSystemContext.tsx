@@ -75,7 +75,9 @@ async function clearHandle(): Promise<void> {
 
 async function verifyPermission(handle: DirHandle): Promise<boolean> {
   let state = await handle.queryPermission({ mode: 'readwrite' });
-  if (state === 'granted') return true;
+  if (state === 'granted') {
+    return true;
+  }
   state = await handle.requestPermission({ mode: 'readwrite' });
   return state === 'granted';
 }
@@ -115,7 +117,9 @@ async function getFileHandleByPath(dir: DirHandle, path: string): Promise<FileHa
 function parseBlockJson(text: string): { config: Record<string, unknown>; slots: CustomBlockEntry['slots'] } | null {
   try {
     const parsed = JSON.parse(text) as Record<string, unknown>;
-    if (!parsed || typeof parsed !== 'object' || !parsed.root) return null;
+    if (!parsed || typeof parsed !== 'object' || !parsed.root) {
+      return null;
+    }
     const slots = (parsed.__slots__ ?? {}) as CustomBlockEntry['slots'];
     const config = { ...parsed };
     delete config.__slots__;
@@ -207,7 +211,9 @@ const FileSystemContext = createContext<FileSystemContextValue | null>(null);
 
 export function useFileSystem() {
   const ctx = useContext(FileSystemContext);
-  if (!ctx) throw new Error('useFileSystem must be used inside FileSystemProvider');
+  if (!ctx) {
+    throw new Error('useFileSystem must be used inside FileSystemProvider');
+  }
   return ctx;
 }
 
@@ -255,12 +261,16 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
   // These functions flush any unsaved changes immediately before the switch.
 
   const flushPendingBlockSave = async () => {
-    if (!blockSaveTimerRef.current) return;
+    if (!blockSaveTimerRef.current) {
+      return;
+    }
     clearTimeout(blockSaveTimerRef.current);
     blockSaveTimerRef.current = null;
 
     const fileHandle = activeBlockFileHandleRef.current;
-    if (!fileHandle || document === lastLoadedBlockDocRef.current) return;
+    if (!fileHandle || document === lastLoadedBlockDocRef.current) {
+      return;
+    }
 
     try {
       const writable = await fileHandle.createWritable();
@@ -282,12 +292,16 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
   };
 
   const flushPendingTemplateSave = async () => {
-    if (!saveTimerRef.current) return;
+    if (!saveTimerRef.current) {
+      return;
+    }
     clearTimeout(saveTimerRef.current);
     saveTimerRef.current = null;
 
     const fileHandle = activeFileHandleRef.current;
-    if (!fileHandle || document === lastLoadedDocRef.current) return;
+    if (!fileHandle || document === lastLoadedDocRef.current) {
+      return;
+    }
 
     try {
       const writable = await fileHandle.createWritable();
@@ -319,10 +333,14 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
 
   // On mount: restore previously selected folder from IndexedDB.
   useEffect(() => {
-    if (!('showDirectoryPicker' in window)) return;
+    if (!('showDirectoryPicker' in window)) {
+      return;
+    }
     loadHandle()
       .then(async (handle) => {
-        if (!handle) return;
+        if (!handle) {
+          return;
+        }
         const granted = await verifyPermission(handle);
         if (!granted) {
           await clearHandle();
@@ -361,7 +379,9 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
       // Safety: if the mode changed since this timer was created, skip the save.
       // The new effect run (with the correct mode) will handle it.
       const currentIsBlockMode = editingModeRef.current === 'block';
-      if (currentIsBlockMode !== isBlockMode) return;
+      if (currentIsBlockMode !== isBlockMode) {
+        return;
+      }
 
       setStatus('saving');
       try {
@@ -441,14 +461,18 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
   };
 
   const refreshFiles = async () => {
-    if (!dirHandleRef.current) return;
+    if (!dirHandleRef.current) {
+      return;
+    }
     const allJsonFiles = await listJsonFiles(dirHandleRef.current, '', ['blocks']);
     const jsonFiles = await filterParsableFiles(dirHandleRef.current, allJsonFiles);
     setFiles(jsonFiles);
   };
 
   const selectFile = async (name: string) => {
-    if (!dirHandleRef.current) return;
+    if (!dirHandleRef.current) {
+      return;
+    }
     try {
       await flushPendingBlockSave();
       await flushPendingTemplateSave();
@@ -485,11 +509,15 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
   };
 
   const createFile = async () => {
-    if (!dirHandleRef.current) return;
+    if (!dirHandleRef.current) {
+      return;
+    }
     await flushPendingBlockSave();
     await flushPendingTemplateSave();
     const raw = window.prompt('New file name:', 'untitled.json');
-    if (!raw) return;
+    if (!raw) {
+      return;
+    }
     const fileName = raw.endsWith('.json') ? raw : `${raw}.json`;
     try {
       const fileHandle = await dirHandleRef.current.getFileHandle(fileName, { create: true });
@@ -525,7 +553,9 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
   // --- Custom block methods ---
 
   const refreshBlockFiles = async () => {
-    if (!blocksDirHandleRef.current) return;
+    if (!blocksDirHandleRef.current) {
+      return;
+    }
     const allJsonFiles = await listJsonFiles(blocksDirHandleRef.current);
     const jsonFiles = await filterParsableFiles(blocksDirHandleRef.current, allJsonFiles);
     setBlockFiles(jsonFiles);
@@ -536,7 +566,9 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
   };
 
   const selectBlock = async (name: string) => {
-    if (!blocksDirHandleRef.current) return;
+    if (!blocksDirHandleRef.current) {
+      return;
+    }
     try {
       await flushPendingBlockSave();
       await flushPendingTemplateSave();
@@ -569,7 +601,8 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
 
       activeBlockFileHandleRef.current = fileHandle;
       lastLoadedBlockDocRef.current = data;
-      activeBlockSlotsRef.current = Object.keys(parsed.slots).length > 0 ? parsed.slots as Record<string, unknown> : null;
+      activeBlockSlotsRef.current =
+        Object.keys(parsed.slots).length > 0 ? (parsed.slots as Record<string, unknown>) : null;
       setActiveBlockFileName(name);
       setBlockSaveStatus('saved');
       editingModeRef.current = 'block'; // Set ref before resetDocument to prevent stale auto-save
@@ -581,11 +614,15 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
   };
 
   const createBlock = async () => {
-    if (!blocksDirHandleRef.current) return;
+    if (!blocksDirHandleRef.current) {
+      return;
+    }
     await flushPendingBlockSave();
     await flushPendingTemplateSave();
     const raw = window.prompt('New block name:', 'untitled.json');
-    if (!raw) return;
+    if (!raw) {
+      return;
+    }
     const fileName = raw.endsWith('.json') ? raw : `${raw}.json`;
     try {
       const fileHandle = await blocksDirHandleRef.current.getFileHandle(fileName, { create: true });
@@ -612,7 +649,10 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
 
       // Also add to the custom blocks store
       const store = useCustomBlocksStore.getState();
-      store.setCustomBlocks([...store.customBlocks, { name: fileName, config: structuredClone(EMPTY_BLOCK), slots: {} }]);
+      store.setCustomBlocks([
+        ...store.customBlocks,
+        { name: fileName, config: structuredClone(EMPTY_BLOCK), slots: {} },
+      ]);
     } catch (e) {
       console.error('Failed to create block', e);
     }

@@ -3,11 +3,11 @@ import React from 'react';
 import { Stack, useTheme } from '@mui/material';
 
 import { useInspectorDrawerOpen, useSamplesDrawerOpen } from '../documents/editor/EditorContext';
-import { FileSystemProvider } from './TemplatePanel/FileSystem/FileSystemContext';
 
 import InspectorDrawer, { INSPECTOR_DRAWER_WIDTH } from './InspectorDrawer';
 import SamplesDrawer, { SAMPLES_DRAWER_WIDTH } from './SamplesDrawer';
 import TemplatePanel from './TemplatePanel';
+import { FileSystemProvider } from './TemplatePanel/FileSystem/FileSystemContext';
 
 function useDrawerTransition(cssProperty: 'margin-left' | 'margin-right', open: boolean) {
   const { transitions } = useTheme();

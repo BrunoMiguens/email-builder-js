@@ -20,7 +20,8 @@ export default function resolveCustomBlocks(
     if (block.type === 'CustomBlock') {
       hasCustomBlocks = true;
       const blockName = block.data?.props?.blockName;
-      const slotValues: Record<string, unknown> = (block.data?.props as Record<string, unknown>)?.slotValues as Record<string, unknown> ?? {};
+      const slotValues: Record<string, unknown> =
+        ((block.data?.props as Record<string, unknown>)?.slotValues as Record<string, unknown>) ?? {};
       const entry = customBlocks.find((b) => b.name === blockName);
       if (!entry) {
         resolved[id] = {
@@ -35,7 +36,7 @@ export default function resolveCustomBlocks(
 
       const config = entry.config;
       const root = config.root;
-      const childrenIds: string[] = (root?.data as Record<string, unknown>)?.childrenIds as string[] ?? [];
+      const childrenIds: string[] = ((root?.data as Record<string, unknown>)?.childrenIds as string[]) ?? [];
       if (childrenIds.length === 0) {
         resolved[id] = {
           type: 'Container',
@@ -74,7 +75,9 @@ export default function resolveCustomBlocks(
       // Build old→new ID mapping
       const idMap = new Map<string, string>();
       for (const oldId of Object.keys(config)) {
-        if (oldId === 'root') continue;
+        if (oldId === 'root') {
+          continue;
+        }
         idMap.set(oldId, `${idPrefix}${oldId}`);
       }
 
@@ -91,7 +94,9 @@ export default function resolveCustomBlocks(
       // Copy all child blocks with namespaced IDs, remapping internal references
       const hasSlots = Object.keys(effectiveValues).length > 0;
       for (const [oldId, childBlock] of Object.entries(config)) {
-        if (oldId === 'root') continue;
+        if (oldId === 'root') {
+          continue;
+        }
         const newId = idMap.get(oldId)!;
         const cloned: TEditorBlock = structuredClone(childBlock);
 
@@ -108,15 +113,15 @@ export default function resolveCustomBlocks(
   }
 
   // If no custom blocks were found, return original to avoid unnecessary object creation
-  if (!hasCustomBlocks) return document;
+  if (!hasCustomBlocks) {
+    return document;
+  }
   return resolved;
 }
 
 function remapChildrenIds(block: TEditorBlock, idMap: Map<string, string>): void {
   if (block.type === 'Container' && block.data?.props?.childrenIds) {
-    block.data.props.childrenIds = block.data.props.childrenIds.map(
-      (id: string) => idMap.get(id) ?? id
-    );
+    block.data.props.childrenIds = block.data.props.childrenIds.map((id: string) => idMap.get(id) ?? id);
   }
   if (block.type === 'ColumnsContainer' && block.data?.props?.columns) {
     for (const col of block.data.props.columns) {
@@ -132,7 +137,9 @@ function remapChildrenIds(block: TEditorBlock, idMap: Map<string, string>): void
  * in string values with the corresponding slot value.
  */
 function substituteSlotValues(obj: unknown, values: Record<string, unknown>): void {
-  if (obj === null || obj === undefined) return;
+  if (obj === null || obj === undefined) {
+    return;
+  }
   if (Array.isArray(obj)) {
     for (let i = 0; i < obj.length; i++) {
       if (typeof obj[i] === 'string') {
@@ -177,14 +184,15 @@ function replaceSlotPlaceholders(str: string, values: Record<string, unknown>): 
  * Converts an array of {label, value} items into an HTML receipt-style table.
  */
 export function generateTableHtml(items: TableItem[]): string {
-  if (items.length === 0) return '';
+  if (items.length === 0) {
+    return '';
+  }
 
   const labelStyle =
     'color:#808080;font-size:16px;line-height:22px;letter-spacing:-0.18px;padding:0;vertical-align:middle;';
   const valueStyle =
     'color:#111111;font-size:16px;line-height:22px;letter-spacing:-0.18px;padding:0;text-align:right;vertical-align:middle;white-space:nowrap;';
-  const spacerRow =
-    '<tr><td height="16" style="height:16px;line-height:16px;font-size:16px;" colspan="2"></td></tr>';
+  const spacerRow = '<tr><td height="16" style="height:16px;line-height:16px;font-size:16px;" colspan="2"></td></tr>';
 
   const rows = items
     .map((item, i) => {

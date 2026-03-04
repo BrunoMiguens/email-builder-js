@@ -40,7 +40,18 @@ export default function TextSidebarPanel({ data, setData }: TextSidebarPanelProp
       />
 
       <MultiStylePropertyPanel
-        names={['color', 'linkColor', 'backgroundColor', 'fontFamily', 'fontSize', 'fontWeight', 'letterSpacing', 'lineHeight', 'textAlign', 'padding']}
+        names={[
+          'color',
+          'linkColor',
+          'backgroundColor',
+          'fontFamily',
+          'fontSize',
+          'fontWeight',
+          'letterSpacing',
+          'lineHeight',
+          'textAlign',
+          'padding',
+        ]}
         value={data.style}
         onChange={(style) => updateData({ ...data, style })}
       />

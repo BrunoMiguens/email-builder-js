@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
 
-import { AddOutlined, ArrowBackOutlined, ChevronRight, FolderOpenOutlined, FolderOutlined, RefreshOutlined, WidgetsOutlined } from '@mui/icons-material';
-import { Box, Button, CircularProgress, Divider, Drawer, IconButton, Link, Stack, Tooltip, Typography } from '@mui/material';
+import {
+  AddOutlined,
+  ArrowBackOutlined,
+  ChevronRight,
+  FolderOpenOutlined,
+  FolderOutlined,
+  RefreshOutlined,
+  WidgetsOutlined,
+} from '@mui/icons-material';
+import { Box, Button, CircularProgress, Divider, Drawer, IconButton, Stack, Tooltip, Typography } from '@mui/material';
 
 import { useSamplesDrawerOpen } from '../../documents/editor/EditorContext';
 import { useFileSystem } from '../TemplatePanel/FileSystem/FileSystemContext';
 
 import SidebarButton from './SidebarButton';
-import logo from './waypoint.svg';
 
 export const SAMPLES_DRAWER_WIDTH = 240;
 
@@ -71,14 +78,22 @@ export default function SamplesDrawer() {
   const renderNode = (node: TreeNode, depth: number, pathPrefix: string): React.ReactNode => (
     <>
       {node.files.map((path) => {
-        const label = path.split('/').pop()!.replace(/\.json$/, '');
+        const label = path
+          .split('/')
+          .pop()!
+          .replace(/\.json$/, '');
         const isActive = path === activeFileName && editingMode === 'template';
         return (
           <Button
             key={path}
             size="small"
             onClick={() => selectFile(path)}
-            sx={{ pl: 0.75 + depth * 1.5, fontWeight: isActive ? 'bold' : 'normal', width: '100%', justifyContent: 'flex-start' }}
+            sx={{
+              pl: 0.75 + depth * 1.5,
+              fontWeight: isActive ? 'bold' : 'normal',
+              width: '100%',
+              justifyContent: 'flex-start',
+            }}
           >
             {label}
           </Button>
@@ -96,7 +111,13 @@ export default function SamplesDrawer() {
                 onClick={() => toggleFolder(fullPath)}
                 startIcon={
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.25 }}>
-                    <ChevronRight sx={{ fontSize: 14, transform: isCollapsed ? 'rotate(0deg)' : 'rotate(90deg)', transition: 'transform 0.15s' }} />
+                    <ChevronRight
+                      sx={{
+                        fontSize: 14,
+                        transform: isCollapsed ? 'rotate(0deg)' : 'rotate(90deg)',
+                        transition: 'transform 0.15s',
+                      }}
+                    />
                     <FolderOutlined sx={{ fontSize: 14 }} />
                   </Box>
                 }
@@ -120,7 +141,13 @@ export default function SamplesDrawer() {
             <Typography
               variant="caption"
               color="text.secondary"
-              sx={{ cursor: 'pointer', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: 120 }}
+              sx={{
+                cursor: 'pointer',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+                maxWidth: 120,
+              }}
               onClick={openFolder}
             >
               {folderName}
@@ -224,7 +251,11 @@ export default function SamplesDrawer() {
   );
 
   const renderBuiltInSamples = () => (
-    <Stack spacing={1} alignItems="flex-start" sx={{ '& .MuiButtonBase-root': { width: '100%', justifyContent: 'flex-start' } }}>
+    <Stack
+      spacing={1}
+      alignItems="flex-start"
+      sx={{ '& .MuiButtonBase-root': { width: '100%', justifyContent: 'flex-start' } }}
+    >
       <Button size="small" startIcon={<FolderOpenOutlined />} onClick={openFolder}>
         Open folder…
       </Button>
@@ -273,7 +304,7 @@ export default function SamplesDrawer() {
               Learn more
             </Button>
             <Button size="small" href="https://github.com/usewaypoint/email-builder-js" target="_blank">
-              Fork Origin 
+              Fork Origin
             </Button>
             <Button size="small" href="https://github.com/BrunoMiguens/email-builder-js" target="_blank">
               View on GitHub

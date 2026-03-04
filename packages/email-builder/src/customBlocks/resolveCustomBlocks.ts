@@ -13,11 +13,10 @@ type AnyDocument = Record<string, AnyBlock>;
  * slotValues, all `{{slotName}}` placeholders in the resolved blocks are
  * replaced with the corresponding values.
  */
-export default function resolveCustomBlocks(
-  document: AnyDocument,
-  customBlocks: CustomBlockEntry[]
-): TReaderDocument {
-  if (customBlocks.length === 0) return document as TReaderDocument;
+export default function resolveCustomBlocks(document: AnyDocument, customBlocks: CustomBlockEntry[]): TReaderDocument {
+  if (customBlocks.length === 0) {
+    return document as TReaderDocument;
+  }
 
   const resolved: AnyDocument = { ...document };
   let hasCustomBlocks = false;
@@ -82,7 +81,9 @@ export default function resolveCustomBlocks(
       // Build old→new ID mapping
       const idMap = new Map<string, string>();
       for (const oldId of Object.keys(config)) {
-        if (oldId === 'root' || oldId === '__slots__') continue;
+        if (oldId === 'root' || oldId === '__slots__') {
+          continue;
+        }
         idMap.set(oldId, `${idPrefix}${oldId}`);
       }
 
@@ -99,7 +100,9 @@ export default function resolveCustomBlocks(
       // Copy all child blocks with namespaced IDs, remapping internal references
       const hasSlots = Object.keys(effectiveValues).length > 0;
       for (const [oldId, childBlock] of Object.entries(config)) {
-        if (oldId === 'root' || oldId === '__slots__') continue;
+        if (oldId === 'root' || oldId === '__slots__') {
+          continue;
+        }
         const newId = idMap.get(oldId)!;
         const cloned = structuredClone(childBlock) as AnyBlock;
 
@@ -114,7 +117,9 @@ export default function resolveCustomBlocks(
     }
   }
 
-  if (!hasCustomBlocks) return document as TReaderDocument;
+  if (!hasCustomBlocks) {
+    return document as TReaderDocument;
+  }
   return resolved as TReaderDocument;
 }
 
@@ -144,7 +149,9 @@ function remapChildrenIds(block: AnyBlock, idMap: Map<string, string>): void {
  * embedded in a larger string, it's converted to a string via String().
  */
 function substituteSlotValues(obj: unknown, values: Record<string, unknown>): void {
-  if (obj === null || obj === undefined) return;
+  if (obj === null || obj === undefined) {
+    return;
+  }
   if (Array.isArray(obj)) {
     for (let i = 0; i < obj.length; i++) {
       if (typeof obj[i] === 'string') {
@@ -190,7 +197,9 @@ function replaceSlotPlaceholders(str: string, values: Record<string, unknown>): 
  * Used to resolve `table` type slot values into HTML before substitution.
  */
 export function generateTableHtml(items: TableItem[]): string {
-  if (items.length === 0) return '';
+  if (items.length === 0) {
+    return '';
+  }
 
   const labelStyle =
     'color:#808080;font-size:16px;line-height:22px;letter-spacing:-0.18px;padding:0;vertical-align:middle;';

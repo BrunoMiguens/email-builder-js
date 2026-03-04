@@ -1,7 +1,16 @@
 import React from 'react';
 
 import { AddOutlined, FolderOpenOutlined, RefreshOutlined } from '@mui/icons-material';
-import { Box, CircularProgress, IconButton, MenuItem, Select, SelectChangeEvent, Tooltip, Typography } from '@mui/material';
+import {
+  Box,
+  CircularProgress,
+  IconButton,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  Tooltip,
+  Typography,
+} from '@mui/material';
 
 import { useFileSystem } from './FileSystemContext';
 

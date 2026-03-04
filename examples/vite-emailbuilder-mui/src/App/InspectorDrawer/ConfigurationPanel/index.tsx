@@ -66,9 +66,7 @@ export default function ConfigurationPanel() {
     case 'Text':
       return <TextSidebarPanel key={selectedBlockId} data={data} setData={(data) => setBlock({ type, data })} />;
     case 'CustomBlock':
-      return (
-        <CustomBlockSidebarPanel key={selectedBlockId} data={data} setData={(data) => setBlock({ type, data })} />
-      );
+      return <CustomBlockSidebarPanel key={selectedBlockId} data={data} setData={(data) => setBlock({ type, data })} />;
     default:
       return <pre>{JSON.stringify(block, null, '  ')}</pre>;
   }

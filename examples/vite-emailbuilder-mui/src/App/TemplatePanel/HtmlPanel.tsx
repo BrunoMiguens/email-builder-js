@@ -12,6 +12,9 @@ export default function HtmlPanel() {
   const document = useDocument();
   const customBlocks = useCustomBlocksStore((s) => s.customBlocks);
   const resolvedDocument = useMemo(() => resolveCustomBlocks(document, customBlocks), [document, customBlocks]);
-  const code = useMemo(() => renderToStaticMarkup(resolvedDocument as never, { rootBlockId: 'root' }), [resolvedDocument]);
+  const code = useMemo(
+    () => renderToStaticMarkup(resolvedDocument as never, { rootBlockId: 'root' }),
+    [resolvedDocument]
+  );
   return <HighlightedCodePanel type="html" value={code} />;
 }
