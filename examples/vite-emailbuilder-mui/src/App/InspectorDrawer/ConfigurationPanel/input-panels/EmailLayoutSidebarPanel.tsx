@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ZodError } from 'zod';
 
-import { RoundedCornerOutlined, WidthNormalOutlined } from '@mui/icons-material';
+import { MonitorOutlined, PhoneIphoneOutlined, RoundedCornerOutlined, WidthNormalOutlined } from '@mui/icons-material';
 
 import EmailLayoutPropsSchema, {
   EmailLayoutProps,
@@ -76,6 +76,28 @@ export default function EmailLayoutSidebarFields({ data, setData }: EmailLayoutS
         label="Text color"
         defaultValue={data.textColor ?? '#262626'}
         onChange={(textColor) => updateData({ ...data, textColor })}
+      />
+      <SliderInput
+        iconLabel={<MonitorOutlined />}
+        units="px"
+        step={4}
+        marks
+        min={0}
+        max={128}
+        label="Desktop vertical padding"
+        defaultValue={data.paddingVertical ?? 0}
+        onChange={(paddingVertical) => updateData({ ...data, paddingVertical })}
+      />
+      <SliderInput
+        iconLabel={<PhoneIphoneOutlined />}
+        units="px"
+        step={4}
+        marks
+        min={0}
+        max={128}
+        label="Mobile vertical padding"
+        defaultValue={data.mobilePaddingVertical ?? 0}
+        onChange={(mobilePaddingVertical) => updateData({ ...data, mobilePaddingVertical })}
       />
     </BaseSidebarPanel>
   );

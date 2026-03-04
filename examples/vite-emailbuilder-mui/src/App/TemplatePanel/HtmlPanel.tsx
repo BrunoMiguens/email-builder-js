@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { renderToStaticMarkup } from '@usewaypoint/email-builder';
+import { renderToStaticMarkup } from '@brunomiguens/email-builder';
 
 import resolveCustomBlocks from '../../documents/blocks/CustomBlock/resolveCustomBlocks';
 import { useCustomBlocksStore } from '../../documents/blocks/helpers/EditorChildrenIds/AddBlockMenu/useCustomBlocks';

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useCurrentBlockId } from '../../editor/EditorBlock';
-import { setDocument, setSelectedBlockId, useDocument } from '../../editor/EditorContext';
+import { setDocument, setSelectedBlockId, useDocument, useSelectedScreenSize } from '../../editor/EditorContext';
 import EditorChildrenIds from '../helpers/EditorChildrenIds';
 
 import { EmailLayoutProps } from './EmailLayoutPropsSchema';
@@ -36,6 +36,12 @@ export default function EmailLayoutEditor(props: EmailLayoutProps) {
   const childrenIds = props.childrenIds ?? [];
   const document = useDocument();
   const currentBlockId = useCurrentBlockId();
+  const selectedScreenSize = useSelectedScreenSize();
+
+  const paddingVertical =
+    selectedScreenSize === 'mobile'
+      ? (props.mobilePaddingVertical ?? props.paddingVertical ?? 0)
+      : (props.paddingVertical ?? 0);
 
   return (
     <div
@@ -51,7 +57,7 @@ export default function EmailLayoutEditor(props: EmailLayoutProps) {
         letterSpacing: '0.15008px',
         lineHeight: '1.5',
         margin: '0',
-        padding: '32px 0',
+        padding: `${paddingVertical}px 0`,
         width: '100%',
         minHeight: '100%',
       }}

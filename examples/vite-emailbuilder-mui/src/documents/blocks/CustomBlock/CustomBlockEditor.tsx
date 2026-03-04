@@ -2,7 +2,7 @@ import React, { Component, useMemo } from 'react';
 
 import { WidgetsOutlined } from '@mui/icons-material';
 import { Box, Stack, Typography } from '@mui/material';
-import { Reader } from '@usewaypoint/email-builder';
+import { Reader } from '@brunomiguens/email-builder';
 
 import { TableItem, useCustomBlocksStore } from '../helpers/EditorChildrenIds/AddBlockMenu/useCustomBlocks';
 

@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 
 import { MonitorOutlined, PhoneIphoneOutlined } from '@mui/icons-material';
 import { Box, Stack, SxProps, ToggleButton, ToggleButtonGroup, Tooltip } from '@mui/material';
-import { Reader } from '@usewaypoint/email-builder';
+import { Reader } from '@brunomiguens/email-builder';
 
 import resolveCustomBlocks from '../../documents/blocks/CustomBlock/resolveCustomBlocks';
 import { useCustomBlocksStore } from '../../documents/blocks/helpers/EditorChildrenIds/AddBlockMenu/useCustomBlocks';
