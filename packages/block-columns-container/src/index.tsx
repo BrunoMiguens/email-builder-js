@@ -114,11 +114,7 @@ function TableCell({ index, props, columns }: Props) {
   // When fixedWidths are in play, only set width on cells that have a fixed value.
   // Cells without a fixed value get no width — table-layout:fixed distributes remaining space.
   // When no fixedWidths at all, use equal percentages.
-  const width = fixedWidth != null
-    ? fixedWidth
-    : hasAnyFixedWidth
-      ? undefined
-      : columnsCount === 2 ? '50%' : '33.33%';
+  const width = fixedWidth != null ? fixedWidth : hasAnyFixedWidth ? undefined : columnsCount === 2 ? '50%' : '33.33%';
   const style: CSSProperties = {
     boxSizing: 'border-box',
     verticalAlign: contentAlignment,
