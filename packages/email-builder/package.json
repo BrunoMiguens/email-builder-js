@@ -1,6 +1,6 @@
 {
   "name": "@brunomiguens/email-builder",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "React component to render email messages",
   "repository": {
     "type": "git",
