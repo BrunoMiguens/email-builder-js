@@ -35,6 +35,8 @@ export default function EditorBlockWrapper({ children }: TEditorBlockWrapperProp
       sx={{
         position: 'relative',
         maxWidth: '100%',
+        overflowWrap: 'break-word',
+        wordBreak: 'break-word',
         outlineOffset: '-1px',
         outline,
       }}

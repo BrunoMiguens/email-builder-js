@@ -189,9 +189,9 @@ export function generateTableHtml(items: TableItem[]): string {
   }
 
   const labelStyle =
-    'color:#808080;font-size:16px;line-height:22px;letter-spacing:-0.18px;padding:0;vertical-align:middle;';
+    'color:#808080;font-size:16px;line-height:22px;letter-spacing:-0.18px;padding:0;vertical-align:middle;width:50%;';
   const valueStyle =
-    'color:#111111;font-size:16px;line-height:22px;letter-spacing:-0.18px;padding:0;text-align:right;vertical-align:middle;white-space:nowrap;';
+    'color:#111111;font-size:16px;line-height:22px;letter-spacing:-0.18px;padding:0;text-align:right;vertical-align:middle;width:50%;';
   const spacerRow = '<tr><td height="16" style="height:16px;line-height:16px;font-size:16px;" colspan="2"></td></tr>';
 
   const rows = items

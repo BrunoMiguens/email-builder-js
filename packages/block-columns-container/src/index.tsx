@@ -75,10 +75,9 @@ export function ColumnsContainer({ style, columns, props }: ColumnsContainerProp
     <div style={wStyle}>
       <table
         align="center"
-        width="100%"
         cellPadding="0"
         border={0}
-        style={{ tableLayout: 'fixed', borderCollapse: 'collapse' }}
+        style={{ width: '100%', tableLayout: 'fixed', borderCollapse: 'collapse' }}
       >
         <tbody style={{ width: '100%' }}>
           <tr style={{ width: '100%' }}>
@@ -110,12 +109,23 @@ function TableCell({ index, props, columns }: Props) {
     return null;
   }
 
+  const fixedWidth = props.fixedWidths?.[index];
+  const hasAnyFixedWidth = props.fixedWidths?.some((w) => w != null) ?? false;
+  // When fixedWidths are in play, only set width on cells that have a fixed value.
+  // Cells without a fixed value get no width — table-layout:fixed distributes remaining space.
+  // When no fixedWidths at all, use equal percentages.
+  const width = fixedWidth != null
+    ? fixedWidth
+    : hasAnyFixedWidth
+      ? undefined
+      : columnsCount === 2 ? '50%' : '33.33%';
   const style: CSSProperties = {
-    boxSizing: 'content-box',
+    boxSizing: 'border-box',
     verticalAlign: contentAlignment,
     paddingLeft: getPaddingBefore(index, props),
     paddingRight: getPaddingAfter(index, props),
-    width: props.fixedWidths?.[index] ?? undefined,
+    width,
+    overflowWrap: 'break-word',
   };
   const children = (columns && columns[index]) ?? null;
   return <td style={style}>{children}</td>;

@@ -52,7 +52,7 @@ export default function TemplatePanel() {
   }, [document, customBlocks, selectedScreenSize]);
 
   let mainBoxSx: SxProps = {
-    height: '100%',
+    minHeight: '100%',
   };
   if (selectedScreenSize === 'mobile') {
     mainBoxSx = {
@@ -80,15 +80,21 @@ export default function TemplatePanel() {
     switch (selectedMainTab) {
       case 'editor':
         return (
-          <Box sx={mainBoxSx}>
-            <EditorBlock id="root" />
-          </Box>
+          <>
+            <Box sx={mainBoxSx}>
+              <EditorBlock id="root" />
+            </Box>
+            <div style={{ height: 64, flexShrink: 0 }} />
+          </>
         );
       case 'preview':
         return (
-          <Box sx={mainBoxSx}>
-            <Reader document={resolvedDocument as never} rootBlockId="root" />
-          </Box>
+          <>
+            <Box sx={mainBoxSx}>
+              <Reader document={resolvedDocument as never} rootBlockId="root" />
+            </Box>
+            <div style={{ height: 64, flexShrink: 0 }} />
+          </>
         );
       case 'html':
         return <HtmlPanel />;

@@ -93,7 +93,7 @@ export default function EmailLayoutEditor(props: EmailLayoutProps) {
       >
         <tbody>
           <tr style={{ width: '100%' }}>
-            <td>
+            <td style={{ overflow: 'hidden', width: '100%' }}>
               <EditorChildrenIds
                 childrenIds={childrenIds}
                 onChange={({ block, blockId, childrenIds }) => {

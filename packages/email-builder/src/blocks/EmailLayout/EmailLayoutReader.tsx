@@ -76,7 +76,7 @@ export default function EmailLayoutReader(props: EmailLayoutProps) {
       >
         <tbody>
           <tr style={{ width: '100%' }}>
-            <td>
+            <td style={{ overflow: 'hidden', width: '100%' }}>
               {childrenIds.map((childId) => (
                 <ReaderBlock key={childId} id={childId} />
               ))}
