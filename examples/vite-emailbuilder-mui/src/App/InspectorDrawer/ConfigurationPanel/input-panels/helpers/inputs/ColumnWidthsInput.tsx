@@ -9,8 +9,10 @@ export const DEFAULT_3_COLUMNS = [4, 8] as [number, number];
 
 type TWidthValue = number | null | undefined;
 type FixedWidths = [
-  //
-  number | null | undefined,
+  (
+    //
+    number | null | undefined
+  ),
   number | null | undefined,
   number | null | undefined,
 ];

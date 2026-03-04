@@ -135,7 +135,7 @@ function SlotFieldInput({ slotKey, definition, value, onChange }: SlotFieldInput
     case 'table': {
       const items: TableItem[] = Array.isArray(effectiveValue)
         ? (effectiveValue as TableItem[])
-        : (definition.defaultValue as TableItem[]) ?? [];
+        : ((definition.defaultValue as TableItem[]) ?? []);
       return <TableItemsInput label={definition.label} items={items} onChange={onChange} />;
     }
     default:

@@ -40,8 +40,8 @@ export default function EmailLayoutEditor(props: EmailLayoutProps) {
 
   const paddingVertical =
     selectedScreenSize === 'mobile'
-      ? props.mobilePaddingVertical ?? props.paddingVertical ?? 0
-      : props.paddingVertical ?? 0;
+      ? (props.mobilePaddingVertical ?? props.paddingVertical ?? 0)
+      : (props.paddingVertical ?? 0);
 
   return (
     <div
