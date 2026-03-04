@@ -54,7 +54,7 @@ export default function PaddingInput({ label, defaultValue, onChange }: Props) {
         units="px"
         step={4}
         min={0}
-        max={80}
+        max={128}
         marks
       />
 
@@ -65,7 +65,7 @@ export default function PaddingInput({ label, defaultValue, onChange }: Props) {
         units="px"
         step={4}
         min={0}
-        max={80}
+        max={128}
         marks
       />
 
@@ -76,7 +76,7 @@ export default function PaddingInput({ label, defaultValue, onChange }: Props) {
         units="px"
         step={4}
         min={0}
-        max={80}
+        max={128}
         marks
       />
 
@@ -87,7 +87,7 @@ export default function PaddingInput({ label, defaultValue, onChange }: Props) {
         units="px"
         step={4}
         min={0}
-        max={80}
+        max={128}
         marks
       />
     </Stack>
