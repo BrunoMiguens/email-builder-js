@@ -1,8 +1,8 @@
 import React, { Component, useMemo } from 'react';
 
+import { Reader } from '@brunomiguens/email-builder';
 import { WidgetsOutlined } from '@mui/icons-material';
 import { Box, Stack, Typography } from '@mui/material';
-import { Reader } from '@brunomiguens/email-builder';
 
 import { TableItem, useCustomBlocksStore } from '../helpers/EditorChildrenIds/AddBlockMenu/useCustomBlocks';
 
