@@ -33,7 +33,7 @@
     "react-dom": "^16 || ^17 || ^18",
     "zod": "^1 || ^2 || ^3"
   },
-  "dependencies": {
+  "devDependencies": {
     "@usewaypoint/block-avatar": "^0.0.3",
     "@usewaypoint/block-button": "^0.0.3",
     "@usewaypoint/block-columns-container": "^0.0.3",
