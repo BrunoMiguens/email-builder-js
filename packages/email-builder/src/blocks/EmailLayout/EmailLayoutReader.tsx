@@ -41,6 +41,7 @@ export default function EmailLayoutReader(props: EmailLayoutProps) {
   const childrenIds = props.childrenIds ?? [];
   return (
     <div
+      className="email-layout-root"
       style={{
         backgroundColor: props.backdropColor ?? '#F5F5F5',
         color: props.textColor ?? '#262626',
@@ -50,7 +51,7 @@ export default function EmailLayoutReader(props: EmailLayoutProps) {
         letterSpacing: '0.15008px',
         lineHeight: '1.5',
         margin: '0',
-        padding: '32px 0',
+        padding: `${props.paddingVertical ?? 0}px 0`,
         minHeight: '100%',
         width: '100%',
       }}
