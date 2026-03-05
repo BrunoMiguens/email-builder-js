@@ -80,17 +80,17 @@ exports[`block-columns-container columnsCount 3 renders column children 1`] = `
           style="width: 100%;"
         >
           <td
-            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 33.33%; overflow-wrap: break-word;"
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 33.3333%; overflow-wrap: break-word;"
           >
             bread
           </td>
           <td
-            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 33.33%; overflow-wrap: break-word;"
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 33.3333%; overflow-wrap: break-word;"
           >
             tomato
           </td>
           <td
-            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 33.33%; overflow-wrap: break-word;"
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 33.3333%; overflow-wrap: break-word;"
           >
             lettuce
           </td>
@@ -117,19 +117,301 @@ exports[`block-columns-container columnsCount 3 uses padding correctly 1`] = `
           style="width: 100%;"
         >
           <td
-            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 8px; width: 33.33%; overflow-wrap: break-word;"
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 8px; width: 33.3333%; overflow-wrap: break-word;"
           >
             bread
           </td>
           <td
-            style="box-sizing: border-box; vertical-align: middle; padding-left: 4px; padding-right: 4px; width: 33.33%; overflow-wrap: break-word;"
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 4px; padding-right: 4px; width: 33.3333%; overflow-wrap: break-word;"
           >
             tomato
           </td>
           <td
-            style="box-sizing: border-box; vertical-align: middle; padding-left: 8px; padding-right: 0px; width: 33.33%; overflow-wrap: break-word;"
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 8px; padding-right: 0px; width: 33.3333%; overflow-wrap: break-word;"
           >
             lettuce
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`block-columns-container columnsCount 4 renders column children 1`] = `
+<DocumentFragment>
+  <div>
+    <table
+      align="center"
+      border="0"
+      cellpadding="0"
+      style="width: 100%; table-layout: fixed; border-collapse: collapse;"
+    >
+      <tbody
+        style="width: 100%;"
+      >
+        <tr
+          style="width: 100%;"
+        >
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 25%; overflow-wrap: break-word;"
+          >
+            a
+          </td>
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 25%; overflow-wrap: break-word;"
+          >
+            b
+          </td>
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 25%; overflow-wrap: break-word;"
+          >
+            c
+          </td>
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 25%; overflow-wrap: break-word;"
+          >
+            d
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`block-columns-container columnsCount 4 uses padding correctly 1`] = `
+<DocumentFragment>
+  <div>
+    <table
+      align="center"
+      border="0"
+      cellpadding="0"
+      style="width: 100%; table-layout: fixed; border-collapse: collapse;"
+    >
+      <tbody
+        style="width: 100%;"
+      >
+        <tr
+          style="width: 100%;"
+        >
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 9px; width: 25%; overflow-wrap: break-word;"
+          >
+            a
+          </td>
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 3px; padding-right: 6px; width: 25%; overflow-wrap: break-word;"
+          >
+            b
+          </td>
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 6px; padding-right: 3px; width: 25%; overflow-wrap: break-word;"
+          >
+            c
+          </td>
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 9px; padding-right: 0px; width: 25%; overflow-wrap: break-word;"
+          >
+            d
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`block-columns-container columnsCount 5 renders column children 1`] = `
+<DocumentFragment>
+  <div>
+    <table
+      align="center"
+      border="0"
+      cellpadding="0"
+      style="width: 100%; table-layout: fixed; border-collapse: collapse;"
+    >
+      <tbody
+        style="width: 100%;"
+      >
+        <tr
+          style="width: 100%;"
+        >
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 20%; overflow-wrap: break-word;"
+          >
+            a
+          </td>
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 20%; overflow-wrap: break-word;"
+          >
+            b
+          </td>
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 20%; overflow-wrap: break-word;"
+          >
+            c
+          </td>
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 20%; overflow-wrap: break-word;"
+          >
+            d
+          </td>
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 20%; overflow-wrap: break-word;"
+          >
+            e
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`block-columns-container columnsCount 5 uses padding correctly 1`] = `
+<DocumentFragment>
+  <div>
+    <table
+      align="center"
+      border="0"
+      cellpadding="0"
+      style="width: 100%; table-layout: fixed; border-collapse: collapse;"
+    >
+      <tbody
+        style="width: 100%;"
+      >
+        <tr
+          style="width: 100%;"
+        >
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 16px; width: 20%; overflow-wrap: break-word;"
+          >
+            a
+          </td>
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 4px; padding-right: 12px; width: 20%; overflow-wrap: break-word;"
+          >
+            b
+          </td>
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 8px; padding-right: 8px; width: 20%; overflow-wrap: break-word;"
+          >
+            c
+          </td>
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 12px; padding-right: 4px; width: 20%; overflow-wrap: break-word;"
+          >
+            d
+          </td>
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 16px; padding-right: 0px; width: 20%; overflow-wrap: break-word;"
+          >
+            e
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`block-columns-container columnsCount 6 renders column children 1`] = `
+<DocumentFragment>
+  <div>
+    <table
+      align="center"
+      border="0"
+      cellpadding="0"
+      style="width: 100%; table-layout: fixed; border-collapse: collapse;"
+    >
+      <tbody
+        style="width: 100%;"
+      >
+        <tr
+          style="width: 100%;"
+        >
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 16.6667%; overflow-wrap: break-word;"
+          >
+            a
+          </td>
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 16.6667%; overflow-wrap: break-word;"
+          >
+            b
+          </td>
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 16.6667%; overflow-wrap: break-word;"
+          >
+            c
+          </td>
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 16.6667%; overflow-wrap: break-word;"
+          >
+            d
+          </td>
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 16.6667%; overflow-wrap: break-word;"
+          >
+            e
+          </td>
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 16.6667%; overflow-wrap: break-word;"
+          >
+            f
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`block-columns-container columnsCount 6 uses padding correctly 1`] = `
+<DocumentFragment>
+  <div>
+    <table
+      align="center"
+      border="0"
+      cellpadding="0"
+      style="width: 100%; table-layout: fixed; border-collapse: collapse;"
+    >
+      <tbody
+        style="width: 100%;"
+      >
+        <tr
+          style="width: 100%;"
+        >
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 20px; width: 16.6667%; overflow-wrap: break-word;"
+          >
+            a
+          </td>
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 4px; padding-right: 16px; width: 16.6667%; overflow-wrap: break-word;"
+          >
+            b
+          </td>
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 8px; padding-right: 12px; width: 16.6667%; overflow-wrap: break-word;"
+          >
+            c
+          </td>
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 12px; padding-right: 8px; width: 16.6667%; overflow-wrap: break-word;"
+          >
+            d
+          </td>
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 16px; padding-right: 4px; width: 16.6667%; overflow-wrap: break-word;"
+          >
+            e
+          </td>
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 20px; padding-right: 0px; width: 16.6667%; overflow-wrap: break-word;"
+          >
+            f
           </td>
         </tr>
       </tbody>

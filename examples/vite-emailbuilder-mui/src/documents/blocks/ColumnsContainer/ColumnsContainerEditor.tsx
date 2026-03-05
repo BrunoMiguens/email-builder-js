@@ -8,15 +8,22 @@ import EditorChildrenIds, { EditorChildrenChange } from '../helpers/EditorChildr
 
 import ColumnsContainerPropsSchema, { ColumnsContainerProps } from './ColumnsContainerPropsSchema';
 
-const EMPTY_COLUMNS = [{ childrenIds: [] }, { childrenIds: [] }, { childrenIds: [] }];
+function makeEmptyColumns(count: number) {
+  return Array.from({ length: count }, () => ({ childrenIds: [] as string[] }));
+}
 
 export default function ColumnsContainerEditor({ style, props }: ColumnsContainerProps) {
   const currentBlockId = useCurrentBlockId();
 
   const { columns, ...restProps } = props ?? {};
-  const columnsValue = columns ?? EMPTY_COLUMNS;
+  const columnsCount = restProps.columnsCount ?? 2;
+  const columnsValue = columns ?? makeEmptyColumns(columnsCount);
+  // Pad if columns array is shorter than columnsCount (e.g. user increased column count)
+  while (columnsValue.length < columnsCount) {
+    columnsValue.push({ childrenIds: [] });
+  }
 
-  const updateColumn = (columnIndex: 0 | 1 | 2, { block, blockId, childrenIds }: EditorChildrenChange) => {
+  const updateColumn = (columnIndex: number, { block, blockId, childrenIds }: EditorChildrenChange) => {
     const nColumns = [...columnsValue];
     nColumns[columnIndex] = { childrenIds };
     setDocument({
@@ -39,11 +46,13 @@ export default function ColumnsContainerEditor({ style, props }: ColumnsContaine
     <BaseColumnsContainer
       props={restProps}
       style={style}
-      columns={[
-        <EditorChildrenIds childrenIds={columns?.[0]?.childrenIds} onChange={(change) => updateColumn(0, change)} />,
-        <EditorChildrenIds childrenIds={columns?.[1]?.childrenIds} onChange={(change) => updateColumn(1, change)} />,
-        <EditorChildrenIds childrenIds={columns?.[2]?.childrenIds} onChange={(change) => updateColumn(2, change)} />,
-      ]}
+      columns={Array.from({ length: columnsCount }, (_, i) => (
+        <EditorChildrenIds
+          key={i}
+          childrenIds={columnsValue[i]?.childrenIds}
+          onChange={(change) => updateColumn(i, change)}
+        />
+      ))}
     />
   );
 }

@@ -14,6 +14,7 @@ import ColumnsContainerPropsSchema, {
 } from '../../../../documents/blocks/ColumnsContainer/ColumnsContainerPropsSchema';
 
 import BaseSidebarPanel from './helpers/BaseSidebarPanel';
+import containsPlaceholders from './helpers/containsPlaceholders';
 import ColumnWidthsInput from './helpers/inputs/ColumnWidthsInput';
 import RadioGroupInput from './helpers/inputs/RadioGroupInput';
 import SliderInput from './helpers/inputs/SliderInput';
@@ -26,6 +27,11 @@ type ColumnsContainerPanelProps = {
 export default function ColumnsContainerPanel({ data, setData }: ColumnsContainerPanelProps) {
   const [, setErrors] = useState<ZodError | null>(null);
   const updateData = (d: unknown) => {
+    if (containsPlaceholders(d)) {
+      setData(d as ColumnsContainerProps);
+      setErrors(null);
+      return;
+    }
     const res = ColumnsContainerPropsSchema.safeParse(d);
     if (res.success) {
       setData(res.data);
@@ -39,15 +45,24 @@ export default function ColumnsContainerPanel({ data, setData }: ColumnsContaine
     <BaseSidebarPanel title="Columns block">
       <RadioGroupInput
         label="Number of columns"
-        defaultValue={data.props?.columnsCount === 2 ? '2' : '3'}
+        defaultValue={String(data.props?.columnsCount ?? 2)}
         onChange={(v) => {
-          updateData({ ...data, props: { ...data.props, columnsCount: v === '2' ? 2 : 3 } });
+          const columnsCount = parseInt(v, 10) as 2 | 3 | 4 | 5 | 6;
+          const columns = data.props?.columns ? [...data.props.columns] : [];
+          while (columns.length < columnsCount) {
+            columns.push({ childrenIds: [] });
+          }
+          updateData({ ...data, props: { ...data.props, columnsCount, columns } });
         }}
       >
         <ToggleButton value="2">2</ToggleButton>
         <ToggleButton value="3">3</ToggleButton>
+        <ToggleButton value="4">4</ToggleButton>
+        <ToggleButton value="5">5</ToggleButton>
+        <ToggleButton value="6">6</ToggleButton>
       </RadioGroupInput>
       <ColumnWidthsInput
+        columnsCount={data.props?.columnsCount ?? 2}
         defaultValue={data.props?.fixedWidths}
         onChange={(fixedWidths) => {
           updateData({ ...data, props: { ...data.props, fixedWidths } });

@@ -97,6 +97,54 @@ describe('block-columns-container', () => {
     ).toMatchSnapshot();
   });
 
+  describe('columnsCount 4', () => {
+    it('renders column children', () => {
+      const columns = [<>a</>, <>b</>, <>c</>, <>d</>];
+      expect(
+        render(<ColumnsContainer props={{ columnsCount: 4 }} columns={columns} />).asFragment()
+      ).toMatchSnapshot();
+    });
+
+    it('uses padding correctly', () => {
+      const columns = [<>a</>, <>b</>, <>c</>, <>d</>];
+      expect(
+        render(<ColumnsContainer props={{ columnsGap: 12, columnsCount: 4 }} columns={columns} />).asFragment()
+      ).toMatchSnapshot();
+    });
+  });
+
+  describe('columnsCount 5', () => {
+    it('renders column children', () => {
+      const columns = [<>a</>, <>b</>, <>c</>, <>d</>, <>e</>];
+      expect(
+        render(<ColumnsContainer props={{ columnsCount: 5 }} columns={columns} />).asFragment()
+      ).toMatchSnapshot();
+    });
+
+    it('uses padding correctly', () => {
+      const columns = [<>a</>, <>b</>, <>c</>, <>d</>, <>e</>];
+      expect(
+        render(<ColumnsContainer props={{ columnsGap: 20, columnsCount: 5 }} columns={columns} />).asFragment()
+      ).toMatchSnapshot();
+    });
+  });
+
+  describe('columnsCount 6', () => {
+    it('renders column children', () => {
+      const columns = [<>a</>, <>b</>, <>c</>, <>d</>, <>e</>, <>f</>];
+      expect(
+        render(<ColumnsContainer props={{ columnsCount: 6 }} columns={columns} />).asFragment()
+      ).toMatchSnapshot();
+    });
+
+    it('uses padding correctly', () => {
+      const columns = [<>a</>, <>b</>, <>c</>, <>d</>, <>e</>, <>f</>];
+      expect(
+        render(<ColumnsContainer props={{ columnsGap: 24, columnsCount: 6 }} columns={columns} />).asFragment()
+      ).toMatchSnapshot();
+    });
+  });
+
   describe('schema validation', () => {
     it('accepts 6-digit hex color', () => {
       const result = ColumnsContainerPropsSchema.safeParse({ style: { backgroundColor: '#FF0000' } });
@@ -115,6 +163,14 @@ describe('block-columns-container', () => {
     it('accepts valid columnsCount', () => {
       expect(ColumnsContainerPropsSchema.safeParse({ props: { columnsCount: 2 } }).success).toBe(true);
       expect(ColumnsContainerPropsSchema.safeParse({ props: { columnsCount: 3 } }).success).toBe(true);
+      expect(ColumnsContainerPropsSchema.safeParse({ props: { columnsCount: 4 } }).success).toBe(true);
+      expect(ColumnsContainerPropsSchema.safeParse({ props: { columnsCount: 5 } }).success).toBe(true);
+      expect(ColumnsContainerPropsSchema.safeParse({ props: { columnsCount: 6 } }).success).toBe(true);
+    });
+
+    it('rejects invalid columnsCount', () => {
+      expect(ColumnsContainerPropsSchema.safeParse({ props: { columnsCount: 1 } }).success).toBe(false);
+      expect(ColumnsContainerPropsSchema.safeParse({ props: { columnsCount: 7 } }).success).toBe(false);
     });
   });
 });

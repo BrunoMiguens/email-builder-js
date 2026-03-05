@@ -36,9 +36,9 @@ function cloneBlock(document: TEditorConfiguration, blockId: string): TEditorBlo
       return clone;
     case 'ColumnsContainer':
       if (clone.data?.props?.columns) {
-        clone.data.props.columns[0].childrenIds = cloneChildrenIds(document, clone.data.props.columns[0].childrenIds);
-        clone.data.props.columns[1].childrenIds = cloneChildrenIds(document, clone.data.props.columns[1].childrenIds);
-        clone.data.props.columns[2].childrenIds = cloneChildrenIds(document, clone.data.props.columns[2].childrenIds);
+        for (const column of clone.data.props.columns) {
+          column.childrenIds = cloneChildrenIds(document, column.childrenIds);
+        }
       }
       return clone;
   }
