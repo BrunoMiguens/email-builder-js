@@ -7,8 +7,7 @@ exports[`block-columns-container columnsCount 2 renders column children 1`] = `
       align="center"
       border="0"
       cellpadding="0"
-      style="table-layout: fixed; border-collapse: collapse;"
-      width="100%"
+      style="width: 100%; table-layout: fixed; border-collapse: collapse;"
     >
       <tbody
         style="width: 100%;"
@@ -17,12 +16,12 @@ exports[`block-columns-container columnsCount 2 renders column children 1`] = `
           style="width: 100%;"
         >
           <td
-            style="box-sizing: content-box; vertical-align: middle; padding-left: 0px; padding-right: 0px;"
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 50%; overflow-wrap: break-word;"
           >
             bread
           </td>
           <td
-            style="box-sizing: content-box; vertical-align: middle; padding-left: 0px; padding-right: 0px;"
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 50%; overflow-wrap: break-word;"
           >
             tomato
           </td>
@@ -40,8 +39,7 @@ exports[`block-columns-container columnsCount 2 uses padding correctly 1`] = `
       align="center"
       border="0"
       cellpadding="0"
-      style="table-layout: fixed; border-collapse: collapse;"
-      width="100%"
+      style="width: 100%; table-layout: fixed; border-collapse: collapse;"
     >
       <tbody
         style="width: 100%;"
@@ -50,12 +48,12 @@ exports[`block-columns-container columnsCount 2 uses padding correctly 1`] = `
           style="width: 100%;"
         >
           <td
-            style="box-sizing: content-box; vertical-align: middle; padding-left: 0px; padding-right: 6px;"
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 6px; width: 50%; overflow-wrap: break-word;"
           >
             bread
           </td>
           <td
-            style="box-sizing: content-box; vertical-align: middle; padding-left: 6px; padding-right: 0px;"
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 6px; padding-right: 0px; width: 50%; overflow-wrap: break-word;"
           >
             tomato
           </td>
@@ -73,8 +71,7 @@ exports[`block-columns-container columnsCount 3 renders column children 1`] = `
       align="center"
       border="0"
       cellpadding="0"
-      style="table-layout: fixed; border-collapse: collapse;"
-      width="100%"
+      style="width: 100%; table-layout: fixed; border-collapse: collapse;"
     >
       <tbody
         style="width: 100%;"
@@ -83,17 +80,17 @@ exports[`block-columns-container columnsCount 3 renders column children 1`] = `
           style="width: 100%;"
         >
           <td
-            style="box-sizing: content-box; vertical-align: middle; padding-left: 0px; padding-right: 0px;"
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 33.33%; overflow-wrap: break-word;"
           >
             bread
           </td>
           <td
-            style="box-sizing: content-box; vertical-align: middle; padding-left: 0px; padding-right: 0px;"
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 33.33%; overflow-wrap: break-word;"
           >
             tomato
           </td>
           <td
-            style="box-sizing: content-box; vertical-align: middle; padding-left: 0px; padding-right: 0px;"
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 33.33%; overflow-wrap: break-word;"
           >
             lettuce
           </td>
@@ -111,8 +108,7 @@ exports[`block-columns-container columnsCount 3 uses padding correctly 1`] = `
       align="center"
       border="0"
       cellpadding="0"
-      style="table-layout: fixed; border-collapse: collapse;"
-      width="100%"
+      style="width: 100%; table-layout: fixed; border-collapse: collapse;"
     >
       <tbody
         style="width: 100%;"
@@ -121,17 +117,17 @@ exports[`block-columns-container columnsCount 3 uses padding correctly 1`] = `
           style="width: 100%;"
         >
           <td
-            style="box-sizing: content-box; vertical-align: middle; padding-left: 0px; padding-right: 8px;"
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 8px; width: 33.33%; overflow-wrap: break-word;"
           >
             bread
           </td>
           <td
-            style="box-sizing: content-box; vertical-align: middle; padding-left: 4px; padding-right: 4px;"
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 4px; padding-right: 4px; width: 33.33%; overflow-wrap: break-word;"
           >
             tomato
           </td>
           <td
-            style="box-sizing: content-box; vertical-align: middle; padding-left: 8px; padding-right: 0px;"
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 8px; padding-right: 0px; width: 33.33%; overflow-wrap: break-word;"
           >
             lettuce
           </td>
@@ -149,8 +145,7 @@ exports[`block-columns-container renders with default values 1`] = `
       align="center"
       border="0"
       cellpadding="0"
-      style="table-layout: fixed; border-collapse: collapse;"
-      width="100%"
+      style="width: 100%; table-layout: fixed; border-collapse: collapse;"
     >
       <tbody
         style="width: 100%;"
@@ -159,10 +154,10 @@ exports[`block-columns-container renders with default values 1`] = `
           style="width: 100%;"
         >
           <td
-            style="box-sizing: content-box; vertical-align: middle; padding-left: 0px; padding-right: 0px;"
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 50%; overflow-wrap: break-word;"
           />
           <td
-            style="box-sizing: content-box; vertical-align: middle; padding-left: 0px; padding-right: 0px;"
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 50%; overflow-wrap: break-word;"
           />
         </tr>
       </tbody>

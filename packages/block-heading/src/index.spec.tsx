@@ -15,7 +15,7 @@ describe('Heading', () => {
       backgroundColor: '#444333',
       color: '#101010',
       fontFamily: 'HEAVY_SANS' as const,
-      fontWeight: 'normal' as const,
+      fontWeight: '400' as const,
       padding: {
         top: 15,
         bottom: 10,
