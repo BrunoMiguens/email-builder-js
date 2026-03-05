@@ -43,7 +43,7 @@ const WELCOME: TEditorConfiguration = {
     type: 'Text',
     data: {
       style: {
-        fontWeight: 'normal',
+        fontWeight: '400',
         padding: {
           top: 0,
           bottom: 16,
@@ -60,7 +60,7 @@ const WELCOME: TEditorConfiguration = {
     type: 'Text',
     data: {
       style: {
-        fontWeight: 'normal',
+        fontWeight: '400',
         padding: {
           top: 0,
           bottom: 16,
@@ -77,7 +77,7 @@ const WELCOME: TEditorConfiguration = {
     type: 'Text',
     data: {
       style: {
-        fontWeight: 'normal',
+        fontWeight: '400',
         padding: {
           top: 0,
           bottom: 16,
@@ -113,7 +113,7 @@ const WELCOME: TEditorConfiguration = {
     type: 'Text',
     data: {
       style: {
-        fontWeight: 'normal',
+        fontWeight: '400',
         padding: {
           top: 16,
           bottom: 16,

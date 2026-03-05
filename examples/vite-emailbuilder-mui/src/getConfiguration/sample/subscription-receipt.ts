@@ -65,7 +65,7 @@ const SUBSCRIPTION_RECEIPT: TEditorConfiguration = {
         backgroundColor: null,
         fontSize: 14,
         fontFamily: null,
-        fontWeight: 'normal',
+        fontWeight: '400',
         textAlign: 'right',
         padding: {
           top: 0,
@@ -159,7 +159,7 @@ const SUBSCRIPTION_RECEIPT: TEditorConfiguration = {
         backgroundColor: null,
         fontSize: 14,
         fontFamily: null,
-        fontWeight: 'normal',
+        fontWeight: '400',
         textAlign: 'left',
         padding: {
           top: 0,
@@ -180,7 +180,7 @@ const SUBSCRIPTION_RECEIPT: TEditorConfiguration = {
         color: null,
         backgroundColor: null,
         fontFamily: null,
-        fontWeight: 'bold',
+        fontWeight: '700',
         textAlign: 'left',
         padding: {
           top: 16,
@@ -203,7 +203,7 @@ const SUBSCRIPTION_RECEIPT: TEditorConfiguration = {
         backgroundColor: null,
         fontSize: 14,
         fontFamily: null,
-        fontWeight: 'normal',
+        fontWeight: '400',
         textAlign: 'left',
         padding: {
           top: 0,
@@ -243,7 +243,7 @@ const SUBSCRIPTION_RECEIPT: TEditorConfiguration = {
         backgroundColor: null,
         fontSize: 14,
         fontFamily: null,
-        fontWeight: 'normal',
+        fontWeight: '400',
         textAlign: 'left',
         padding: {
           top: 0,
@@ -377,7 +377,7 @@ const SUBSCRIPTION_RECEIPT: TEditorConfiguration = {
         backgroundColor: null,
         fontSize: 14,
         fontFamily: null,
-        fontWeight: 'normal',
+        fontWeight: '400',
         textAlign: 'left',
         padding: {
           top: 0,
@@ -418,7 +418,7 @@ const SUBSCRIPTION_RECEIPT: TEditorConfiguration = {
         backgroundColor: null,
         fontSize: 14,
         fontFamily: null,
-        fontWeight: 'normal',
+        fontWeight: '400',
         textAlign: 'right',
         padding: {
           top: 0,
@@ -506,7 +506,7 @@ const SUBSCRIPTION_RECEIPT: TEditorConfiguration = {
         backgroundColor: null,
         fontSize: 14,
         fontFamily: null,
-        fontWeight: 'normal',
+        fontWeight: '400',
         textAlign: 'left',
         padding: {
           top: 0,
@@ -547,7 +547,7 @@ const SUBSCRIPTION_RECEIPT: TEditorConfiguration = {
         backgroundColor: null,
         fontSize: 14,
         fontFamily: null,
-        fontWeight: 'normal',
+        fontWeight: '400',
         textAlign: 'right',
         padding: {
           top: 0,
@@ -635,7 +635,7 @@ const SUBSCRIPTION_RECEIPT: TEditorConfiguration = {
         backgroundColor: null,
         fontSize: 14,
         fontFamily: null,
-        fontWeight: 'normal',
+        fontWeight: '400',
         textAlign: 'left',
         padding: {
           top: 0,
@@ -676,7 +676,7 @@ const SUBSCRIPTION_RECEIPT: TEditorConfiguration = {
         backgroundColor: null,
         fontSize: 14,
         fontFamily: null,
-        fontWeight: 'normal',
+        fontWeight: '400',
         textAlign: 'right',
         padding: {
           top: 0,
@@ -795,7 +795,7 @@ const SUBSCRIPTION_RECEIPT: TEditorConfiguration = {
         color: null,
         backgroundColor: null,
         fontFamily: null,
-        fontWeight: 'normal',
+        fontWeight: '400',
         textAlign: 'left',
         padding: {
           top: 16,
@@ -818,7 +818,7 @@ const SUBSCRIPTION_RECEIPT: TEditorConfiguration = {
         backgroundColor: null,
         fontSize: 14,
         fontFamily: null,
-        fontWeight: 'normal',
+        fontWeight: '400',
         textAlign: 'left',
         padding: {
           top: 16,
@@ -840,7 +840,7 @@ const SUBSCRIPTION_RECEIPT: TEditorConfiguration = {
         backgroundColor: null,
         fontSize: 14,
         fontFamily: null,
-        fontWeight: 'bold',
+        fontWeight: '700',
         textAlign: 'left',
         padding: {
           top: 0,
@@ -862,7 +862,7 @@ const SUBSCRIPTION_RECEIPT: TEditorConfiguration = {
         backgroundColor: null,
         fontSize: 12,
         fontFamily: null,
-        fontWeight: 'normal',
+        fontWeight: '400',
         textAlign: 'left',
         padding: {
           top: 8,
@@ -903,7 +903,7 @@ const SUBSCRIPTION_RECEIPT: TEditorConfiguration = {
         backgroundColor: null,
         fontSize: 14,
         fontFamily: null,
-        fontWeight: 'bold',
+        fontWeight: '700',
         textAlign: 'right',
         padding: {
           top: 0,
@@ -1028,7 +1028,7 @@ const SUBSCRIPTION_RECEIPT: TEditorConfiguration = {
         backgroundColor: null,
         fontSize: 14,
         fontFamily: null,
-        fontWeight: 'bold',
+        fontWeight: '700',
         textAlign: 'left',
         padding: {
           top: 0,
@@ -1069,7 +1069,7 @@ const SUBSCRIPTION_RECEIPT: TEditorConfiguration = {
         backgroundColor: null,
         fontSize: 14,
         fontFamily: null,
-        fontWeight: 'bold',
+        fontWeight: '700',
         textAlign: 'right',
         padding: {
           top: 0,
@@ -1175,7 +1175,7 @@ const SUBSCRIPTION_RECEIPT: TEditorConfiguration = {
         backgroundColor: null,
         fontSize: 14,
         fontFamily: null,
-        fontWeight: 'bold',
+        fontWeight: '700',
         textAlign: 'left',
         padding: {
           top: 0,
@@ -1216,7 +1216,7 @@ const SUBSCRIPTION_RECEIPT: TEditorConfiguration = {
         backgroundColor: null,
         fontSize: 14,
         fontFamily: null,
-        fontWeight: 'bold',
+        fontWeight: '700',
         textAlign: 'right',
         padding: {
           top: 0,
@@ -1330,7 +1330,7 @@ const SUBSCRIPTION_RECEIPT: TEditorConfiguration = {
         backgroundColor: null,
         fontSize: 12,
         fontFamily: null,
-        fontWeight: 'normal',
+        fontWeight: '400',
         textAlign: 'left',
         padding: {
           top: 24,

@@ -47,7 +47,7 @@ const RESET_PASSWORD: TEditorConfiguration = {
         color: null,
         backgroundColor: null,
         fontFamily: null,
-        fontWeight: 'bold',
+        fontWeight: '700',
         textAlign: 'left',
         padding: {
           top: 32,
@@ -70,7 +70,7 @@ const RESET_PASSWORD: TEditorConfiguration = {
         backgroundColor: null,
         fontSize: 14,
         fontFamily: null,
-        fontWeight: 'normal',
+        fontWeight: '400',
         textAlign: 'left',
         padding: {
           top: 8,
@@ -91,7 +91,7 @@ const RESET_PASSWORD: TEditorConfiguration = {
         backgroundColor: null,
         fontSize: 14,
         fontFamily: null,
-        fontWeight: 'bold',
+        fontWeight: '700',
         textAlign: 'left',
         padding: {
           top: 12,
@@ -137,7 +137,7 @@ const RESET_PASSWORD: TEditorConfiguration = {
         backgroundColor: null,
         fontSize: 12,
         fontFamily: null,
-        fontWeight: 'normal',
+        fontWeight: '400',
         textAlign: 'left',
         padding: {
           top: 4,

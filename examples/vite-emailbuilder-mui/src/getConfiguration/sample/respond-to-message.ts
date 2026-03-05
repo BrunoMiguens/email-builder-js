@@ -156,7 +156,7 @@ const RESPOND_TO_MESSAGE: TEditorConfiguration = {
         backgroundColor: null,
         fontSize: 16,
         fontFamily: null,
-        fontWeight: 'normal',
+        fontWeight: '400',
         textAlign: 'left',
         padding: {
           top: 0,

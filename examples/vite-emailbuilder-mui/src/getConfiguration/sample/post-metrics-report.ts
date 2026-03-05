@@ -154,7 +154,7 @@ const POST_METRICS_REPORT: TEditorConfiguration = {
         color: null,
         backgroundColor: null,
         fontFamily: null,
-        fontWeight: 'bold',
+        fontWeight: '700',
         textAlign: 'center',
         padding: {
           top: 24,
@@ -177,7 +177,7 @@ const POST_METRICS_REPORT: TEditorConfiguration = {
         backgroundColor: null,
         fontSize: 48,
         fontFamily: null,
-        fontWeight: 'bold',
+        fontWeight: '700',
         textAlign: 'center',
         padding: {
           top: 16,
@@ -199,7 +199,7 @@ const POST_METRICS_REPORT: TEditorConfiguration = {
         backgroundColor: null,
         fontSize: 14,
         fontFamily: null,
-        fontWeight: 'bold',
+        fontWeight: '700',
         textAlign: 'center',
         padding: {
           top: 0,
@@ -220,7 +220,7 @@ const POST_METRICS_REPORT: TEditorConfiguration = {
         backgroundColor: null,
         fontSize: 16,
         fontFamily: null,
-        fontWeight: 'bold',
+        fontWeight: '700',
         textAlign: 'center',
         padding: {
           top: 16,
@@ -247,7 +247,7 @@ const POST_METRICS_REPORT: TEditorConfiguration = {
         color: null,
         backgroundColor: null,
         fontFamily: null,
-        fontWeight: 'bold',
+        fontWeight: '700',
         textAlign: 'center',
         padding: {
           top: 24,
@@ -270,7 +270,7 @@ const POST_METRICS_REPORT: TEditorConfiguration = {
         backgroundColor: null,
         fontSize: 16,
         fontFamily: null,
-        fontWeight: 'normal',
+        fontWeight: '400',
         textAlign: 'left',
         padding: {
           top: 0,
@@ -329,7 +329,7 @@ const POST_METRICS_REPORT: TEditorConfiguration = {
         backgroundColor: null,
         fontSize: 16,
         fontFamily: null,
-        fontWeight: 'bold',
+        fontWeight: '700',
         textAlign: 'center',
         padding: {
           top: 16,
@@ -375,7 +375,7 @@ const POST_METRICS_REPORT: TEditorConfiguration = {
         backgroundColor: null,
         fontSize: 12,
         fontFamily: null,
-        fontWeight: 'normal',
+        fontWeight: '400',
         textAlign: 'center',
         padding: {
           top: 24,

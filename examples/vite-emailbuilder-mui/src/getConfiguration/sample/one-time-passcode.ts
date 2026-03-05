@@ -45,7 +45,7 @@ const ONE_TIME_PASSCODE: TEditorConfiguration = {
         backgroundColor: null,
         fontSize: 16,
         fontFamily: null,
-        fontWeight: 'normal',
+        fontWeight: '400',
         textAlign: 'center',
         padding: {
           top: 16,
@@ -66,7 +66,7 @@ const ONE_TIME_PASSCODE: TEditorConfiguration = {
         color: null,
         backgroundColor: null,
         fontFamily: 'MONOSPACE',
-        fontWeight: 'bold',
+        fontWeight: '700',
         textAlign: 'center',
         padding: {
           top: 16,
@@ -89,7 +89,7 @@ const ONE_TIME_PASSCODE: TEditorConfiguration = {
         backgroundColor: null,
         fontSize: 16,
         fontFamily: null,
-        fontWeight: 'normal',
+        fontWeight: '400',
         textAlign: 'center',
         padding: {
           top: 16,
@@ -111,7 +111,7 @@ const ONE_TIME_PASSCODE: TEditorConfiguration = {
         backgroundColor: null,
         fontSize: 14,
         fontFamily: null,
-        fontWeight: 'normal',
+        fontWeight: '400',
         textAlign: 'center',
         padding: {
           top: 16,
