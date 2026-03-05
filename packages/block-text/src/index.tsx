@@ -47,7 +47,7 @@ function getFontFamily(fontFamily: z.infer<typeof FONT_FAMILY_SCHEMA>) {
 
 const COLOR_SCHEMA = z
   .string()
-  .regex(/^#[0-9a-fA-F]{6}$/)
+  .regex(/^#[0-9a-fA-F]{6}([0-9a-fA-F]{2})?$/)
   .nullable()
   .optional();
 
@@ -71,7 +71,7 @@ export const TextPropsSchema = z.object({
       backgroundColor: COLOR_SCHEMA,
       fontSize: z.number().gte(0).optional().nullable(),
       fontFamily: FONT_FAMILY_SCHEMA,
-      fontWeight: z.enum(['bold', 'normal']).optional().nullable(),
+      fontWeight: z.enum(['300', '400', '500', '600', '700', 'bold', 'normal']).optional().nullable(),
       textAlign: z.enum(['left', 'center', 'right']).optional().nullable(),
       linkColor: COLOR_SCHEMA,
       letterSpacing: z.number().optional().nullable(),
@@ -91,6 +91,25 @@ export const TextPropsSchema = z.object({
 
 export type TextProps = z.infer<typeof TextPropsSchema>;
 
+function getFontWeight(fontWeight: string | null | undefined): number | undefined {
+  switch (fontWeight) {
+    case 'bold':
+    case '700':
+      return 700;
+    case '600':
+      return 600;
+    case '500':
+      return 500;
+    case 'normal':
+    case '400':
+      return 400;
+    case '300':
+      return 300;
+    default:
+      return undefined;
+  }
+}
+
 export const TextPropsDefaults = {
   text: '',
 };
@@ -101,7 +120,7 @@ export function Text({ style, props }: TextProps) {
     backgroundColor: style?.backgroundColor ?? undefined,
     fontSize: style?.fontSize ?? undefined,
     fontFamily: getFontFamily(style?.fontFamily),
-    fontWeight: style?.fontWeight ?? undefined,
+    fontWeight: getFontWeight(style?.fontWeight),
     textAlign: style?.textAlign ?? undefined,
     letterSpacing: style?.letterSpacing != null ? `${style.letterSpacing}px` : undefined,
     lineHeight: style?.lineHeight != null ? `${style.lineHeight}px` : undefined,

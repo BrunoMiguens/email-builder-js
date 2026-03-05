@@ -3,7 +3,7 @@ import { z } from 'zod';
 
 const COLOR_SCHEMA = z
   .string()
-  .regex(/^#[0-9a-fA-F]{6}$/)
+  .regex(/^#[0-9a-fA-F]{6}([0-9a-fA-F]{2})?$/)
   .nullable()
   .optional();
 
@@ -75,7 +75,7 @@ export const HeadingPropsSchema = z.object({
       color: COLOR_SCHEMA,
       backgroundColor: COLOR_SCHEMA,
       fontFamily: FONT_FAMILY_SCHEMA,
-      fontWeight: z.enum(['bold', 'normal']).optional().nullable(),
+      fontWeight: z.enum(['300', '400', '500', '600', '700', 'bold', 'normal']).optional().nullable(),
       textAlign: z.enum(['left', 'center', 'right']).optional().nullable(),
       letterSpacing: z.number().optional().nullable(),
       lineHeight: z.number().optional().nullable(),
@@ -86,6 +86,25 @@ export const HeadingPropsSchema = z.object({
 });
 
 export type HeadingProps = z.infer<typeof HeadingPropsSchema>;
+
+function getFontWeight(fontWeight: string | null | undefined, fallback: number): number {
+  switch (fontWeight) {
+    case 'bold':
+    case '700':
+      return 700;
+    case '600':
+      return 600;
+    case '500':
+      return 500;
+    case 'normal':
+    case '400':
+      return 400;
+    case '300':
+      return 300;
+    default:
+      return fallback;
+  }
+}
 
 export const HeadingPropsDefaults = {
   level: 'h2',
@@ -98,7 +117,7 @@ export function Heading({ props, style }: HeadingProps) {
   const hStyle: CSSProperties = {
     color: style?.color ?? undefined,
     backgroundColor: style?.backgroundColor ?? undefined,
-    fontWeight: style?.fontWeight ?? 'bold',
+    fontWeight: getFontWeight(style?.fontWeight, 700),
     textAlign: style?.textAlign ?? undefined,
     margin: 0,
     fontFamily: getFontFamily(style?.fontFamily),

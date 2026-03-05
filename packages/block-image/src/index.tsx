@@ -20,10 +20,11 @@ export const ImagePropsSchema = z.object({
       padding: PADDING_SCHEMA,
       backgroundColor: z
         .string()
-        .regex(/^#[0-9a-fA-F]{6}$/)
+        .regex(/^#[0-9a-fA-F]{6}([0-9a-fA-F]{2})?$/)
         .optional()
         .nullable(),
       textAlign: z.enum(['center', 'left', 'right']).optional().nullable(),
+      opacity: z.number().min(0).max(1).optional().nullable(),
     })
     .optional()
     .nullable(),
@@ -68,6 +69,7 @@ export function Image({ style, props }: ImageProps) {
         verticalAlign: props?.contentAlignment ?? 'middle',
         display: 'inline-block',
         maxWidth: '100%',
+        opacity: style?.opacity ?? undefined,
       }}
     />
   );

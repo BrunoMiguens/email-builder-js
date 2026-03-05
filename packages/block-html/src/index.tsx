@@ -45,7 +45,7 @@ function getFontFamily(fontFamily: z.infer<typeof FONT_FAMILY_SCHEMA>) {
 
 const COLOR_SCHEMA = z
   .string()
-  .regex(/^#[0-9a-fA-F]{6}$/)
+  .regex(/^#[0-9a-fA-F]{6}([0-9a-fA-F]{2})?$/)
   .nullable()
   .optional();
 

@@ -45,7 +45,7 @@ function getFontFamily(fontFamily: z.infer<typeof FONT_FAMILY_SCHEMA>) {
 
 const COLOR_SCHEMA = z
   .string()
-  .regex(/^#[0-9a-fA-F]{6}$/)
+  .regex(/^#[0-9a-fA-F]{6}([0-9a-fA-F]{2})?$/)
   .nullable()
   .optional();
 
@@ -68,7 +68,7 @@ export const ButtonPropsSchema = z.object({
       backgroundColor: COLOR_SCHEMA,
       fontSize: z.number().min(0).optional().nullable(),
       fontFamily: FONT_FAMILY_SCHEMA,
-      fontWeight: z.enum(['bold', 'normal']).optional().nullable(),
+      fontWeight: z.enum(['300', '400', '500', '600', '700', 'bold', 'normal']).optional().nullable(),
       textAlign: z.enum(['left', 'center', 'right']).optional().nullable(),
       padding: PADDING_SCHEMA,
     })
@@ -119,6 +119,25 @@ function getButtonSizePadding(props: ButtonProps['props']) {
   }
 }
 
+function getFontWeight(fontWeight: string | null | undefined, fallback: number): number {
+  switch (fontWeight) {
+    case 'bold':
+    case '700':
+      return 700;
+    case '600':
+      return 600;
+    case '500':
+      return 500;
+    case 'normal':
+    case '400':
+      return 400;
+    case '300':
+      return 300;
+    default:
+      return fallback;
+  }
+}
+
 export const ButtonPropsDefaults = {
   text: '',
   url: '',
@@ -147,7 +166,7 @@ export function Button({ style, props }: ButtonProps) {
     color: buttonTextColor,
     fontSize: style?.fontSize ?? 16,
     fontFamily: getFontFamily(style?.fontFamily),
-    fontWeight: style?.fontWeight ?? 'bold',
+    fontWeight: getFontWeight(style?.fontWeight, 700),
     backgroundColor: buttonBackgroundColor,
     borderRadius: getRoundedCorners(props),
     display: fullWidth ? 'block' : 'inline-block',
