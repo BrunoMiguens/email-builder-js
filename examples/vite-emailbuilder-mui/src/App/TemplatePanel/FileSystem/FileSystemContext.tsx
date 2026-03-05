@@ -205,6 +205,10 @@ type FileSystemContextValue = {
   createBlock(): void;
   refreshBlockFiles(): void;
   switchToTemplateMode(): void;
+
+  // Slot definitions for the active block
+  activeBlockSlots: Record<string, unknown> | null;
+  setActiveBlockSlots(slots: Record<string, unknown> | null): void;
 };
 
 const FileSystemContext = createContext<FileSystemContextValue | null>(null);
@@ -242,6 +246,12 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
   const lastLoadedBlockDocRef = useRef<unknown>(null);
   const blockSaveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const activeBlockSlotsRef = useRef<Record<string, unknown> | null>(null);
+  const [activeBlockSlots, setActiveBlockSlotsState] = useState<Record<string, unknown> | null>(null);
+
+  const setActiveBlockSlots = (slots: Record<string, unknown> | null) => {
+    activeBlockSlotsRef.current = slots;
+    setActiveBlockSlotsState(slots);
+  };
 
   // Preserve template state when switching to block editing
   const savedTemplateDocRef = useRef<TEditorConfiguration | null>(null);
@@ -450,7 +460,7 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
       setActiveBlockFileName('');
       activeBlockFileHandleRef.current = null;
       lastLoadedBlockDocRef.current = null;
-      activeBlockSlotsRef.current = null;
+      setActiveBlockSlots(null);
       setBlockSaveStatus(null);
 
       // Initialize blocks subfolder
@@ -492,7 +502,7 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
       // Clear block editing state to prevent stale handles
       activeBlockFileHandleRef.current = null;
       lastLoadedBlockDocRef.current = null;
-      activeBlockSlotsRef.current = null;
+      setActiveBlockSlots(null);
       setActiveBlockFileName('');
       setBlockSaveStatus(null);
       savedTemplateDocRef.current = null;
@@ -533,7 +543,7 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
       // Clear block editing state to prevent stale handles
       activeBlockFileHandleRef.current = null;
       lastLoadedBlockDocRef.current = null;
-      activeBlockSlotsRef.current = null;
+      setActiveBlockSlots(null);
       setActiveBlockFileName('');
       setBlockSaveStatus(null);
       savedTemplateDocRef.current = null;
@@ -601,8 +611,9 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
 
       activeBlockFileHandleRef.current = fileHandle;
       lastLoadedBlockDocRef.current = data;
-      activeBlockSlotsRef.current =
-        Object.keys(parsed.slots).length > 0 ? (parsed.slots as Record<string, unknown>) : null;
+      setActiveBlockSlots(
+        Object.keys(parsed.slots).length > 0 ? (parsed.slots as Record<string, unknown>) : null
+      );
       setActiveBlockFileName(name);
       setBlockSaveStatus('saved');
       editingModeRef.current = 'block'; // Set ref before resetDocument to prevent stale auto-save
@@ -665,7 +676,7 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
     setActiveBlockFileName('');
     activeBlockFileHandleRef.current = null;
     lastLoadedBlockDocRef.current = null;
-    activeBlockSlotsRef.current = null;
+    setActiveBlockSlots(null);
     setBlockSaveStatus(null);
 
     // Restore saved template state
@@ -707,6 +718,8 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
         createBlock,
         refreshBlockFiles,
         switchToTemplateMode,
+        activeBlockSlots,
+        setActiveBlockSlots,
       }}
     >
       {children}
