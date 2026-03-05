@@ -138,6 +138,72 @@ exports[`block-columns-container columnsCount 3 uses padding correctly 1`] = `
 </DocumentFragment>
 `;
 
+exports[`block-columns-container renders with RGBA background color 1`] = `
+<DocumentFragment>
+  <div
+    style="background-color: rgba(0, 0, 255, 0.502);"
+  >
+    <table
+      align="center"
+      border="0"
+      cellpadding="0"
+      style="width: 100%; table-layout: fixed; border-collapse: collapse;"
+    >
+      <tbody
+        style="width: 100%;"
+      >
+        <tr
+          style="width: 100%;"
+        >
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 50%; overflow-wrap: break-word;"
+          >
+            col1
+          </td>
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 50%; overflow-wrap: break-word;"
+          >
+            col2
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`block-columns-container renders with content alignment 1`] = `
+<DocumentFragment>
+  <div>
+    <table
+      align="center"
+      border="0"
+      cellpadding="0"
+      style="width: 100%; table-layout: fixed; border-collapse: collapse;"
+    >
+      <tbody
+        style="width: 100%;"
+      >
+        <tr
+          style="width: 100%;"
+        >
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 50%; overflow-wrap: break-word;"
+          >
+            short
+          </td>
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 50%; overflow-wrap: break-word;"
+          >
+            tall content that takes more space
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`block-columns-container renders with default values 1`] = `
 <DocumentFragment>
   <div>
@@ -159,6 +225,77 @@ exports[`block-columns-container renders with default values 1`] = `
           <td
             style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 50%; overflow-wrap: break-word;"
           />
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`block-columns-container renders with fixed widths 1`] = `
+<DocumentFragment>
+  <div>
+    <table
+      align="center"
+      border="0"
+      cellpadding="0"
+      style="width: 100%; table-layout: fixed; border-collapse: collapse;"
+    >
+      <tbody
+        style="width: 100%;"
+      >
+        <tr
+          style="width: 100%;"
+        >
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 200px; overflow-wrap: break-word;"
+          >
+            fixed
+          </td>
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; overflow-wrap: break-word;"
+          >
+            flexible
+          </td>
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 150px; overflow-wrap: break-word;"
+          >
+            third
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`block-columns-container renders with style padding 1`] = `
+<DocumentFragment>
+  <div
+    style="background-color: rgb(238, 238, 238); padding: 16px 24px 16px 24px;"
+  >
+    <table
+      align="center"
+      border="0"
+      cellpadding="0"
+      style="width: 100%; table-layout: fixed; border-collapse: collapse;"
+    >
+      <tbody
+        style="width: 100%;"
+      >
+        <tr
+          style="width: 100%;"
+        >
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 50%; overflow-wrap: break-word;"
+          >
+            col1
+          </td>
+          <td
+            style="box-sizing: border-box; vertical-align: middle; padding-left: 0px; padding-right: 0px; width: 50%; overflow-wrap: break-word;"
+          >
+            col2
+          </td>
         </tr>
       </tbody>
     </table>

@@ -1,5 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`block-button renders with RGBA background color 1`] = `
+<DocumentFragment>
+  <div
+    style="background-color: rgba(0, 0, 255, 0.502);"
+  >
+    <a
+      href="https://example.com"
+      style="color: rgb(255, 255, 255); font-size: 16px; font-weight: 700; background-color: rgba(255, 0, 0, 0.6); border-radius: 4px; display: inline-block; padding: 12px 20px; text-decoration: none;"
+      target="_blank"
+    >
+      <span>
+        <!--[if mso]&gt;&lt;i style="letter-spacing: 20px;mso-font-width:-100%;mso-text-raise:30" hidden&gt;&nbsp;&lt;/i&gt;&lt;![endif]-->
+      </span>
+      <span>
+        Transparent BG
+      </span>
+      <span>
+        <!--[if mso]&gt;&lt;i style="letter-spacing: 20px;mso-font-width:-100%" hidden&gt;&nbsp;&lt;/i&gt;&lt;![endif]-->
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`block-button renders with default values 1`] = `
 <DocumentFragment>
   <div>
@@ -14,6 +38,140 @@ exports[`block-button renders with default values 1`] = `
       <span />
       <span>
         <!--[if mso]&gt;&lt;i style="letter-spacing: 20px;mso-font-width:-100%" hidden&gt;&nbsp;&lt;/i&gt;&lt;![endif]-->
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`block-button renders with font weight 300 (light) 1`] = `
+<DocumentFragment>
+  <div>
+    <a
+      href="https://example.com"
+      style="color: rgb(255, 255, 255); font-size: 16px; font-weight: 300; background-color: rgb(153, 153, 153); border-radius: 4px; display: inline-block; padding: 12px 20px; text-decoration: none;"
+      target="_blank"
+    >
+      <span>
+        <!--[if mso]&gt;&lt;i style="letter-spacing: 20px;mso-font-width:-100%;mso-text-raise:30" hidden&gt;&nbsp;&lt;/i&gt;&lt;![endif]-->
+      </span>
+      <span>
+        Light button
+      </span>
+      <span>
+        <!--[if mso]&gt;&lt;i style="letter-spacing: 20px;mso-font-width:-100%" hidden&gt;&nbsp;&lt;/i&gt;&lt;![endif]-->
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`block-button renders with font weight 500 (medium) 1`] = `
+<DocumentFragment>
+  <div>
+    <a
+      href="https://example.com"
+      style="color: rgb(255, 255, 255); font-size: 16px; font-weight: 500; background-color: rgb(153, 153, 153); border-radius: 4px; display: inline-block; padding: 12px 20px; text-decoration: none;"
+      target="_blank"
+    >
+      <span>
+        <!--[if mso]&gt;&lt;i style="letter-spacing: 20px;mso-font-width:-100%;mso-text-raise:30" hidden&gt;&nbsp;&lt;/i&gt;&lt;![endif]-->
+      </span>
+      <span>
+        Medium button
+      </span>
+      <span>
+        <!--[if mso]&gt;&lt;i style="letter-spacing: 20px;mso-font-width:-100%" hidden&gt;&nbsp;&lt;/i&gt;&lt;![endif]-->
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`block-button renders with font weight 600 (semibold) 1`] = `
+<DocumentFragment>
+  <div>
+    <a
+      href="https://example.com"
+      style="color: rgb(255, 255, 255); font-size: 16px; font-weight: 600; background-color: rgb(153, 153, 153); border-radius: 4px; display: inline-block; padding: 12px 20px; text-decoration: none;"
+      target="_blank"
+    >
+      <span>
+        <!--[if mso]&gt;&lt;i style="letter-spacing: 20px;mso-font-width:-100%;mso-text-raise:30" hidden&gt;&nbsp;&lt;/i&gt;&lt;![endif]-->
+      </span>
+      <span>
+        Semibold button
+      </span>
+      <span>
+        <!--[if mso]&gt;&lt;i style="letter-spacing: 20px;mso-font-width:-100%" hidden&gt;&nbsp;&lt;/i&gt;&lt;![endif]-->
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`block-button renders with font weight bold 1`] = `
+<DocumentFragment>
+  <div>
+    <a
+      href="https://example.com"
+      style="color: rgb(255, 255, 255); font-size: 16px; font-weight: 700; background-color: rgb(153, 153, 153); border-radius: 4px; display: inline-block; padding: 12px 20px; text-decoration: none;"
+      target="_blank"
+    >
+      <span>
+        <!--[if mso]&gt;&lt;i style="letter-spacing: 20px;mso-font-width:-100%;mso-text-raise:30" hidden&gt;&nbsp;&lt;/i&gt;&lt;![endif]-->
+      </span>
+      <span>
+        Click me
+      </span>
+      <span>
+        <!--[if mso]&gt;&lt;i style="letter-spacing: 20px;mso-font-width:-100%" hidden&gt;&nbsp;&lt;/i&gt;&lt;![endif]-->
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`block-button renders with font weight normal 1`] = `
+<DocumentFragment>
+  <div>
+    <a
+      href="https://example.com"
+      style="color: rgb(255, 255, 255); font-size: 16px; font-weight: 400; background-color: rgb(153, 153, 153); border-radius: 4px; display: inline-block; padding: 12px 20px; text-decoration: none;"
+      target="_blank"
+    >
+      <span>
+        <!--[if mso]&gt;&lt;i style="letter-spacing: 20px;mso-font-width:-100%;mso-text-raise:30" hidden&gt;&nbsp;&lt;/i&gt;&lt;![endif]-->
+      </span>
+      <span>
+        Normal button
+      </span>
+      <span>
+        <!--[if mso]&gt;&lt;i style="letter-spacing: 20px;mso-font-width:-100%" hidden&gt;&nbsp;&lt;/i&gt;&lt;![endif]-->
+      </span>
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`block-button renders with full style and props 1`] = `
+<DocumentFragment>
+  <div
+    style="background-color: rgb(238, 238, 238); text-align: center; padding: 10px 20px 10px 20px;"
+  >
+    <a
+      href="https://example.com/action"
+      style="color: rgb(255, 255, 255); font-size: 18px; font-family: Charter, "Bitstream Charter", "Sitka Text", Cambria, serif; font-weight: 600; background-color: rgb(51, 102, 153); border-radius: 64px; display: block; padding: 16px 32px; text-decoration: none;"
+      target="_blank"
+    >
+      <span>
+        <!--[if mso]&gt;&lt;i style="letter-spacing: 32px;mso-font-width:-100%;mso-text-raise:48" hidden&gt;&nbsp;&lt;/i&gt;&lt;![endif]-->
+      </span>
+      <span>
+        Styled button
+      </span>
+      <span>
+        <!--[if mso]&gt;&lt;i style="letter-spacing: 32px;mso-font-width:-100%" hidden&gt;&nbsp;&lt;/i&gt;&lt;![endif]-->
       </span>
     </a>
   </div>

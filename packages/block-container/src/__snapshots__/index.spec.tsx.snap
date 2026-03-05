@@ -1,7 +1,64 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`block-container renders with RGBA background color 1`] = `
+<DocumentFragment>
+  <div
+    style="background-color: rgba(255, 0, 0, 0.502);"
+  >
+    <span>
+      Content
+    </span>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`block-container renders with RGBA border color 1`] = `
+<DocumentFragment>
+  <div
+    style="border: 1px solid #0000ff40;"
+  >
+    <span>
+      Bordered
+    </span>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`block-container renders with all style properties 1`] = `
+<DocumentFragment>
+  <div
+    style="background-color: rgb(238, 238, 238); border: 1px solid #cccccc; border-radius: 12px; padding: 16px 24px 16px 24px;"
+  >
+    <span>
+      Fully styled
+    </span>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`block-container renders with children 1`] = `
+<DocumentFragment>
+  <div>
+    <p>
+      First child
+    </p>
+    <p>
+      Second child
+    </p>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`block-container renders with default values 1`] = `
 <DocumentFragment>
   <div />
+</DocumentFragment>
+`;
+
+exports[`block-container renders without children (self-closing div) 1`] = `
+<DocumentFragment>
+  <div
+    style="background-color: rgb(245, 245, 245);"
+  />
 </DocumentFragment>
 `;

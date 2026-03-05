@@ -1,5 +1,41 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`block-image renders with RGBA background color 1`] = `
+<DocumentFragment>
+  <div
+    style="background-color: rgba(255, 0, 0, 0.502);"
+  >
+    <img
+      alt=""
+      src="https://example.com/image.png"
+      style="outline: none; text-decoration: none; vertical-align: middle; display: inline-block; max-width: 100%;"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`block-image renders with all style and props 1`] = `
+<DocumentFragment>
+  <div
+    style="padding: 10px 20px 10px 20px; background-color: rgb(204, 204, 204); text-align: center;"
+  >
+    <a
+      href="https://example.com"
+      style="text-decoration: none;"
+      target="_blank"
+    >
+      <img
+        alt="Banner"
+        height="100"
+        src="https://example.com/banner.png"
+        style="width: 200px; height: 100px; outline: none; text-decoration: none; vertical-align: top; display: inline-block; max-width: 100%; opacity: 0.8;"
+        width="200"
+      />
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`block-image renders with default values 1`] = `
 <DocumentFragment>
   <div>
@@ -7,6 +43,60 @@ exports[`block-image renders with default values 1`] = `
       alt=""
       src=""
       style="outline: none; text-decoration: none; vertical-align: middle; display: inline-block; max-width: 100%;"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`block-image renders with full opacity (1) 1`] = `
+<DocumentFragment>
+  <div>
+    <img
+      alt=""
+      src="https://example.com/logo.png"
+      style="outline: none; text-decoration: none; vertical-align: middle; display: inline-block; max-width: 100%; opacity: 1;"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`block-image renders with link wrapping 1`] = `
+<DocumentFragment>
+  <div>
+    <a
+      href="https://example.com"
+      style="text-decoration: none;"
+      target="_blank"
+    >
+      <img
+        alt=""
+        src="https://example.com/image.png"
+        style="outline: none; text-decoration: none; vertical-align: middle; display: inline-block; max-width: 100%;"
+      />
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`block-image renders with opacity 1`] = `
+<DocumentFragment>
+  <div>
+    <img
+      alt="Logo"
+      src="https://example.com/logo.png"
+      style="outline: none; text-decoration: none; vertical-align: middle; display: inline-block; max-width: 100%; opacity: 0.5;"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`block-image renders with zero opacity 1`] = `
+<DocumentFragment>
+  <div>
+    <img
+      alt=""
+      src="https://example.com/logo.png"
+      style="outline: none; text-decoration: none; vertical-align: middle; display: inline-block; max-width: 100%; opacity: 0;"
     />
   </div>
 </DocumentFragment>

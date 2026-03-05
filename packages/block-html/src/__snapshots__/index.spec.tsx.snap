@@ -1,5 +1,57 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`block-html renders with HTML contents 1`] = `
+<DocumentFragment>
+  <div>
+    <strong>
+      Bold text
+    </strong>
+    <em>
+      Italic
+    </em>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`block-html renders with Inter font family 1`] = `
+<DocumentFragment>
+  <div
+    style="font-family: "Inter", -apple-system, BlinkMacSystemFont, Arial, sans-serif;"
+  >
+    <p>
+      Inter font
+    </p>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`block-html renders with RGBA colors 1`] = `
+<DocumentFragment>
+  <div
+    style="color: rgba(51, 51, 51, 0.502); background-color: rgba(0, 0, 255, 0.125);"
+  >
+    <p>
+      Transparent
+    </p>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`block-html renders with all style properties 1`] = `
+<DocumentFragment>
+  <div
+    style="color: rgb(17, 17, 17); background-color: rgb(245, 245, 245); font-family: Charter, "Bitstream Charter", "Sitka Text", Cambria, serif; font-size: 14px; text-align: center; padding: 8px 16px 8px 16px;"
+  >
+    <h2>
+      Title
+    </h2>
+    <p>
+      Content
+    </p>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`block-html renders with default values 1`] = `
 <DocumentFragment>
   <div />

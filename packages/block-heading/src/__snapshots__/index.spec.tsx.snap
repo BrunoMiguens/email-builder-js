@@ -1,10 +1,90 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Heading renders h1 with font weight 700 1`] = `
+<DocumentFragment>
+  <h1
+    style="font-weight: 700; margin: 0px; font-size: 32px;"
+  >
+    Bold heading
+  </h1>
+</DocumentFragment>
+`;
+
+exports[`Heading renders h2 with font weight 300 (light) 1`] = `
+<DocumentFragment>
+  <h2
+    style="font-weight: 300; margin: 0px; font-size: 24px;"
+  >
+    Light heading
+  </h2>
+</DocumentFragment>
+`;
+
+exports[`Heading renders h3 with font weight 500 (medium) 1`] = `
+<DocumentFragment>
+  <h3
+    style="font-weight: 500; margin: 0px; font-size: 20px;"
+  >
+    Medium heading
+  </h3>
+</DocumentFragment>
+`;
+
+exports[`Heading renders with RGBA colors 1`] = `
+<DocumentFragment>
+  <h2
+    style="color: rgba(0, 0, 0, 0.502); background-color: rgba(255, 0, 0, 0.2); font-weight: 700; margin: 0px; font-size: 24px;"
+  >
+    Transparent heading
+  </h2>
+</DocumentFragment>
+`;
+
+exports[`Heading renders with all style properties 1`] = `
+<DocumentFragment>
+  <h1
+    style="color: rgb(51, 51, 51); background-color: rgb(245, 245, 245); font-weight: 500; text-align: right; margin: 0px; font-family: Charter, "Bitstream Charter", "Sitka Text", Cambria, serif; font-size: 32px; letter-spacing: 2px; line-height: 40px; padding: 20px 10px 20px 10px;"
+  >
+    Fully styled heading
+  </h1>
+</DocumentFragment>
+`;
+
 exports[`Heading renders with default values 1`] = `
 <DocumentFragment>
   <h2
     style="font-weight: 700; margin: 0px; font-size: 24px;"
   />
+</DocumentFragment>
+`;
+
+exports[`Heading renders with font weight 600 (semibold) 1`] = `
+<DocumentFragment>
+  <h2
+    style="font-weight: 600; margin: 0px; font-size: 24px;"
+  >
+    Semibold heading
+  </h2>
+</DocumentFragment>
+`;
+
+exports[`Heading renders with font weight bold (legacy) 1`] = `
+<DocumentFragment>
+  <h2
+    style="font-weight: 700; margin: 0px; font-size: 24px;"
+  >
+    Bold legacy heading
+  </h2>
+</DocumentFragment>
+`;
+
+exports[`Heading renders with font weight normal (legacy) 1`] = `
+<DocumentFragment>
+  <h2
+    style="font-weight: 400; margin: 0px; font-size: 24px;"
+  >
+    Normal weight heading
+  </h2>
 </DocumentFragment>
 `;
 

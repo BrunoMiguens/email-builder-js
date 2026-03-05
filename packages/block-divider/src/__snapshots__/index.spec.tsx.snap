@@ -1,5 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Divider renders with RGBA background color 1`] = `
+<DocumentFragment>
+  <div
+    style="background-color: rgba(255, 0, 0, 0.2);"
+  >
+    <hr
+      style="width: 100%; border-top: 1px solid #333333; margin: 0px;"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Divider renders with RGBA line color 1`] = `
+<DocumentFragment>
+  <div>
+    <hr
+      style="width: 100%; border-top: 2px solid #99999980; margin: 0px;"
+    />
+  </div>
+</DocumentFragment>
+`;
+
 exports[`Divider renders with default values 1`] = `
 <DocumentFragment>
   <div>

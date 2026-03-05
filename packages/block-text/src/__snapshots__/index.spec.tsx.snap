@@ -1,8 +1,98 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`block-text renders with Inter font family 1`] = `
+<DocumentFragment>
+  <div
+    style="font-family: "Inter", -apple-system, BlinkMacSystemFont, Arial, sans-serif;"
+  >
+    Inter text
+  </div>
+</DocumentFragment>
+`;
+
+exports[`block-text renders with RGBA colors 1`] = `
+<DocumentFragment>
+  <div
+    style="color: rgba(51, 51, 51, 0.502); background-color: rgba(255, 0, 0, 0.2);"
+  >
+    Text with transparent colors
+  </div>
+</DocumentFragment>
+`;
+
+exports[`block-text renders with all style properties 1`] = `
+<DocumentFragment>
+  <div
+    style="color: rgb(17, 17, 17); background-color: rgb(240, 240, 240); font-size: 18px; font-family: "Iowan Old Style", "Palatino Linotype", "URW Palladio L", P052, serif; font-weight: 500; text-align: center; letter-spacing: 1px; line-height: 28px; padding: 12px 16px 12px 16px;"
+  >
+    Fully styled text block
+  </div>
+</DocumentFragment>
+`;
+
 exports[`block-text renders with default values 1`] = `
 <DocumentFragment>
   <div />
+</DocumentFragment>
+`;
+
+exports[`block-text renders with font weight 300 (light) 1`] = `
+<DocumentFragment>
+  <div
+    style="font-weight: 300;"
+  >
+    Light text
+  </div>
+</DocumentFragment>
+`;
+
+exports[`block-text renders with font weight 500 (medium) 1`] = `
+<DocumentFragment>
+  <div
+    style="font-weight: 500;"
+  >
+    Medium text
+  </div>
+</DocumentFragment>
+`;
+
+exports[`block-text renders with font weight 600 (semibold) 1`] = `
+<DocumentFragment>
+  <div
+    style="font-weight: 600;"
+  >
+    Semibold text
+  </div>
+</DocumentFragment>
+`;
+
+exports[`block-text renders with font weight 700 1`] = `
+<DocumentFragment>
+  <div
+    style="font-weight: 700;"
+  >
+    Bold text
+  </div>
+</DocumentFragment>
+`;
+
+exports[`block-text renders with font weight bold (legacy) 1`] = `
+<DocumentFragment>
+  <div
+    style="font-weight: 700;"
+  >
+    Legacy bold text
+  </div>
+</DocumentFragment>
+`;
+
+exports[`block-text renders with font weight normal (legacy) 1`] = `
+<DocumentFragment>
+  <div
+    style="font-weight: 400;"
+  >
+    Legacy normal text
+  </div>
 </DocumentFragment>
 `;
 
