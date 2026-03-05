@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ZodError } from 'zod';
 
 import {
+  OpacityOutlined,
   VerticalAlignBottomOutlined,
   VerticalAlignCenterOutlined,
   VerticalAlignTopOutlined,
@@ -11,6 +12,7 @@ import { ImageProps, ImagePropsSchema } from '@usewaypoint/block-image';
 
 import BaseSidebarPanel from './helpers/BaseSidebarPanel';
 import RadioGroupInput from './helpers/inputs/RadioGroupInput';
+import SliderInput from './helpers/inputs/SliderInput';
 import TextDimensionInput from './helpers/inputs/TextDimensionInput';
 import TextInput from './helpers/inputs/TextInput';
 import MultiStylePropertyPanel from './helpers/style-inputs/MultiStylePropertyPanel';
@@ -84,6 +86,17 @@ export default function ImageSidebarPanel({ data, setData }: ImageSidebarPanelPr
           <VerticalAlignBottomOutlined fontSize="small" />
         </ToggleButton>
       </RadioGroupInput>
+
+      <SliderInput
+        label="Opacity"
+        iconLabel={<OpacityOutlined sx={{ color: 'text.secondary' }} />}
+        units=""
+        step={0.05}
+        min={0}
+        max={1}
+        defaultValue={data.style?.opacity ?? 1}
+        onChange={(opacity) => updateData({ ...data, style: { ...data.style, opacity } })}
+      />
 
       <MultiStylePropertyPanel
         names={['backgroundColor', 'textAlign', 'padding']}

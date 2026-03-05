@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { FONT_FAMILY_NAMES } from './fontFamily';
 
 export function zColor() {
-  return z.string().regex(/^#[0-9a-fA-F]{6}$/);
+  return z.string().regex(/^#[0-9a-fA-F]{6}([0-9a-fA-F]{2})?$/);
 }
 
 export function zFontFamily() {

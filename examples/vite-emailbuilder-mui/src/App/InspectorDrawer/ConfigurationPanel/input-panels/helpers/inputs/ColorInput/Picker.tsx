@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { HexColorInput, HexColorPicker } from 'react-colorful';
+import { HexAlphaColorPicker, HexColorInput } from 'react-colorful';
 
-import { Box, Stack, SxProps } from '@mui/material';
+import { Box, Stack, SxProps, Tooltip, Typography } from '@mui/material';
 
 import Swatch from './Swatch';
 
@@ -57,6 +57,16 @@ const SX: SxProps = {
     height: 24,
     cursor: 'col-resize',
   },
+  '.react-colorful__alpha-pointer': {
+    width: '4px',
+    borderRadius: '4px',
+    height: 24,
+    cursor: 'col-resize',
+  },
+  '.react-colorful__alpha': {
+    borderRadius: '4px',
+    mt: 1,
+  },
   '.react-colorful__saturation-pointer': {
     cursor: 'all-scroll',
   },
@@ -69,6 +79,14 @@ const SX: SxProps = {
   },
 };
 
+function getOpacityPercent(hex: string): number {
+  const clean = hex.startsWith('#') ? hex.slice(1) : hex;
+  if (clean.length === 8) {
+    return Math.round((parseInt(clean.substring(6, 8), 16) / 255) * 100);
+  }
+  return 100;
+}
+
 type Props = {
   value: string;
   onChange: (v: string) => void;
@@ -77,17 +95,28 @@ export default function Picker({ value, onChange }: Props) {
   const [internalValue, setInternalValue] = useState(value);
   const handleChange = (v: string) => {
     setInternalValue(v);
-    if (/^#[0-9a-fA-F]{6}$/.test(v)) {
+    if (/^#[0-9a-fA-F]{6}([0-9a-fA-F]{2})?$/.test(v)) {
       onChange(v);
     }
   };
 
+  const opacity = getOpacityPercent(internalValue);
+
   return (
     <Stack spacing={1} sx={SX}>
-      <HexColorPicker color={value} onChange={handleChange} />
+      <HexAlphaColorPicker color={value} onChange={handleChange} />
+      <Tooltip title={`Opacity: ${opacity}%`} placement="top" arrow>
+        <Typography
+          variant="caption"
+          color="text.secondary"
+          sx={{ textAlign: 'right', cursor: 'default', userSelect: 'none' }}
+        >
+          Opacity: {opacity}%
+        </Typography>
+      </Tooltip>
       <Swatch paletteColors={DEFAULT_PRESET_COLORS} value={value} onChange={handleChange} />
       <Box pt={1}>
-        <HexColorInput prefixed color={internalValue} onChange={handleChange} />
+        <HexColorInput prefixed alpha color={internalValue} onChange={handleChange} />
       </Box>
     </Stack>
   );
