@@ -1,6 +1,6 @@
 {
   "name": "@brunomiguens/email-builder",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "description": "React component to render email messages",
   "repository": {
     "type": "git",
@@ -8,6 +8,7 @@
     "directory": "packages/email-builder"
   },
   "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
   "main": "./dist/index.js",
