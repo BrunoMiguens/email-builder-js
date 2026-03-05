@@ -316,6 +316,228 @@ describe('resolveCustomBlocks', () => {
     expect((headingData.props as Record<string, unknown>).text).toBe('From B');
   });
 
+  it('substitutes color slot values', () => {
+    const doc = {
+      root: { type: 'Container', data: { props: { childrenIds: ['cb1'] } } },
+      cb1: {
+        type: 'CustomBlock',
+        data: { props: { blockName: 'Card', slotValues: { bgColor: '#FF0000' } } },
+      },
+    };
+    const customBlocks: CustomBlockEntry[] = [
+      {
+        name: 'Card',
+        config: {
+          root: { data: { childrenIds: ['box1'] } },
+          box1: { type: 'Container', data: { style: { backgroundColor: '{{bgColor}}' }, props: { childrenIds: [] } } },
+        },
+        slots: {
+          bgColor: { label: 'Background', type: 'color', defaultValue: '#FFFFFF' },
+        },
+      },
+    ];
+    const result = resolveCustomBlocks(doc, customBlocks);
+    const boxData = result['cb-cb1-box1'].data as Record<string, unknown>;
+    const style = boxData.style as Record<string, unknown>;
+    expect(style.backgroundColor).toBe('#FF0000');
+  });
+
+  it('substitutes html slot values with multiline content', () => {
+    const doc = {
+      root: { type: 'Container', data: { props: { childrenIds: ['cb1'] } } },
+      cb1: {
+        type: 'CustomBlock',
+        data: {
+          props: {
+            blockName: 'Custom',
+            slotValues: { content: '<h1>Title</h1>\n<p>Body text</p>' },
+          },
+        },
+      },
+    };
+    const customBlocks: CustomBlockEntry[] = [
+      {
+        name: 'Custom',
+        config: {
+          root: { data: { childrenIds: ['html1'] } },
+          html1: { type: 'Html', data: { props: { contents: '{{content}}' } } },
+        },
+        slots: {
+          content: { label: 'Content', type: 'html', defaultValue: '<p>Default</p>' },
+        },
+      },
+    ];
+    const result = resolveCustomBlocks(doc, customBlocks);
+    const htmlData = result['cb-cb1-html1'].data as Record<string, unknown>;
+    const htmlProps = htmlData.props as Record<string, unknown>;
+    expect(htmlProps.contents).toBe('<h1>Title</h1>\n<p>Body text</p>');
+  });
+
+  it('substitutes multiple placeholders in a single string', () => {
+    const doc = {
+      root: { type: 'Container', data: { props: { childrenIds: ['cb1'] } } },
+      cb1: {
+        type: 'CustomBlock',
+        data: { props: { blockName: 'Msg', slotValues: { first: 'Jane', last: 'Doe' } } },
+      },
+    };
+    const customBlocks: CustomBlockEntry[] = [
+      {
+        name: 'Msg',
+        config: {
+          root: { data: { childrenIds: ['t1'] } },
+          t1: { type: 'Text', data: { props: { text: 'Hello {{first}} {{last}}!' } } },
+        },
+        slots: {
+          first: { label: 'First', type: 'text', defaultValue: 'John' },
+          last: { label: 'Last', type: 'text', defaultValue: 'Smith' },
+        },
+      },
+    ];
+    const result = resolveCustomBlocks(doc, customBlocks);
+    const textData = result['cb-cb1-t1'].data as Record<string, unknown>;
+    const textProps = textData.props as Record<string, unknown>;
+    expect(textProps.text).toBe('Hello Jane Doe!');
+  });
+
+  it('substitutes slot values in deeply nested style objects', () => {
+    const doc = {
+      root: { type: 'Container', data: { props: { childrenIds: ['cb1'] } } },
+      cb1: {
+        type: 'CustomBlock',
+        data: { props: { blockName: 'Styled', slotValues: { top: 20 } } },
+      },
+    };
+    const customBlocks: CustomBlockEntry[] = [
+      {
+        name: 'Styled',
+        config: {
+          root: { data: { childrenIds: ['t1'] } },
+          t1: {
+            type: 'Text',
+            data: {
+              style: { padding: { top: '{{top}}', bottom: 8, left: 16, right: 16 } },
+              props: { text: 'Hello' },
+            },
+          },
+        },
+        slots: {
+          top: { label: 'Top Padding', type: 'number', defaultValue: 10 },
+        },
+      },
+    ];
+    const result = resolveCustomBlocks(doc, customBlocks);
+    const textData = result['cb-cb1-t1'].data as Record<string, unknown>;
+    const style = textData.style as Record<string, unknown>;
+    const padding = style.padding as Record<string, unknown>;
+    expect(padding.top).toBe(20);
+    expect(typeof padding.top).toBe('number');
+  });
+
+  it('handles same custom block used multiple times with different slot values', () => {
+    const doc = {
+      root: { type: 'Container', data: { props: { childrenIds: ['cb1', 'cb2'] } } },
+      cb1: {
+        type: 'CustomBlock',
+        data: { props: { blockName: 'Greeting', slotValues: { name: 'Alice' } } },
+      },
+      cb2: {
+        type: 'CustomBlock',
+        data: { props: { blockName: 'Greeting', slotValues: { name: 'Bob' } } },
+      },
+    };
+    const customBlocks: CustomBlockEntry[] = [
+      {
+        name: 'Greeting',
+        config: {
+          root: { data: { childrenIds: ['t1'] } },
+          t1: { type: 'Text', data: { props: { text: 'Hi {{name}}' } } },
+        },
+        slots: {
+          name: { label: 'Name', type: 'text', defaultValue: 'World' },
+        },
+      },
+    ];
+    const result = resolveCustomBlocks(doc, customBlocks);
+    const text1 = (result['cb-cb1-t1'].data as Record<string, unknown>).props as Record<string, unknown>;
+    const text2 = (result['cb-cb2-t1'].data as Record<string, unknown>).props as Record<string, unknown>;
+    expect(text1.text).toBe('Hi Alice');
+    expect(text2.text).toBe('Hi Bob');
+  });
+
+  it('uses default when slot value is explicitly null', () => {
+    const doc = {
+      root: { type: 'Container', data: { props: { childrenIds: ['cb1'] } } },
+      cb1: {
+        type: 'CustomBlock',
+        data: { props: { blockName: 'Card', slotValues: { title: null } } },
+      },
+    };
+    const customBlocks: CustomBlockEntry[] = [
+      {
+        name: 'Card',
+        config: {
+          root: { data: { childrenIds: ['t1'] } },
+          t1: { type: 'Text', data: { props: { text: '{{title}}' } } },
+        },
+        slots: {
+          title: { label: 'Title', type: 'text', defaultValue: 'Untitled' },
+        },
+      },
+    ];
+    const result = resolveCustomBlocks(doc, customBlocks);
+    const textProps = (result['cb-cb1-t1'].data as Record<string, unknown>).props as Record<string, unknown>;
+    expect(textProps.text).toBe('Untitled');
+  });
+
+  it('keeps unresolved placeholders when no matching slot exists', () => {
+    const doc = {
+      root: { type: 'Container', data: { props: { childrenIds: ['cb1'] } } },
+      cb1: {
+        type: 'CustomBlock',
+        data: { props: { blockName: 'Test' } },
+      },
+    };
+    const customBlocks: CustomBlockEntry[] = [
+      {
+        name: 'Test',
+        config: {
+          root: { data: { childrenIds: ['t1'] } },
+          t1: { type: 'Text', data: { props: { text: 'Value: {{unknown}}' } } },
+        },
+        slots: {},
+      },
+    ];
+    const result = resolveCustomBlocks(doc, customBlocks);
+    const textProps = (result['cb-cb1-t1'].data as Record<string, unknown>).props as Record<string, unknown>;
+    expect(textProps.text).toBe('Value: {{unknown}}');
+  });
+
+  it('uses empty string slot override instead of falling back to default', () => {
+    const doc = {
+      root: { type: 'Container', data: { props: { childrenIds: ['cb1'] } } },
+      cb1: {
+        type: 'CustomBlock',
+        data: { props: { blockName: 'Card', slotValues: { title: '' } } },
+      },
+    };
+    const customBlocks: CustomBlockEntry[] = [
+      {
+        name: 'Card',
+        config: {
+          root: { data: { childrenIds: ['t1'] } },
+          t1: { type: 'Text', data: { props: { text: '{{title}}' } } },
+        },
+        slots: {
+          title: { label: 'Title', type: 'text', defaultValue: 'Default Title' },
+        },
+      },
+    ];
+    const result = resolveCustomBlocks(doc, customBlocks);
+    const textProps = (result['cb-cb1-t1'].data as Record<string, unknown>).props as Record<string, unknown>;
+    expect(textProps.text).toBe('');
+  });
+
   it('does not mutate the original document', () => {
     const doc = {
       root: { type: 'Container', data: { props: { childrenIds: ['cb1'] } } },

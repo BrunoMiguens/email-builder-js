@@ -113,6 +113,120 @@ describe('renderEmailToHtml', () => {
     expect(result).toContain('href="https://fonts.example.com/inter.css"');
   });
 
+  it('resolves CustomBlocks with color slot applied to styles', () => {
+    const customBlocks: CustomBlockEntry[] = [
+      {
+        name: 'Banner',
+        config: {
+          root: { data: { childrenIds: ['h1'] } },
+          h1: {
+            type: 'Heading',
+            data: {
+              style: { color: '{{textColor}}' },
+              props: { text: 'Colorful', level: 'h2' },
+            },
+          },
+        },
+        slots: {
+          textColor: { label: 'Text Color', type: 'color', defaultValue: '#000000' },
+        },
+      },
+    ];
+    const result = renderEmailToHtml(
+      {
+        root: {
+          type: 'Container',
+          data: { props: { childrenIds: ['cb1'] } },
+        },
+        cb1: {
+          type: 'CustomBlock',
+          data: { props: { blockName: 'Banner', slotValues: { textColor: '#E91E63' } } },
+        },
+      },
+      { customBlocks }
+    );
+    expect(result).toContain('Colorful');
+    expect(result).toContain('#E91E63');
+  });
+
+  it('resolves CustomBlocks with table slot rendered as HTML', () => {
+    const customBlocks: CustomBlockEntry[] = [
+      {
+        name: 'Receipt',
+        config: {
+          root: { data: { childrenIds: ['html1'] } },
+          html1: { type: 'Html', data: { props: { contents: '{{items}}' } } },
+        },
+        slots: {
+          items: { label: 'Items', type: 'table', defaultValue: [] },
+        },
+      },
+    ];
+    const result = renderEmailToHtml(
+      {
+        root: {
+          type: 'Container',
+          data: { props: { childrenIds: ['cb1'] } },
+        },
+        cb1: {
+          type: 'CustomBlock',
+          data: {
+            props: {
+              blockName: 'Receipt',
+              slotValues: {
+                items: [
+                  { label: 'Subtotal', value: '$80.00' },
+                  { label: 'Tax', value: '$6.40' },
+                  { label: 'Total', value: '$86.40' },
+                ],
+              },
+            },
+          },
+        },
+      },
+      { customBlocks }
+    );
+    expect(result).toContain('<table');
+    expect(result).toContain('Subtotal');
+    expect(result).toContain('$80.00');
+    expect(result).toContain('Tax');
+    expect(result).toContain('$86.40');
+  });
+
+  it('renders same custom block multiple times with different values', () => {
+    const customBlocks: CustomBlockEntry[] = [
+      {
+        name: 'Badge',
+        config: {
+          root: { data: { childrenIds: ['t1'] } },
+          t1: { type: 'Text', data: { props: { text: '{{label}}' } } },
+        },
+        slots: {
+          label: { label: 'Label', type: 'text', defaultValue: 'Badge' },
+        },
+      },
+    ];
+    const result = renderEmailToHtml(
+      {
+        root: {
+          type: 'Container',
+          data: { props: { childrenIds: ['cb1', 'cb2'] } },
+        },
+        cb1: {
+          type: 'CustomBlock',
+          data: { props: { blockName: 'Badge', slotValues: { label: 'Active' } } },
+        },
+        cb2: {
+          type: 'CustomBlock',
+          data: { props: { blockName: 'Badge', slotValues: { label: 'Pending' } } },
+        },
+      },
+      { customBlocks }
+    );
+    expect(result).toContain('Active');
+    expect(result).toContain('Pending');
+  });
+
   it('renders a full email with EmailLayout, custom blocks, and all block types', () => {
     const customBlocks: CustomBlockEntry[] = [
       {
