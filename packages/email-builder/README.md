@@ -69,12 +69,12 @@ const myBlock: CustomBlockEntry = {
 
 ### Slot types
 
-| Type     | Default value type | Description                                    |
-| -------- | ------------------ | ---------------------------------------------- |
-| `text`   | `string`           | Plain text replacement                         |
-| `html`   | `string`           | HTML content                                   |
-| `color`  | `string`           | Color value (hex, rgb, etc.)                   |
-| `number` | `number`           | Numeric value — type is preserved in output    |
+| Type     | Default value type | Description                                     |
+| -------- | ------------------ | ----------------------------------------------- |
+| `text`   | `string`           | Plain text replacement                          |
+| `html`   | `string`           | HTML content                                    |
+| `color`  | `string`           | Color value (hex, rgb, etc.)                    |
+| `number` | `number`           | Numeric value — type is preserved in output     |
 | `table`  | `TableItem[]`      | Array of `{ label, value }` rendered as a table |
 
 ### Rendering with custom blocks
@@ -124,7 +124,13 @@ export { Reader } from '@brunomiguens/email-builder';
 export { resolveCustomBlocks, generateTableHtml } from '@brunomiguens/email-builder';
 
 // Types
-export type { TReaderDocument, TReaderBlock, SlotDefinition, CustomBlockEntry, TableItem } from '@brunomiguens/email-builder';
+export type {
+  TReaderDocument,
+  TReaderBlock,
+  SlotDefinition,
+  CustomBlockEntry,
+  TableItem,
+} from '@brunomiguens/email-builder';
 ```
 
 ## Built-in blocks

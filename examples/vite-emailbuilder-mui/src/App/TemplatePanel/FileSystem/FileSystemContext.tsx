@@ -611,9 +611,7 @@ export function FileSystemProvider({ children }: { children: React.ReactNode }) 
 
       activeBlockFileHandleRef.current = fileHandle;
       lastLoadedBlockDocRef.current = data;
-      setActiveBlockSlots(
-        Object.keys(parsed.slots).length > 0 ? (parsed.slots as Record<string, unknown>) : null
-      );
+      setActiveBlockSlots(Object.keys(parsed.slots).length > 0 ? (parsed.slots as Record<string, unknown>) : null);
       setActiveBlockFileName(name);
       setBlockSaveStatus('saved');
       editingModeRef.current = 'block'; // Set ref before resetDocument to prevent stale auto-save

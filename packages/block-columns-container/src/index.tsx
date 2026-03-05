@@ -17,11 +17,7 @@ const PADDING_SCHEMA = z
   .optional()
   .nullable();
 
-const FIXED_WIDTHS_SCHEMA = z
-  .array(z.number().nullish())
-  .max(6)
-  .optional()
-  .nullable();
+const FIXED_WIDTHS_SCHEMA = z.array(z.number().nullish()).max(6).optional().nullable();
 
 const getPadding = (padding: z.infer<typeof PADDING_SCHEMA>) =>
   padding ? `${padding.top}px ${padding.right}px ${padding.bottom}px ${padding.left}px` : undefined;
@@ -108,7 +104,7 @@ function TableCell({ index, props, columns }: Props) {
 
   const fixedWidth = props.fixedWidths?.[index];
   const hasAnyFixedWidth = props.fixedWidths?.some((w) => w != null) ?? false;
-  const equalWidth = `${+(100 / columnsCount).toFixed(4)}%`;
+  const equalWidth = `${Number((100 / columnsCount).toFixed(4))}%`;
   const width = fixedWidth != null ? fixedWidth : hasAnyFixedWidth ? undefined : equalWidth;
   const style: CSSProperties = {
     boxSizing: 'border-box',

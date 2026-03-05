@@ -41,7 +41,9 @@ export default function SlotDefinitionsPanel() {
 
   const addSlot = () => {
     const name = window.prompt('Slot name (e.g. "title"):');
-    if (!name || name.trim() === '') return;
+    if (!name || name.trim() === '') {
+      return;
+    }
     const key = name.trim();
     if (slots[key]) {
       alert(`Slot "${key}" already exists.`);
@@ -51,19 +53,26 @@ export default function SlotDefinitionsPanel() {
   };
 
   const removeSlot = (key: string) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { [key]: _, ...rest } = slots;
     updateSlots(rest);
   };
 
   const updateSlotField = (key: string, field: keyof SlotDefinition, value: unknown) => {
     const current = slots[key];
-    if (!current) return;
+    if (!current) {
+      return;
+    }
 
     if (field === 'type') {
       const newType = value as SlotDefinition['type'];
       let defaultValue: SlotDefinition['defaultValue'] = '';
-      if (newType === 'number') defaultValue = 0;
-      if (newType === 'table') defaultValue = [];
+      if (newType === 'number') {
+        defaultValue = 0;
+      }
+      if (newType === 'table') {
+        defaultValue = [];
+      }
       updateSlots({ ...slots, [key]: { ...current, type: newType, defaultValue } });
     } else {
       updateSlots({ ...slots, [key]: { ...current, [field]: value } });
@@ -72,7 +81,9 @@ export default function SlotDefinitionsPanel() {
 
   const renameSlot = (oldKey: string) => {
     const newKey = window.prompt('New slot name:', oldKey);
-    if (!newKey || newKey.trim() === '' || newKey.trim() === oldKey) return;
+    if (!newKey || newKey.trim() === '' || newKey.trim() === oldKey) {
+      return;
+    }
     const trimmed = newKey.trim();
     if (slots[trimmed]) {
       alert(`Slot "${trimmed}" already exists.`);

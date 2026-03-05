@@ -100,9 +100,7 @@ describe('block-columns-container', () => {
   describe('columnsCount 4', () => {
     it('renders column children', () => {
       const columns = [<>a</>, <>b</>, <>c</>, <>d</>];
-      expect(
-        render(<ColumnsContainer props={{ columnsCount: 4 }} columns={columns} />).asFragment()
-      ).toMatchSnapshot();
+      expect(render(<ColumnsContainer props={{ columnsCount: 4 }} columns={columns} />).asFragment()).toMatchSnapshot();
     });
 
     it('uses padding correctly', () => {
@@ -116,9 +114,7 @@ describe('block-columns-container', () => {
   describe('columnsCount 5', () => {
     it('renders column children', () => {
       const columns = [<>a</>, <>b</>, <>c</>, <>d</>, <>e</>];
-      expect(
-        render(<ColumnsContainer props={{ columnsCount: 5 }} columns={columns} />).asFragment()
-      ).toMatchSnapshot();
+      expect(render(<ColumnsContainer props={{ columnsCount: 5 }} columns={columns} />).asFragment()).toMatchSnapshot();
     });
 
     it('uses padding correctly', () => {
@@ -132,9 +128,7 @@ describe('block-columns-container', () => {
   describe('columnsCount 6', () => {
     it('renders column children', () => {
       const columns = [<>a</>, <>b</>, <>c</>, <>d</>, <>e</>, <>f</>];
-      expect(
-        render(<ColumnsContainer props={{ columnsCount: 6 }} columns={columns} />).asFragment()
-      ).toMatchSnapshot();
+      expect(render(<ColumnsContainer props={{ columnsCount: 6 }} columns={columns} />).asFragment()).toMatchSnapshot();
     });
 
     it('uses padding correctly', () => {

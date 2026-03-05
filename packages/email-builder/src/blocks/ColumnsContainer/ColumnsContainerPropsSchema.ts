@@ -9,7 +9,10 @@ const ColumnsContainerPropsSchema = z.object({
   props: z
     .object({
       ...BasePropsShape,
-      columns: z.array(z.object({ childrenIds: z.array(z.string()) })).min(2).max(6),
+      columns: z
+        .array(z.object({ childrenIds: z.array(z.string()) }))
+        .min(2)
+        .max(6),
     })
     .optional()
     .nullable(),
