@@ -34,10 +34,7 @@ describe('Heading', () => {
   it('renders h1 with font weight 700', () => {
     expect(
       render(
-        <Heading
-          style={{ fontWeight: '700' }}
-          props={{ text: 'Bold heading', level: 'h1' as const }}
-        />
+        <Heading style={{ fontWeight: '700' }} props={{ text: 'Bold heading', level: 'h1' as const }} />
       ).asFragment()
     ).toMatchSnapshot();
   });
@@ -45,10 +42,7 @@ describe('Heading', () => {
   it('renders h2 with font weight 300 (light)', () => {
     expect(
       render(
-        <Heading
-          style={{ fontWeight: '300' }}
-          props={{ text: 'Light heading', level: 'h2' as const }}
-        />
+        <Heading style={{ fontWeight: '300' }} props={{ text: 'Light heading', level: 'h2' as const }} />
       ).asFragment()
     ).toMatchSnapshot();
   });
@@ -56,44 +50,26 @@ describe('Heading', () => {
   it('renders h3 with font weight 500 (medium)', () => {
     expect(
       render(
-        <Heading
-          style={{ fontWeight: '500' }}
-          props={{ text: 'Medium heading', level: 'h3' as const }}
-        />
+        <Heading style={{ fontWeight: '500' }} props={{ text: 'Medium heading', level: 'h3' as const }} />
       ).asFragment()
     ).toMatchSnapshot();
   });
 
   it('renders with font weight 600 (semibold)', () => {
     expect(
-      render(
-        <Heading
-          style={{ fontWeight: '600' }}
-          props={{ text: 'Semibold heading' }}
-        />
-      ).asFragment()
+      render(<Heading style={{ fontWeight: '600' }} props={{ text: 'Semibold heading' }} />).asFragment()
     ).toMatchSnapshot();
   });
 
   it('renders with font weight bold (legacy)', () => {
     expect(
-      render(
-        <Heading
-          style={{ fontWeight: 'bold' }}
-          props={{ text: 'Bold legacy heading' }}
-        />
-      ).asFragment()
+      render(<Heading style={{ fontWeight: 'bold' }} props={{ text: 'Bold legacy heading' }} />).asFragment()
     ).toMatchSnapshot();
   });
 
   it('renders with font weight normal (legacy)', () => {
     expect(
-      render(
-        <Heading
-          style={{ fontWeight: 'normal' }}
-          props={{ text: 'Normal weight heading' }}
-        />
-      ).asFragment()
+      render(<Heading style={{ fontWeight: 'normal' }} props={{ text: 'Normal weight heading' }} />).asFragment()
     ).toMatchSnapshot();
   });
 

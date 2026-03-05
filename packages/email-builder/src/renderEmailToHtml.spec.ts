@@ -4,8 +4,8 @@
 
 import { describe, expect, it } from '@jest/globals';
 
-import renderEmailToHtml from './renderEmailToHtml';
 import { CustomBlockEntry } from './customBlocks/types';
+import renderEmailToHtml from './renderEmailToHtml';
 
 describe('renderEmailToHtml', () => {
   it('renders a simple document without custom blocks', () => {

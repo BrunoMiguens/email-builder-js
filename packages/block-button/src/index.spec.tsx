@@ -13,10 +13,7 @@ describe('block-button', () => {
   it('renders with font weight bold', () => {
     expect(
       render(
-        <Button
-          style={{ fontWeight: 'bold' }}
-          props={{ text: 'Click me', url: 'https://example.com' }}
-        />
+        <Button style={{ fontWeight: 'bold' }} props={{ text: 'Click me', url: 'https://example.com' }} />
       ).asFragment()
     ).toMatchSnapshot();
   });
@@ -24,10 +21,7 @@ describe('block-button', () => {
   it('renders with font weight 300 (light)', () => {
     expect(
       render(
-        <Button
-          style={{ fontWeight: '300' }}
-          props={{ text: 'Light button', url: 'https://example.com' }}
-        />
+        <Button style={{ fontWeight: '300' }} props={{ text: 'Light button', url: 'https://example.com' }} />
       ).asFragment()
     ).toMatchSnapshot();
   });
@@ -35,10 +29,7 @@ describe('block-button', () => {
   it('renders with font weight 500 (medium)', () => {
     expect(
       render(
-        <Button
-          style={{ fontWeight: '500' }}
-          props={{ text: 'Medium button', url: 'https://example.com' }}
-        />
+        <Button style={{ fontWeight: '500' }} props={{ text: 'Medium button', url: 'https://example.com' }} />
       ).asFragment()
     ).toMatchSnapshot();
   });
@@ -46,10 +37,7 @@ describe('block-button', () => {
   it('renders with font weight 600 (semibold)', () => {
     expect(
       render(
-        <Button
-          style={{ fontWeight: '600' }}
-          props={{ text: 'Semibold button', url: 'https://example.com' }}
-        />
+        <Button style={{ fontWeight: '600' }} props={{ text: 'Semibold button', url: 'https://example.com' }} />
       ).asFragment()
     ).toMatchSnapshot();
   });
@@ -57,10 +45,7 @@ describe('block-button', () => {
   it('renders with font weight normal', () => {
     expect(
       render(
-        <Button
-          style={{ fontWeight: 'normal' }}
-          props={{ text: 'Normal button', url: 'https://example.com' }}
-        />
+        <Button style={{ fontWeight: 'normal' }} props={{ text: 'Normal button', url: 'https://example.com' }} />
       ).asFragment()
     ).toMatchSnapshot();
   });

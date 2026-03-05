@@ -12,9 +12,7 @@ describe('block-html', () => {
 
   it('renders with HTML contents', () => {
     expect(
-      render(
-        <Html props={{ contents: '<strong>Bold text</strong><em>Italic</em>' }} />
-      ).asFragment()
+      render(<Html props={{ contents: '<strong>Bold text</strong><em>Italic</em>' }} />).asFragment()
     ).toMatchSnapshot();
   });
 
@@ -34,12 +32,7 @@ describe('block-html', () => {
 
   it('renders with Inter font family', () => {
     expect(
-      render(
-        <Html
-          style={{ fontFamily: 'INTER' as const }}
-          props={{ contents: '<p>Inter font</p>' }}
-        />
-      ).asFragment()
+      render(<Html style={{ fontFamily: 'INTER' as const }} props={{ contents: '<p>Inter font</p>' }} />).asFragment()
     ).toMatchSnapshot();
   });
 
@@ -88,8 +81,16 @@ describe('block-html', () => {
 
     it('accepts all font families', () => {
       const families = [
-        'MODERN_SANS', 'BOOK_SANS', 'ORGANIC_SANS', 'GEOMETRIC_SANS', 'HEAVY_SANS',
-        'ROUNDED_SANS', 'MODERN_SERIF', 'BOOK_SERIF', 'MONOSPACE', 'INTER',
+        'MODERN_SANS',
+        'BOOK_SANS',
+        'ORGANIC_SANS',
+        'GEOMETRIC_SANS',
+        'HEAVY_SANS',
+        'ROUNDED_SANS',
+        'MODERN_SERIF',
+        'BOOK_SERIF',
+        'MONOSPACE',
+        'INTER',
       ];
       for (const fontFamily of families) {
         expect(HtmlPropsSchema.safeParse({ style: { fontFamily } }).success).toBe(true);

@@ -58,11 +58,7 @@ describe('block-columns-container', () => {
     const columns = [<>col1</>, <>col2</>];
     expect(
       render(
-        <ColumnsContainer
-          style={{ backgroundColor: '#0000FF80' }}
-          props={{ columnsCount: 2 }}
-          columns={columns}
-        />
+        <ColumnsContainer style={{ backgroundColor: '#0000FF80' }} props={{ columnsCount: 2 }} columns={columns} />
       ).asFragment()
     ).toMatchSnapshot();
   });
@@ -87,10 +83,7 @@ describe('block-columns-container', () => {
     const columns = [<>short</>, <>tall content that takes more space</>];
     expect(
       render(
-        <ColumnsContainer
-          props={{ columnsCount: 2, contentAlignment: 'middle' }}
-          columns={columns}
-        />
+        <ColumnsContainer props={{ columnsCount: 2, contentAlignment: 'middle' }} columns={columns} />
       ).asFragment()
     ).toMatchSnapshot();
   });
@@ -99,10 +92,7 @@ describe('block-columns-container', () => {
     const columns = [<>fixed</>, <>flexible</>, <>third</>];
     expect(
       render(
-        <ColumnsContainer
-          props={{ columnsCount: 3, fixedWidths: [200, null, 150] }}
-          columns={columns}
-        />
+        <ColumnsContainer props={{ columnsCount: 3, fixedWidths: [200, null, 150] }} columns={columns} />
       ).asFragment()
     ).toMatchSnapshot();
   });

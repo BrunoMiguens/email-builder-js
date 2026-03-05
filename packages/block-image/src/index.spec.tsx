@@ -13,54 +13,34 @@ describe('block-image', () => {
   it('renders with opacity', () => {
     expect(
       render(
-        <Image
-          style={{ opacity: 0.5 }}
-          props={{ url: 'https://example.com/logo.png', alt: 'Logo' }}
-        />
+        <Image style={{ opacity: 0.5 }} props={{ url: 'https://example.com/logo.png', alt: 'Logo' }} />
       ).asFragment()
     ).toMatchSnapshot();
   });
 
   it('renders with full opacity (1)', () => {
     expect(
-      render(
-        <Image
-          style={{ opacity: 1 }}
-          props={{ url: 'https://example.com/logo.png' }}
-        />
-      ).asFragment()
+      render(<Image style={{ opacity: 1 }} props={{ url: 'https://example.com/logo.png' }} />).asFragment()
     ).toMatchSnapshot();
   });
 
   it('renders with zero opacity', () => {
     expect(
-      render(
-        <Image
-          style={{ opacity: 0 }}
-          props={{ url: 'https://example.com/logo.png' }}
-        />
-      ).asFragment()
+      render(<Image style={{ opacity: 0 }} props={{ url: 'https://example.com/logo.png' }} />).asFragment()
     ).toMatchSnapshot();
   });
 
   it('renders with RGBA background color', () => {
     expect(
       render(
-        <Image
-          style={{ backgroundColor: '#FF000080' }}
-          props={{ url: 'https://example.com/image.png' }}
-        />
+        <Image style={{ backgroundColor: '#FF000080' }} props={{ url: 'https://example.com/image.png' }} />
       ).asFragment()
     ).toMatchSnapshot();
   });
 
   it('renders with link wrapping', () => {
     expect(
-      render(
-        <Image
-          props={{ url: 'https://example.com/image.png', linkHref: 'https://example.com' }}
-        />
-      ).asFragment()
+      render(<Image props={{ url: 'https://example.com/image.png', linkHref: 'https://example.com' }} />).asFragment()
     ).toMatchSnapshot();
   });
 

@@ -22,9 +22,7 @@ describe('resolveCustomBlocks', () => {
       root: { type: 'Container', data: { props: { childrenIds: ['block1'] } } },
       block1: { type: 'Text', data: { props: { text: 'Hello' } } },
     };
-    const customBlocks: CustomBlockEntry[] = [
-      { name: 'MyBlock', config: {}, slots: {} },
-    ];
+    const customBlocks: CustomBlockEntry[] = [{ name: 'MyBlock', config: {}, slots: {} }];
     const result = resolveCustomBlocks(doc, customBlocks);
     expect(result).toBe(doc);
   });

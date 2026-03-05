@@ -443,11 +443,7 @@ describe('renderToStaticMarkup', () => {
           data: {
             props: {
               columnsCount: 2,
-              columns: [
-                { childrenIds: ['left'] },
-                { childrenIds: ['right'] },
-                { childrenIds: [] },
-              ],
+              columns: [{ childrenIds: ['left'] }, { childrenIds: ['right'] }, { childrenIds: [] }],
             },
           },
         },

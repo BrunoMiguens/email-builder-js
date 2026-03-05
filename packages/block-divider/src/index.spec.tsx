@@ -25,19 +25,11 @@ describe('Divider', () => {
   });
 
   it('renders with RGBA background color', () => {
-    expect(
-      render(
-        <Divider style={{ backgroundColor: '#FF000033' }} />
-      ).asFragment()
-    ).toMatchSnapshot();
+    expect(render(<Divider style={{ backgroundColor: '#FF000033' }} />).asFragment()).toMatchSnapshot();
   });
 
   it('renders with RGBA line color', () => {
-    expect(
-      render(
-        <Divider props={{ lineColor: '#99999980', lineHeight: 2 }} />
-      ).asFragment()
-    ).toMatchSnapshot();
+    expect(render(<Divider props={{ lineColor: '#99999980', lineHeight: 2 }} />).asFragment()).toMatchSnapshot();
   });
 
   describe('schema validation', () => {

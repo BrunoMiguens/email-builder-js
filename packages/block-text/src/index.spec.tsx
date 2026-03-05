@@ -85,67 +85,35 @@ Powered by [Waypoint](https://usewaypoint.com)`,
 
   it('renders with font weight 300 (light)', () => {
     expect(
-      render(
-        <Text
-          style={{ fontWeight: '300' }}
-          props={{ text: 'Light text' }}
-        />
-      ).asFragment()
+      render(<Text style={{ fontWeight: '300' }} props={{ text: 'Light text' }} />).asFragment()
     ).toMatchSnapshot();
   });
 
   it('renders with font weight 500 (medium)', () => {
     expect(
-      render(
-        <Text
-          style={{ fontWeight: '500' }}
-          props={{ text: 'Medium text' }}
-        />
-      ).asFragment()
+      render(<Text style={{ fontWeight: '500' }} props={{ text: 'Medium text' }} />).asFragment()
     ).toMatchSnapshot();
   });
 
   it('renders with font weight 600 (semibold)', () => {
     expect(
-      render(
-        <Text
-          style={{ fontWeight: '600' }}
-          props={{ text: 'Semibold text' }}
-        />
-      ).asFragment()
+      render(<Text style={{ fontWeight: '600' }} props={{ text: 'Semibold text' }} />).asFragment()
     ).toMatchSnapshot();
   });
 
   it('renders with font weight 700', () => {
-    expect(
-      render(
-        <Text
-          style={{ fontWeight: '700' }}
-          props={{ text: 'Bold text' }}
-        />
-      ).asFragment()
-    ).toMatchSnapshot();
+    expect(render(<Text style={{ fontWeight: '700' }} props={{ text: 'Bold text' }} />).asFragment()).toMatchSnapshot();
   });
 
   it('renders with font weight bold (legacy)', () => {
     expect(
-      render(
-        <Text
-          style={{ fontWeight: 'bold' }}
-          props={{ text: 'Legacy bold text' }}
-        />
-      ).asFragment()
+      render(<Text style={{ fontWeight: 'bold' }} props={{ text: 'Legacy bold text' }} />).asFragment()
     ).toMatchSnapshot();
   });
 
   it('renders with font weight normal (legacy)', () => {
     expect(
-      render(
-        <Text
-          style={{ fontWeight: 'normal' }}
-          props={{ text: 'Legacy normal text' }}
-        />
-      ).asFragment()
+      render(<Text style={{ fontWeight: 'normal' }} props={{ text: 'Legacy normal text' }} />).asFragment()
     ).toMatchSnapshot();
   });
 
@@ -186,11 +154,7 @@ Powered by [Waypoint](https://usewaypoint.com)`,
   });
 
   it('renders markdown paragraphs with zero margin', () => {
-    const { container } = render(
-      <Text
-        props={{ text: 'First paragraph\n\nSecond paragraph', markdown: true }}
-      />
-    );
+    const { container } = render(<Text props={{ text: 'First paragraph\n\nSecond paragraph', markdown: true }} />);
     const paragraphs = container.querySelectorAll('p');
     expect(paragraphs.length).toBeGreaterThanOrEqual(2);
     paragraphs.forEach((p) => {
@@ -200,10 +164,7 @@ Powered by [Waypoint](https://usewaypoint.com)`,
 
   it('renders markdown with link color applied to links', () => {
     const { container } = render(
-      <Text
-        style={{ linkColor: '#0066CC' }}
-        props={{ text: '[Click](https://example.com)', markdown: true }}
-      />
+      <Text style={{ linkColor: '#0066CC' }} props={{ text: '[Click](https://example.com)', markdown: true }} />
     );
     const link = container.querySelector('a');
     expect(link).toBeTruthy();
@@ -214,12 +175,7 @@ Powered by [Waypoint](https://usewaypoint.com)`,
 
   it('renders with Inter font family', () => {
     expect(
-      render(
-        <Text
-          style={{ fontFamily: 'INTER' as const }}
-          props={{ text: 'Inter text' }}
-        />
-      ).asFragment()
+      render(<Text style={{ fontFamily: 'INTER' as const }} props={{ text: 'Inter text' }} />).asFragment()
     ).toMatchSnapshot();
   });
 

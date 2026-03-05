@@ -59,11 +59,7 @@ describe('block-container', () => {
   });
 
   it('renders without children (self-closing div)', () => {
-    expect(
-      render(
-        <Container style={{ backgroundColor: '#F5F5F5' }} />
-      ).asFragment()
-    ).toMatchSnapshot();
+    expect(render(<Container style={{ backgroundColor: '#F5F5F5' }} />).asFragment()).toMatchSnapshot();
   });
 
   describe('schema validation', () => {
