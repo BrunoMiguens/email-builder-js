@@ -5,6 +5,7 @@ import { ToggleButton } from '@mui/material';
 import { HeadingProps, HeadingPropsDefaults, HeadingPropsSchema } from '@usewaypoint/block-heading';
 
 import BaseSidebarPanel from './helpers/BaseSidebarPanel';
+import containsPlaceholders from './helpers/containsPlaceholders';
 import RadioGroupInput from './helpers/inputs/RadioGroupInput';
 import TextInput from './helpers/inputs/TextInput';
 import MultiStylePropertyPanel from './helpers/style-inputs/MultiStylePropertyPanel';
@@ -17,6 +18,11 @@ export default function HeadingSidebarPanel({ data, setData }: HeadingSidebarPan
   const [, setErrors] = useState<ZodError | null>(null);
 
   const updateData = (d: unknown) => {
+    if (containsPlaceholders(d)) {
+      setData(d as HeadingProps);
+      setErrors(null);
+      return;
+    }
     const res = HeadingPropsSchema.safeParse(d);
     if (res.success) {
       setData(res.data);

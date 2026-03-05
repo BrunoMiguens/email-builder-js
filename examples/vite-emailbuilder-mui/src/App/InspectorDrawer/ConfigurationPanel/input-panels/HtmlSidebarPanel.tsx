@@ -4,6 +4,7 @@ import { ZodError } from 'zod';
 import { HtmlProps, HtmlPropsSchema } from '@usewaypoint/block-html';
 
 import BaseSidebarPanel from './helpers/BaseSidebarPanel';
+import containsPlaceholders from './helpers/containsPlaceholders';
 import TextInput from './helpers/inputs/TextInput';
 import MultiStylePropertyPanel from './helpers/style-inputs/MultiStylePropertyPanel';
 
@@ -15,6 +16,11 @@ export default function HtmlSidebarPanel({ data, setData }: HtmlSidebarPanelProp
   const [, setErrors] = useState<ZodError | null>(null);
 
   const updateData = (d: unknown) => {
+    if (containsPlaceholders(d)) {
+      setData(d as HtmlProps);
+      setErrors(null);
+      return;
+    }
     const res = HtmlPropsSchema.safeParse(d);
     if (res.success) {
       setData(res.data);

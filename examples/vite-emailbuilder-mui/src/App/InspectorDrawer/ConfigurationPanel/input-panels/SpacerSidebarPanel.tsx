@@ -5,6 +5,7 @@ import { HeightOutlined } from '@mui/icons-material';
 import { SpacerProps, SpacerPropsDefaults, SpacerPropsSchema } from '@usewaypoint/block-spacer';
 
 import BaseSidebarPanel from './helpers/BaseSidebarPanel';
+import containsPlaceholders from './helpers/containsPlaceholders';
 import SliderInput from './helpers/inputs/SliderInput';
 
 type SpacerSidebarPanelProps = {
@@ -15,6 +16,11 @@ export default function SpacerSidebarPanel({ data, setData }: SpacerSidebarPanel
   const [, setErrors] = useState<ZodError | null>(null);
 
   const updateData = (d: unknown) => {
+    if (containsPlaceholders(d)) {
+      setData(d as SpacerProps);
+      setErrors(null);
+      return;
+    }
     const res = SpacerPropsSchema.safeParse(d);
     if (res.success) {
       setData(res.data);

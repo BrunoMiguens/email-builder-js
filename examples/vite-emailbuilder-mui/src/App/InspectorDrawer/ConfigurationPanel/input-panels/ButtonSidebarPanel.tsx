@@ -5,6 +5,7 @@ import { ToggleButton } from '@mui/material';
 import { ButtonProps, ButtonPropsDefaults, ButtonPropsSchema } from '@usewaypoint/block-button';
 
 import BaseSidebarPanel from './helpers/BaseSidebarPanel';
+import containsPlaceholders from './helpers/containsPlaceholders';
 import ColorInput from './helpers/inputs/ColorInput';
 import RadioGroupInput from './helpers/inputs/RadioGroupInput';
 import TextInput from './helpers/inputs/TextInput';
@@ -18,6 +19,11 @@ export default function ButtonSidebarPanel({ data, setData }: ButtonSidebarPanel
   const [, setErrors] = useState<ZodError | null>(null);
 
   const updateData = (d: unknown) => {
+    if (containsPlaceholders(d)) {
+      setData(d as ButtonProps);
+      setErrors(null);
+      return;
+    }
     const res = ButtonPropsSchema.safeParse(d);
     if (res.success) {
       setData(res.data);

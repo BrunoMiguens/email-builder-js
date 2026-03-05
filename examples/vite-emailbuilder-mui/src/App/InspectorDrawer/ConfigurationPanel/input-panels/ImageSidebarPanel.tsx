@@ -11,6 +11,7 @@ import { Stack, ToggleButton } from '@mui/material';
 import { ImageProps, ImagePropsSchema } from '@usewaypoint/block-image';
 
 import BaseSidebarPanel from './helpers/BaseSidebarPanel';
+import containsPlaceholders from './helpers/containsPlaceholders';
 import RadioGroupInput from './helpers/inputs/RadioGroupInput';
 import SliderInput from './helpers/inputs/SliderInput';
 import TextDimensionInput from './helpers/inputs/TextDimensionInput';
@@ -25,6 +26,11 @@ export default function ImageSidebarPanel({ data, setData }: ImageSidebarPanelPr
   const [, setErrors] = useState<ZodError | null>(null);
 
   const updateData = (d: unknown) => {
+    if (containsPlaceholders(d)) {
+      setData(d as ImageProps);
+      setErrors(null);
+      return;
+    }
     const res = ImagePropsSchema.safeParse(d);
     if (res.success) {
       setData(res.data);

@@ -8,6 +8,7 @@ import EmailLayoutPropsSchema, {
 } from '../../../../documents/blocks/EmailLayout/EmailLayoutPropsSchema';
 
 import BaseSidebarPanel from './helpers/BaseSidebarPanel';
+import containsPlaceholders from './helpers/containsPlaceholders';
 import ColorInput, { NullableColorInput } from './helpers/inputs/ColorInput';
 import { NullableFontFamily } from './helpers/inputs/FontFamily';
 import SliderInput from './helpers/inputs/SliderInput';
@@ -20,6 +21,11 @@ export default function EmailLayoutSidebarFields({ data, setData }: EmailLayoutS
   const [, setErrors] = useState<ZodError | null>(null);
 
   const updateData = (d: unknown) => {
+    if (containsPlaceholders(d)) {
+      setData(d as EmailLayoutProps);
+      setErrors(null);
+      return;
+    }
     const res = EmailLayoutPropsSchema.safeParse(d);
     if (res.success) {
       setData(res.data);

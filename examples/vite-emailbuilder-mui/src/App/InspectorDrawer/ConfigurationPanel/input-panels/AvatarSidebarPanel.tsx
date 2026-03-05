@@ -6,6 +6,7 @@ import { ToggleButton } from '@mui/material';
 import { AvatarProps, AvatarPropsDefaults, AvatarPropsSchema } from '@usewaypoint/block-avatar';
 
 import BaseSidebarPanel from './helpers/BaseSidebarPanel';
+import containsPlaceholders from './helpers/containsPlaceholders';
 import RadioGroupInput from './helpers/inputs/RadioGroupInput';
 import SliderInput from './helpers/inputs/SliderInput';
 import TextInput from './helpers/inputs/TextInput';
@@ -18,6 +19,11 @@ type AvatarSidebarPanelProps = {
 export default function AvatarSidebarPanel({ data, setData }: AvatarSidebarPanelProps) {
   const [, setErrors] = useState<ZodError | null>(null);
   const updateData = (d: unknown) => {
+    if (containsPlaceholders(d)) {
+      setData(d as AvatarProps);
+      setErrors(null);
+      return;
+    }
     const res = AvatarPropsSchema.safeParse(d);
     if (res.success) {
       setData(res.data);

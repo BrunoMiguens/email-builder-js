@@ -4,6 +4,7 @@ import type { ZodError } from 'zod';
 import ContainerPropsSchema, { ContainerProps } from '../../../../documents/blocks/Container/ContainerPropsSchema';
 
 import BaseSidebarPanel from './helpers/BaseSidebarPanel';
+import containsPlaceholders from './helpers/containsPlaceholders';
 import MultiStylePropertyPanel from './helpers/style-inputs/MultiStylePropertyPanel';
 
 type ContainerSidebarPanelProps = {
@@ -14,6 +15,11 @@ type ContainerSidebarPanelProps = {
 export default function ContainerSidebarPanel({ data, setData }: ContainerSidebarPanelProps) {
   const [, setErrors] = useState<ZodError | null>(null);
   const updateData = (d: unknown) => {
+    if (containsPlaceholders(d)) {
+      setData(d as ContainerProps);
+      setErrors(null);
+      return;
+    }
     const res = ContainerPropsSchema.safeParse(d);
     if (res.success) {
       setData(res.data);

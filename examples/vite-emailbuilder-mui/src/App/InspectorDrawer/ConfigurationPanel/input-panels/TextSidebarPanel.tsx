@@ -4,6 +4,7 @@ import { ZodError } from 'zod';
 import { TextProps, TextPropsSchema } from '@usewaypoint/block-text';
 
 import BaseSidebarPanel from './helpers/BaseSidebarPanel';
+import containsPlaceholders from './helpers/containsPlaceholders';
 import BooleanInput from './helpers/inputs/BooleanInput';
 import TextInput from './helpers/inputs/TextInput';
 import MultiStylePropertyPanel from './helpers/style-inputs/MultiStylePropertyPanel';
@@ -16,6 +17,11 @@ export default function TextSidebarPanel({ data, setData }: TextSidebarPanelProp
   const [, setErrors] = useState<ZodError | null>(null);
 
   const updateData = (d: unknown) => {
+    if (containsPlaceholders(d)) {
+      setData(d as TextProps);
+      setErrors(null);
+      return;
+    }
     const res = TextPropsSchema.safeParse(d);
     if (res.success) {
       setData(res.data);

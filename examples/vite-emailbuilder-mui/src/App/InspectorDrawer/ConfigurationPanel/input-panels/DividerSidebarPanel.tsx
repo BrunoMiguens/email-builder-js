@@ -5,6 +5,7 @@ import { HeightOutlined } from '@mui/icons-material';
 import { DividerProps, DividerPropsDefaults, DividerPropsSchema } from '@usewaypoint/block-divider';
 
 import BaseSidebarPanel from './helpers/BaseSidebarPanel';
+import containsPlaceholders from './helpers/containsPlaceholders';
 import ColorInput from './helpers/inputs/ColorInput';
 import SliderInput from './helpers/inputs/SliderInput';
 import MultiStylePropertyPanel from './helpers/style-inputs/MultiStylePropertyPanel';
@@ -16,6 +17,11 @@ type DividerSidebarPanelProps = {
 export default function DividerSidebarPanel({ data, setData }: DividerSidebarPanelProps) {
   const [, setErrors] = useState<ZodError | null>(null);
   const updateData = (d: unknown) => {
+    if (containsPlaceholders(d)) {
+      setData(d as DividerProps);
+      setErrors(null);
+      return;
+    }
     const res = DividerPropsSchema.safeParse(d);
     if (res.success) {
       setData(res.data);
