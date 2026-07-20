@@ -46,5 +46,8 @@
     "@usewaypoint/block-spacer": "^0.0.3",
     "@usewaypoint/block-text": "^0.0.7",
     "@usewaypoint/document-core": "^0.0.6"
+  },
+  "dependencies": {
+    "sanitize-html": "^2.17.6"
   }
 }

@@ -26,10 +26,10 @@
   },
   "devDependencies": {
     "@testing-library/react": "^14.2.1",
-    "@types/insane": "^1.0.0"
+    "@types/sanitize-html": "^2.16.0"
   },
   "dependencies": {
-    "insane": "^2.6.2",
-    "marked": "^12.0.2"
+    "marked": "^12.0.2",
+    "sanitize-html": "^2.17.0"
   }
 }
