@@ -1,0 +1,36 @@
+packages/email-builder/src/renderers/renderToStaticMarkup.spec.tsx
+  s_08849c5ffcd023::t_ce57bfcb2be95d 566
+  s_08849c5ffcd023::t_8110678db24b21 543-544
+packages/block-text/src/EmailMarkdown.tsx
+  s_08849c5ffcd023::t_f380683f7c1f78 83-87
+  s_08849c5ffcd023::t_4c81e43de0efff 81,101-105
+  s_08849c5ffcd023::t_4d004eb05e6ad5 49-78
+  s_08849c5ffcd023::t_2121c098196ee8 3,5
+jest.config.ts
+  s_08849c5ffcd023::t_77aaad729f37bc 3-11,13-16,20-23
+  s_08849c5ffcd023::t_8365fa7b5bb717 12
+package-lock.json
+  s_08849c5ffcd023::t_dad103cfb0ce79 2894,2915,2929,2944-2945,3170-3179,3763,4412-4417,4554,4627-4654,4668-4698,5684-5716,6049-6057,7070-7078,7646-7651,7739,8365-8483,11161-11162,11166,11311,11313-11315
+packages/block-text/package.json
+  s_08849c5ffcd023::t_10c06084f4aed5 29,32-33
+packages/block-text/src/__snapshots__/index.spec.tsx.snap
+  s_08849c5ffcd023::t_e1721cef2ca20a 103,141,175,208,253,261,266,271,276
+packages/email-builder/package.json
+  s_08849c5ffcd023::t_6f13e70202387a 49-51
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "a09bbfca55d12e3af9ad2eb4e31cabf6ddb1bf4a",
+  "prompts": {},
+  "sessions": {
+    "s_08849c5ffcd023": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bc0c1436-8581-42f4-be35-a84c22d98bcf",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Gavin Newcomer <gjnprivate@gmail.com>"
+    }
+  }
+}
