@@ -1,6 +1,6 @@
 {
   "name": "@push-co/email-builder",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "React component to render email messages",
   "repository": {
     "type": "git",
@@ -8,7 +8,8 @@
     "directory": "packages/email-builder"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
