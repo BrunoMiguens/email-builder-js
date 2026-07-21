@@ -1,0 +1,25 @@
+.github/workflows/publish.yaml
+  s_08849c5ffcd023::t_cc7e5d3aa8a9b2 21,34,39
+package-lock.json
+  s_08849c5ffcd023::t_0167ae83d3c12f 11355
+packages/document-core/package.json
+  s_08849c5ffcd023::t_6c78cb75ab15e8 28-29
+packages/email-builder/package.json
+  s_08849c5ffcd023::t_3c0359d32edf03 3,11-12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "750f4603765bec5da6c2d70ab120cf09a71d25da",
+  "prompts": {},
+  "sessions": {
+    "s_08849c5ffcd023": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bc0c1436-8581-42f4-be35-a84c22d98bcf",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Gavin Newcomer <gjnprivate@gmail.com>"
+    }
+  }
+}
