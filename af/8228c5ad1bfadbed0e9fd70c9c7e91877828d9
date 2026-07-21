@@ -1,0 +1,53 @@
+package-lock.json
+  s_08849c5ffcd023::t_f156d94d5faeb9 2277,2281,2285,2289,2293,2297,2301,2305,2309,2313,2317,2321,10337,10433,10529,10625,10721,10817,10913,11009,11105,11201,11302,11354-11355,11361-11371
+packages/block-avatar/package.json
+  s_08849c5ffcd023::t_ddbaa73057ad40 2,4
+packages/block-button/package.json
+  s_08849c5ffcd023::t_9454ab7c0ba86a 2,4
+packages/block-columns-container/package.json
+  s_08849c5ffcd023::t_e233120ead605f 2,4
+packages/block-container/package.json
+  s_08849c5ffcd023::t_cc94fa9a8a420a 2,4
+packages/block-divider/package.json
+  s_08849c5ffcd023::t_3bfb3d29c18b25 2,4
+packages/block-heading/package.json
+  s_08849c5ffcd023::t_ee7b0cc8b67a27 2,4
+packages/block-html/package.json
+  s_08849c5ffcd023::t_2ed92302566468 2,4
+packages/block-image/package.json
+  s_08849c5ffcd023::t_ff891161b3eb64 2,4
+packages/block-spacer/package.json
+  s_08849c5ffcd023::t_d032e5ce61bbb7 2,4
+packages/block-text/package.json
+  s_08849c5ffcd023::t_c5e602fda3a34b 2,4
+packages/document-core/package.json
+  s_08849c5ffcd023::t_959413ea188a01 2
+packages/email-builder/package.json
+  s_08849c5ffcd023::t_9dde0bc153be18 2-3,38-48
+packages/email-builder/src/Reader/core.tsx
+  s_08849c5ffcd023::t_a929f164d694b6 4-11,16
+packages/email-builder/src/blocks/ColumnsContainer/ColumnsContainerPropsSchema.ts
+  s_08849c5ffcd023::t_2464aab9aaf4dc 3
+packages/email-builder/src/blocks/ColumnsContainer/ColumnsContainerReader.tsx
+  s_08849c5ffcd023::t_77229ff93707bc 3
+packages/email-builder/src/blocks/Container/ContainerPropsSchema.tsx
+  s_08849c5ffcd023::t_ab0d74b48f599a 3
+packages/email-builder/src/blocks/Container/ContainerReader.tsx
+  s_08849c5ffcd023::t_3152e40523afba 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "af8228c5ad1bfadbed0e9fd70c9c7e91877828d9",
+  "prompts": {},
+  "sessions": {
+    "s_08849c5ffcd023": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bc0c1436-8581-42f4-be35-a84c22d98bcf",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Gavin Newcomer <gjnprivate@gmail.com>"
+    }
+  }
+}
