@@ -1,7 +1,7 @@
 {
-  "name": "@push-co/block-heading",
+  "name": "@push-labs/block-heading",
   "version": "0.0.3",
-  "description": "@push-co/document compatible Heading component",
+  "description": "@push-labs/document compatible Heading component",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",

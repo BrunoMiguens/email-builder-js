@@ -1,7 +1,7 @@
 {
-  "name": "@push-co/block-html",
+  "name": "@push-labs/block-html",
   "version": "0.0.3",
-  "description": "@push-co/document compatible HTML component",
+  "description": "@push-labs/document compatible HTML component",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Container as BaseContainer } from '@push-co/block-container';
+import { Container as BaseContainer } from '@push-labs/block-container';
 
 import { ReaderBlock } from '../../Reader/core';
 

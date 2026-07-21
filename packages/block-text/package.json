@@ -1,7 +1,7 @@
 {
-  "name": "@push-co/block-text",
+  "name": "@push-labs/block-text",
   "version": "0.0.7",
-  "description": "@push-co/document compatible Text component",
+  "description": "@push-labs/document compatible Text component",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",

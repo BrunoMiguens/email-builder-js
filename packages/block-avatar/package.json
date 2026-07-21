@@ -1,7 +1,7 @@
 {
-  "name": "@push-co/block-avatar",
+  "name": "@push-labs/block-avatar",
   "version": "0.0.3",
-  "description": "@push-co/document compatible Avatar component",
+  "description": "@push-labs/document compatible Avatar component",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",

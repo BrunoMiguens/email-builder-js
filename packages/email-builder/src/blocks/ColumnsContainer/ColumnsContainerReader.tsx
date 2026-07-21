@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ColumnsContainer as BaseColumnsContainer } from '@push-co/block-columns-container';
+import { ColumnsContainer as BaseColumnsContainer } from '@push-labs/block-columns-container';
 
 import { ReaderBlock } from '../../Reader/core';
 
