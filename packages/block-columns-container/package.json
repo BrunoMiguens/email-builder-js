@@ -1,7 +1,7 @@
 {
-  "name": "@usewaypoint/block-columns-container",
+  "name": "@push-co/block-columns-container",
   "version": "0.0.3",
-  "description": "@usewaypoint/document compatible ColumnsContainer component",
+  "description": "@push-co/document compatible ColumnsContainer component",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -26,5 +26,6 @@
   },
   "devDependencies": {
     "@testing-library/react": "^14.2.1"
-  }
+  },
+  "private": true
 }
