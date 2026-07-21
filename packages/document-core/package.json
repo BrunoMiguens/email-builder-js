@@ -1,5 +1,5 @@
 {
-  "name": "@usewaypoint/document-core",
+  "name": "@push-co/document-core",
   "version": "0.0.6",
   "description": "Tools to render waypoint-style documents (core package)",
   "main": "./dist/index.js",
@@ -23,5 +23,13 @@
   "peerDependencies": {
     "react": "^16 || ^17 || ^18",
     "zod": "^1 || ^2 || ^3"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/push-co/email-builder-js.git",
+    "directory": "packages/document-core"
   }
 }

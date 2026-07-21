@@ -1,7 +1,7 @@
 {
-  "name": "@usewaypoint/block-text",
+  "name": "@push-co/block-text",
   "version": "0.0.7",
-  "description": "@usewaypoint/document compatible Text component",
+  "description": "@push-co/document compatible Text component",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -31,5 +31,6 @@
   "dependencies": {
     "marked": "^12.0.2",
     "sanitize-html": "^2.17.0"
-  }
+  },
+  "private": true
 }

@@ -1,7 +1,7 @@
 {
-  "name": "@usewaypoint/block-avatar",
+  "name": "@push-co/block-avatar",
   "version": "0.0.3",
-  "description": "@usewaypoint/document compatible Avatar component",
+  "description": "@push-co/document compatible Avatar component",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -26,5 +26,6 @@
   },
   "devDependencies": {
     "@testing-library/react": "^14.2.1"
-  }
+  },
+  "private": true
 }

@@ -1,7 +1,7 @@
 {
-  "name": "@usewaypoint/block-divider",
+  "name": "@push-co/block-divider",
   "version": "0.0.4",
-  "description": "@usewaypoint/document compatible Divider component",
+  "description": "@push-co/document compatible Divider component",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -26,5 +26,6 @@
   },
   "devDependencies": {
     "@testing-library/react": "^14.2.1"
-  }
+  },
+  "private": true
 }
