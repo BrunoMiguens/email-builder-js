@@ -5,10 +5,8 @@ on:
     tags:
       - 'v*'
 
-# GitHub Packages needs write access to publish; the built-in GITHUB_TOKEN carries it.
 permissions:
   contents: read
-  packages: write
 
 jobs:
   publish:
@@ -20,8 +18,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          registry-url: https://npm.pkg.github.com
-          scope: '@push-co'
+          registry-url: https://registry.npmjs.org
           cache: 'npm'
           cache-dependency-path: './package-lock.json'
 
@@ -34,9 +31,9 @@ jobs:
       - name: Publish document-core
         run: npm publish --workspace packages/document-core
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish email-builder
         run: npm publish --workspace packages/email-builder
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
