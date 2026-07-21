@@ -1,7 +1,7 @@
 {
-  "name": "@push-co/block-spacer",
+  "name": "@push-labs/block-spacer",
   "version": "0.0.3",
-  "description": "@push-co/document compatible Spacer component",
+  "description": "@push-labs/document compatible Spacer component",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",

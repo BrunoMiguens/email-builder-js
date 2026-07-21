@@ -1,7 +1,7 @@
 {
-  "name": "@push-co/block-divider",
+  "name": "@push-labs/block-divider",
   "version": "0.0.4",
-  "description": "@push-co/document compatible Divider component",
+  "description": "@push-labs/document compatible Divider component",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",

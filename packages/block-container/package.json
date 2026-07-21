@@ -1,7 +1,7 @@
 {
-  "name": "@push-co/block-container",
+  "name": "@push-labs/block-container",
   "version": "0.0.2",
-  "description": "@push-co/document compatible Container component",
+  "description": "@push-labs/document compatible Container component",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",

@@ -1,19 +1,19 @@
 import React, { createContext, useContext } from 'react';
 import { z } from 'zod';
 
-import { Avatar, AvatarPropsSchema } from '@push-co/block-avatar';
-import { Button, ButtonPropsSchema } from '@push-co/block-button';
-import { Divider, DividerPropsSchema } from '@push-co/block-divider';
-import { Heading, HeadingPropsSchema } from '@push-co/block-heading';
-import { Html, HtmlPropsSchema } from '@push-co/block-html';
-import { Image, ImagePropsSchema } from '@push-co/block-image';
-import { Spacer, SpacerPropsSchema } from '@push-co/block-spacer';
-import { Text, TextPropsSchema } from '@push-co/block-text';
+import { Avatar, AvatarPropsSchema } from '@push-labs/block-avatar';
+import { Button, ButtonPropsSchema } from '@push-labs/block-button';
+import { Divider, DividerPropsSchema } from '@push-labs/block-divider';
+import { Heading, HeadingPropsSchema } from '@push-labs/block-heading';
+import { Html, HtmlPropsSchema } from '@push-labs/block-html';
+import { Image, ImagePropsSchema } from '@push-labs/block-image';
+import { Spacer, SpacerPropsSchema } from '@push-labs/block-spacer';
+import { Text, TextPropsSchema } from '@push-labs/block-text';
 import {
   buildBlockComponent,
   buildBlockConfigurationDictionary,
   buildBlockConfigurationSchema,
-} from '@push-co/document-core';
+} from '@push-labs/document-core';
 
 import ColumnsContainerPropsSchema from '../blocks/ColumnsContainer/ColumnsContainerPropsSchema';
 import ColumnsContainerReader from '../blocks/ColumnsContainer/ColumnsContainerReader';

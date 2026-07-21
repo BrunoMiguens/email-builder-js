@@ -1,7 +1,7 @@
 {
-  "name": "@push-co/block-button",
+  "name": "@push-labs/block-button",
   "version": "0.0.3",
-  "description": "@push-co/document compatible Button component",
+  "description": "@push-labs/document compatible Button component",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",

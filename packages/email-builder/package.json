@@ -1,6 +1,6 @@
 {
-  "name": "@push-co/email-builder",
-  "version": "1.3.1",
+  "name": "@push-labs/email-builder",
+  "version": "1.3.2",
   "description": "React component to render email messages",
   "repository": {
     "type": "git",
@@ -35,17 +35,17 @@
     "zod": "^1 || ^2 || ^3"
   },
   "devDependencies": {
-    "@push-co/block-avatar": "^0.0.3",
-    "@push-co/block-button": "^0.0.3",
-    "@push-co/block-columns-container": "^0.0.3",
-    "@push-co/block-container": "^0.0.2",
-    "@push-co/block-divider": "^0.0.4",
-    "@push-co/block-heading": "^0.0.3",
-    "@push-co/block-html": "^0.0.3",
-    "@push-co/block-image": "^0.0.5",
-    "@push-co/block-spacer": "^0.0.3",
-    "@push-co/block-text": "^0.0.7",
-    "@push-co/document-core": "^0.0.6"
+    "@push-labs/block-avatar": "^0.0.3",
+    "@push-labs/block-button": "^0.0.3",
+    "@push-labs/block-columns-container": "^0.0.3",
+    "@push-labs/block-container": "^0.0.2",
+    "@push-labs/block-divider": "^0.0.4",
+    "@push-labs/block-heading": "^0.0.3",
+    "@push-labs/block-html": "^0.0.3",
+    "@push-labs/block-image": "^0.0.5",
+    "@push-labs/block-spacer": "^0.0.3",
+    "@push-labs/block-text": "^0.0.7",
+    "@push-labs/document-core": "^0.0.6"
   },
   "dependencies": {
     "sanitize-html": "^2.17.6"
