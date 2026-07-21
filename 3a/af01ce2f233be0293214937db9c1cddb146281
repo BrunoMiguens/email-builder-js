@@ -1,0 +1,55 @@
+.github/workflows/publish.yaml
+  s_08849c5ffcd023::t_56e7b5ff96ac80 8,11,23-24,32-39,42
+package-lock.json
+  s_08849c5ffcd023::t_9ec6281b770790 2277-2324,10337,10433,10529,10625,10721,10817,10913,11009,11105,11201,11302,11354-11355,11361-11371
+packages/block-avatar/package.json
+  s_08849c5ffcd023::t_099fa6801b181a 2,4,29-30
+packages/block-button/package.json
+  s_08849c5ffcd023::t_0a2d563156314b 2,4,29-30
+packages/block-columns-container/package.json
+  s_08849c5ffcd023::t_dc1abda45dcd38 2,4,29-30
+packages/block-container/package.json
+  s_08849c5ffcd023::t_52354da286f6d7 2,4,29-30
+packages/block-divider/package.json
+  s_08849c5ffcd023::t_77a81af0db0288 2,4,29-30
+packages/block-heading/package.json
+  s_08849c5ffcd023::t_b6e102f72954c5 2,4,29-30
+packages/block-html/package.json
+  s_08849c5ffcd023::t_5c1f1cad126a41 2,4,29-30
+packages/block-image/package.json
+  s_08849c5ffcd023::t_84aecfbb1ba56f 2,4,29-30
+packages/block-spacer/package.json
+  s_08849c5ffcd023::t_df2e38ac5255bb 2,4,29-30
+packages/block-text/package.json
+  s_08849c5ffcd023::t_1ed3626dc8485e 2,4,34-35
+packages/document-core/package.json
+  s_08849c5ffcd023::t_b7ae1ef25d3957 2,26-33
+packages/email-builder/package.json
+  s_08849c5ffcd023::t_700176d91ad214 2-3,7,11,37-47
+packages/email-builder/src/Reader/core.tsx
+  s_08849c5ffcd023::t_1819295962ef89 4-11,16
+packages/email-builder/src/blocks/ColumnsContainer/ColumnsContainerPropsSchema.ts
+  s_08849c5ffcd023::t_19dd75ac12c0e2 3
+packages/email-builder/src/blocks/ColumnsContainer/ColumnsContainerReader.tsx
+  s_08849c5ffcd023::t_5dfda47e598aac 3
+packages/email-builder/src/blocks/Container/ContainerPropsSchema.tsx
+  s_08849c5ffcd023::t_61574828635b3b 3
+packages/email-builder/src/blocks/Container/ContainerReader.tsx
+  s_08849c5ffcd023::t_379210992fec6b 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "3aaf01ce2f233be0293214937db9c1cddb146281",
+  "prompts": {},
+  "sessions": {
+    "s_08849c5ffcd023": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bc0c1436-8581-42f4-be35-a84c22d98bcf",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Gavin Newcomer <gjnprivate@gmail.com>"
+    }
+  }
+}
