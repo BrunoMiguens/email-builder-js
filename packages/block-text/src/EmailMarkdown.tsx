@@ -1,8 +1,8 @@
-import insane, { AllowedTags } from 'insane';
 import { marked, Renderer } from 'marked';
 import React, { CSSProperties, useMemo } from 'react';
+import sanitizeHtml from 'sanitize-html';
 
-const ALLOWED_TAGS: AllowedTags[] = [
+const ALLOWED_TAGS: string[] = [
   'a',
   'article',
   'b',
@@ -46,11 +46,45 @@ const ALLOWED_TAGS: AllowedTags[] = [
   'ul',
 ];
 const GENERIC_ALLOWED_ATTRIBUTES = ['style', 'title'];
+const ALLOWED_SCHEMES = ['http', 'https', 'mailto'];
+
+/**
+ * True when a URL is safe to emit in an href/src.
+ *
+ * sanitize-html's own allowedSchemes only rejects values whose scheme it recognises, so a
+ * payload like `'javascript:alert(1)` — where a stray quote makes the scheme unparseable —
+ * is treated as a relative URL and kept. Browsers will not execute it, but the sanitizer it
+ * replaced (insane) dropped it, and we do not ship a weaker filter than the one before.
+ */
+function isSafeUrl(value: string): boolean {
+  if (value === '') {
+    return true;
+  }
+  // Everything before the first "/", "?" or "#" is the scheme candidate when it ends in ":".
+  const scheme = /^([^/?#]*):/.exec(value);
+  if (scheme === null) {
+    return true; // relative URL — no scheme to validate
+  }
+  return ALLOWED_SCHEMES.includes(scheme[1].toLowerCase());
+}
+
+function dropUnsafeUrl(attribute: 'href' | 'src') {
+  return (tagName: string, attribs: Record<string, string>) => {
+    if (attribs[attribute] !== undefined && !isSafeUrl(attribs[attribute])) {
+      delete attribs[attribute];
+    }
+    return { tagName, attribs };
+  };
+}
 
 function sanitizer(html: string): string {
-  return insane(html, {
+  return sanitizeHtml(html, {
     allowedTags: ALLOWED_TAGS,
-    allowedSchemes: ['http', 'https', 'mailto'],
+    allowedSchemes: ALLOWED_SCHEMES,
+    transformTags: {
+      a: dropUnsafeUrl('href'),
+      img: dropUnsafeUrl('src'),
+    },
     allowedAttributes: {
       ...ALLOWED_TAGS.reduce<Record<string, string[]>>((res, tag) => {
         res[tag] = [...GENERIC_ALLOWED_ATTRIBUTES];
@@ -64,15 +98,11 @@ function sanitizer(html: string): string {
       ol: ['start', ...GENERIC_ALLOWED_ATTRIBUTES],
       ul: ['start', ...GENERIC_ALLOWED_ATTRIBUTES],
     },
-    filter: (token) => {
-      if (token.tag === 'a' && 'href' in token.attrs && token.attrs.href === undefined) {
-        token.attrs.href = '';
-      }
-      if (token.tag === 'img' && 'src' in token.attrs && token.attrs.src === undefined) {
-        token.attrs.src = '';
-      }
-      return true;
-    },
+    // Inline styles are emitted by the markdown renderer itself and must survive
+    // untouched; sanitize-html only filters style values when allowedStyles is set.
+    allowedStyles: undefined,
+    // The markdown renderer emits well-formed HTML, so entity re-encoding is not needed.
+    disallowedTagsMode: 'discard',
   });
 }
 

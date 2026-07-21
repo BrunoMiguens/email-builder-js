@@ -540,7 +540,8 @@ describe('renderToStaticMarkup', () => {
       },
       { rootBlockId: 'root' }
     );
-    expect(result).toContain('<p style="margin:0;">');
+    // The sanitiser re-serialises CSS declarations, so assert the rule rather than its spacing.
+    expect(result).toMatch(/<p style="margin:\s*0;?">/);
     expect(result).toContain('First paragraph');
     expect(result).toContain('Second paragraph');
   });
@@ -562,7 +563,7 @@ describe('renderToStaticMarkup', () => {
       },
       { rootBlockId: 'root' }
     );
-    expect(result).toContain('color: #0066CC');
+    expect(result).toMatch(/color:\s*#0066CC/);
     expect(result).toContain('href="https://example.com"');
     expect(result).toContain('Click here');
   });

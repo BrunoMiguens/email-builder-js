@@ -100,7 +100,7 @@ exports[`block-text renders with safe markdown 1`] = `
 <DocumentFragment>
   <div>
     <p
-      style="margin:0;"
+      style="margin:0"
     >
       This 
       <span>
@@ -138,7 +138,7 @@ exports[`block-text renders with safe markdown 1`] = `
     
 
     <p
-      style="margin:0;"
+      style="margin:0"
     >
       Powered by 
       <a
@@ -172,7 +172,7 @@ exports[`block-text sanitizes HTML 1`] = `
 
 
     <p
-      style="margin:0;"
+      style="margin:0"
     >
       <a
         target="_blank"
@@ -205,7 +205,7 @@ exports[`block-text sanitizes HTML 1`] = `
       </a>
     </p>
     <p
-      style="margin:0;"
+      style="margin:0"
     >
       <a
         target="_blank"
@@ -250,9 +250,7 @@ exports[`block-text sanitizes HTML 1`] = `
     <div>
       
 
-      <img
-        src=""
-      />
+      <img />
       
 
       <a>
@@ -260,30 +258,22 @@ exports[`block-text sanitizes HTML 1`] = `
       </a>
       
 
-      <a
-        href=""
-      >
+      <a>
         link 2
       </a>
       
 
-      <a
-        href=""
-      >
+      <a>
         link 3
       </a>
       
 
-      <a
-        title=""
-      >
+      <a>
         link 4
       </a>
       
 
-      <a
-        title=""
-      >
+      <a>
         link 5
       </a>
       
