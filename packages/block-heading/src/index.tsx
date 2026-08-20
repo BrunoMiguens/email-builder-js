@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react';
-import { z } from 'zod/v4';
+import * as z from 'zod/v4';
 
 const COLOR_SCHEMA = z
   .string()

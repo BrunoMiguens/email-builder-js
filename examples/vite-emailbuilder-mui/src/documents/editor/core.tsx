@@ -1,5 +1,5 @@
 import React from 'react';
-import { z } from 'zod/v4';
+import * as z from 'zod/v4';
 
 import { Avatar, AvatarPropsSchema } from '@push-labs/block-avatar';
 import { Button, ButtonPropsSchema } from '@push-labs/block-button';

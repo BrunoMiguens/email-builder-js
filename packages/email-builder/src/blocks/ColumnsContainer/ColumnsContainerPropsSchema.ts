@@ -1,4 +1,4 @@
-import { z } from 'zod/v4';
+import * as z from 'zod/v4';
 
 import { ColumnsContainerPropsSchema as BaseColumnsContainerPropsSchema } from '@push-labs/block-columns-container';
 
