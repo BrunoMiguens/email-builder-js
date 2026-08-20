@@ -1,6 +1,6 @@
-import { z } from 'zod';
+import type * as z from 'zod/v4/core';
 
-export type BaseZodDictionary = { [name: string]: z.AnyZodObject };
+export type BaseZodDictionary = { [name: string]: z.$ZodType<Record<string, any>> };
 export type DocumentBlocksDictionary<T extends BaseZodDictionary> = {
   [K in keyof T]: {
     schema: T[K];

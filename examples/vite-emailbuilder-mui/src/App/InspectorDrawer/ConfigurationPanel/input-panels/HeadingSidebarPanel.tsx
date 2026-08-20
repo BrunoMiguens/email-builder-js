@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ZodError } from 'zod';
 
 import { ToggleButton } from '@mui/material';
-import { HeadingProps, HeadingPropsDefaults, HeadingPropsSchema } from '@usewaypoint/block-heading';
+import { HeadingProps, HeadingPropsDefaults, HeadingPropsSchema } from '@push-labs/block-heading';
 
 import BaseSidebarPanel from './helpers/BaseSidebarPanel';
 import containsPlaceholders from './helpers/containsPlaceholders';

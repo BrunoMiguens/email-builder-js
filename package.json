@@ -1,5 +1,5 @@
 {
-  "name": "@usewaypoint/email-builder-project",
+  "name": "@push-labs/email-builder-project",
   "target": "ES2022",
   "files": [
     "dist"
@@ -22,7 +22,7 @@
     "examples/*"
   ],
   "scripts": {
-    "build": "npx tsc",
+    "build": "npm run build --workspaces",
     "test": "npx jest"
   },
   "author": "carlos@usewaypoint.com",

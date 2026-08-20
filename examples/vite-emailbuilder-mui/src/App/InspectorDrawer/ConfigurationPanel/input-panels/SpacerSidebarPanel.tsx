@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ZodError } from 'zod';
 
 import { HeightOutlined } from '@mui/icons-material';
-import { SpacerProps, SpacerPropsDefaults, SpacerPropsSchema } from '@usewaypoint/block-spacer';
+import { SpacerProps, SpacerPropsDefaults, SpacerPropsSchema } from '@push-labs/block-spacer';
 
 import BaseSidebarPanel from './helpers/BaseSidebarPanel';
 import containsPlaceholders from './helpers/containsPlaceholders';

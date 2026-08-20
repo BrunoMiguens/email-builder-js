@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ZodError } from 'zod';
 
-import { HtmlProps, HtmlPropsSchema } from '@usewaypoint/block-html';
+import { HtmlProps, HtmlPropsSchema } from '@push-labs/block-html';
 
 import BaseSidebarPanel from './helpers/BaseSidebarPanel';
 import containsPlaceholders from './helpers/containsPlaceholders';

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ZodError } from 'zod';
 
 import { HeightOutlined } from '@mui/icons-material';
-import { DividerProps, DividerPropsDefaults, DividerPropsSchema } from '@usewaypoint/block-divider';
+import { DividerProps, DividerPropsDefaults, DividerPropsSchema } from '@push-labs/block-divider';
 
 import BaseSidebarPanel from './helpers/BaseSidebarPanel';
 import containsPlaceholders from './helpers/containsPlaceholders';

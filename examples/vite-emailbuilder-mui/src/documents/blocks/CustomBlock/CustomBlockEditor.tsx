@@ -1,6 +1,6 @@
 import React, { Component, useMemo } from 'react';
 
-import { Reader } from '@brunomiguens/email-builder';
+import { Reader } from '@push-labs/email-builder';
 import { WidgetsOutlined } from '@mui/icons-material';
 import { Box, Stack, Typography } from '@mui/material';
 

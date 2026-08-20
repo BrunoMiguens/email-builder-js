@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ColumnsContainer as BaseColumnsContainer } from '@usewaypoint/block-columns-container';
+import { ColumnsContainer as BaseColumnsContainer } from '@push-labs/block-columns-container';
 
 import { useCurrentBlockId } from '../../editor/EditorBlock';
 import { setDocument, setSelectedBlockId } from '../../editor/EditorContext';
@@ -15,7 +15,7 @@ function makeEmptyColumns(count: number) {
 export default function ColumnsContainerEditor({ style, props }: ColumnsContainerProps) {
   const currentBlockId = useCurrentBlockId();
 
-  const { columns, ...restProps } = props ?? {};
+  const { columns, ...restProps } = props ?? {columnsCount: 2};
   const columnsCount = restProps.columnsCount ?? 2;
   const columnsValue = columns ?? makeEmptyColumns(columnsCount);
   // Pad if columns array is shorter than columnsCount (e.g. user increased column count)

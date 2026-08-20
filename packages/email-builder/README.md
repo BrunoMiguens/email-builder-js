@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>@brunomiguens/email-builder</h1>
+  <h1>@push-labs/email-builder</h1>
   <p align="center">
     <a href="https://github.com/BrunoMiguens/email-builder-js">GitHub</a>
   </p>
@@ -14,7 +14,7 @@ Renders clean JSON or HTML output that works across clients and devices.
 ## Installation
 
 ```bash
-npm install @brunomiguens/email-builder
+npm install @push-labs/email-builder
 ```
 
 ## Quick start
@@ -22,7 +22,7 @@ npm install @brunomiguens/email-builder
 ### Rendering a document to HTML
 
 ```javascript
-import { renderEmailToHtml } from '@brunomiguens/email-builder';
+import { renderEmailToHtml } from '@push-labs/email-builder';
 
 const html = renderEmailToHtml(document, {
   rootBlockId: 'root',
@@ -33,7 +33,7 @@ const html = renderEmailToHtml(document, {
 ### Using the Reader component
 
 ```javascript
-import { Reader } from '@brunomiguens/email-builder';
+import { Reader } from '@push-labs/email-builder';
 
 <Reader document={document} rootBlockId="root" />;
 ```
@@ -47,7 +47,7 @@ Custom blocks are reusable template components with configurable **slots** — p
 A custom block entry contains its block structure and a set of slot definitions:
 
 ```typescript
-import type { CustomBlockEntry, SlotDefinition } from '@brunomiguens/email-builder';
+import type { CustomBlockEntry, SlotDefinition } from '@push-labs/email-builder';
 
 const myBlock: CustomBlockEntry = {
   name: 'greeting-card',
@@ -82,7 +82,7 @@ const myBlock: CustomBlockEntry = {
 Pass your custom block definitions when rendering:
 
 ```javascript
-import { renderEmailToHtml } from '@brunomiguens/email-builder';
+import { renderEmailToHtml } from '@push-labs/email-builder';
 
 const html = renderEmailToHtml(templateDocument, {
   rootBlockId: 'root',
@@ -102,7 +102,7 @@ The resolver automatically:
 For standalone use outside of custom blocks:
 
 ```javascript
-import { generateTableHtml } from '@brunomiguens/email-builder';
+import { generateTableHtml } from '@push-labs/email-builder';
 
 const html = generateTableHtml([
   { label: 'Item', value: 'Widget' },
@@ -114,14 +114,14 @@ const html = generateTableHtml([
 
 ```typescript
 // Rendering
-export { renderToStaticMarkup } from '@brunomiguens/email-builder';
-export { renderEmailToHtml } from '@brunomiguens/email-builder';
+export { renderToStaticMarkup } from '@push-labs/email-builder';
+export { renderEmailToHtml } from '@push-labs/email-builder';
 
 // Reader component
-export { Reader } from '@brunomiguens/email-builder';
+export { Reader } from '@push-labs/email-builder';
 
 // Custom blocks
-export { resolveCustomBlocks, generateTableHtml } from '@brunomiguens/email-builder';
+export { resolveCustomBlocks, generateTableHtml } from '@push-labs/email-builder';
 
 // Types
 export type {
@@ -130,7 +130,7 @@ export type {
   SlotDefinition,
   CustomBlockEntry,
   TableItem,
-} from '@brunomiguens/email-builder';
+} from '@push-labs/email-builder';
 ```
 
 ## Built-in blocks
