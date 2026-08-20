@@ -8,7 +8,7 @@ import {
   VerticalAlignTopOutlined,
 } from '@mui/icons-material';
 import { Stack, ToggleButton } from '@mui/material';
-import { ImageProps, ImagePropsSchema } from '@usewaypoint/block-image';
+import { ImageProps, ImagePropsSchema } from '@push-labs/block-image';
 
 import BaseSidebarPanel from './helpers/BaseSidebarPanel';
 import containsPlaceholders from './helpers/containsPlaceholders';

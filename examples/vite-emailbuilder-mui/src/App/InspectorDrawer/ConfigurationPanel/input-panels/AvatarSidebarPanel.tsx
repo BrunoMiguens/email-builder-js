@@ -3,7 +3,7 @@ import { ZodError } from 'zod';
 
 import { AspectRatioOutlined } from '@mui/icons-material';
 import { ToggleButton } from '@mui/material';
-import { AvatarProps, AvatarPropsDefaults, AvatarPropsSchema } from '@usewaypoint/block-avatar';
+import { AvatarProps, AvatarPropsDefaults, AvatarPropsSchema } from '@push-labs/block-avatar';
 
 import BaseSidebarPanel from './helpers/BaseSidebarPanel';
 import containsPlaceholders from './helpers/containsPlaceholders';

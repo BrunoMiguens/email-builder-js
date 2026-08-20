@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { Reader } from '@brunomiguens/email-builder';
+import { Reader } from '@push-labs/email-builder';
 import { MonitorOutlined, PhoneIphoneOutlined } from '@mui/icons-material';
 import { Box, Stack, SxProps, ToggleButton, ToggleButtonGroup, Tooltip } from '@mui/material';
 

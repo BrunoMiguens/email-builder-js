@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { BaseZodDictionary, BlockConfiguration, DocumentBlocksDictionary } from '../utils';
 
 /**
@@ -8,7 +7,8 @@ import { BaseZodDictionary, BlockConfiguration, DocumentBlocksDictionary } from 
  */
 export default function buildBlockComponent<T extends BaseZodDictionary>(blocks: DocumentBlocksDictionary<T>) {
   return function BlockComponent({ type, data }: BlockConfiguration<T>) {
-    const Component = blocks[type].Component;
+    const Component = blocks[type].Component as React.ElementType<any>;
+    
     return <Component {...data} />;
   };
 }

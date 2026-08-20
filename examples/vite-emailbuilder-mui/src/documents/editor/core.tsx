@@ -1,19 +1,19 @@
 import React from 'react';
-import { z } from 'zod';
+import { z } from 'zod/v4';
 
-import { Avatar, AvatarPropsSchema } from '@usewaypoint/block-avatar';
-import { Button, ButtonPropsSchema } from '@usewaypoint/block-button';
-import { Divider, DividerPropsSchema } from '@usewaypoint/block-divider';
-import { Heading, HeadingPropsSchema } from '@usewaypoint/block-heading';
-import { Html, HtmlPropsSchema } from '@usewaypoint/block-html';
-import { Image, ImagePropsSchema } from '@usewaypoint/block-image';
-import { Spacer, SpacerPropsSchema } from '@usewaypoint/block-spacer';
-import { Text, TextPropsSchema } from '@usewaypoint/block-text';
+import { Avatar, AvatarPropsSchema } from '@push-labs/block-avatar';
+import { Button, ButtonPropsSchema } from '@push-labs/block-button';
+import { Divider, DividerPropsSchema } from '@push-labs/block-divider';
+import { Heading, HeadingPropsSchema } from '@push-labs/block-heading';
+import { Html, HtmlPropsSchema } from '@push-labs/block-html';
+import { Image, ImagePropsSchema } from '@push-labs/block-image';
+import { Spacer, SpacerPropsSchema } from '@push-labs/block-spacer';
+import { Text, TextPropsSchema } from '@push-labs/block-text';
 import {
   buildBlockComponent,
   buildBlockConfigurationDictionary,
   buildBlockConfigurationSchema,
-} from '@usewaypoint/document-core';
+} from '@push-labs/document-core';
 
 import ColumnsContainerEditor from '../blocks/ColumnsContainer/ColumnsContainerEditor';
 import ColumnsContainerPropsSchema from '../blocks/ColumnsContainer/ColumnsContainerPropsSchema';

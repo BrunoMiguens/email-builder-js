@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react';
-import { z } from 'zod';
+import { z } from 'zod/v4';
 
 const PADDING_SCHEMA = z
   .object({
